@@ -1,0 +1,10 @@
+'mainpage.txt
+/**
+         @mainpage M_anything Fortran Library
+
+         @section Introduction
+
+     M_anything - Fortran modules for promoting and casting scalar intrinsic types
+
+         @image html html/images/anything.gif
+*/'
