@@ -63,9 +63,9 @@
 !!     end function squareall
 !!
 !!     end program demo_anyscalar_to_double
-!! ```
+!!
 !!   Results:
-!! ```text
+!!
 !!       4.00000000000000
 !!       4.00000000000000
 !!       4.00000000000000
@@ -73,7 +73,6 @@
 !!       4.00000000000000
 !!       4.00000000000000
 !!       4.00000000000000
-!! ```
 !!
 !!##AUTHOR
 !!    John S. Urban
@@ -136,6 +135,7 @@ contains
 !!    A convenience routine that sets an array to an empty set.
 !!##EXAMPLE
 !!
+!!
 !!   Sample program:
 !!
 !!    program demo_empty_
@@ -166,17 +166,18 @@ contains
 !!
 !!   Expected output:
 !!
-!!               0
-!!     give them some size ...
-!!               3
-!!               3
-!!               4
-!!     back to empty ...
-!!               0
-!!               0
-!!               0
+!!                  0
+!!        give them some size ...
+!!                  3
+!!                  3
+!!                  4
+!!        back to empty ...
+!!                  0
+!!                  0
+!!                  0
 !!##AUTHOR
 !!    John S. Urban
+!!
 !!##LICENSE
 !!    MIT
    subroutine ints_empty_( x, emp )
@@ -323,25 +324,25 @@ end subroutine bytes_to_anything
 !!
 !!   Expected output
 !!
-!!     01 00 00 00
-!!     04 00 00 00
-!!     09 00 00 00
-!!     10 00 00 00
-!!     19 00 00 00
-!!     24 00 00 00
-!!     31 00 00 00
-!!     40 00 00 00
-!!     51 00 00 00
-!!     64 00 00 00
+!!        01 00 00 00
+!!        04 00 00 00
+!!        09 00 00 00
+!!        10 00 00 00
+!!        19 00 00 00
+!!        24 00 00 00
+!!        31 00 00 00
+!!        40 00 00 00
+!!        51 00 00 00
+!!        64 00 00 00
 !!
-!!     8F C2 31 41
-!!     8F C2 B1 41
-!!     EC 51 05 42
+!!        8F C2 31 41
+!!        8F C2 B1 41
+!!        EC 51 05 42
 !!
-!!     54 68 69 73
-!!     20 69 73 20
-!!     61 20 73 74
-!!     72 69 6E 67
+!!        54 68 69 73
+!!        20 69 73 20
+!!        61 20 73 74
+!!        72 69 6E 67
 !!
 !!##AUTHOR
 !!    John S. Urban
@@ -441,6 +442,7 @@ end function  anything_to_bytes_scalar
 !!    VALUEIN  input argument of a procedure to convert to type REAL128.
 !!             May be of KIND kind=int8, kind=int16, kind=int32, kind=int64,
 !!             kind=real32, kind=real64, or kind=real128
+!!
 !!##RESULTS
 !!
 !!    D_OUT    The value of VALUIN converted to REAL128 (assuming
@@ -475,8 +477,10 @@ end function  anything_to_bytes_scalar
 !!     end function squarei
 !!
 !!     end program demo_anyscalar_to_real128
+!!
 !!##AUTHOR
 !!    John S. Urban
+!!
 !!##LICENSE
 !!    MIT
 pure elemental function anyscalar_to_real128(valuein) result(d_out)
@@ -531,6 +535,7 @@ end function anyscalar_to_real128
 !!    VALUEIN  input argument of a procedure to convert to type DOUBLEPRECISION.
 !!             May be of KIND kind=int8, kind=int16, kind=int32, kind=int64,
 !!             kind=real32, kind=real64, or kind=real128
+!!
 !!##RESULTS
 !!
 !!    D_OUT    The value of VALUIN converted to doubleprecision (assuming
@@ -565,8 +570,10 @@ end function anyscalar_to_real128
 !!     end function squarei
 !!
 !!     end program demo_anyscalar_to_double
+!!
 !!##AUTHOR
 !!    John S. Urban
+!!
 !!##LICENSE
 !!    MIT
 pure elemental function anyscalar_to_double(valuein) result(d_out)
@@ -628,6 +635,7 @@ end function anyscalar_to_double
 !!    VALUEIN  input argument of a procedure to convert to type REAL.
 !!             May be of KIND kind=int8, kind=int16, kind=int32, kind=int64,
 !!             kind=real32, kind=real64, or kind=real128.
+!!
 !!##RESULTS
 !!
 !!    R_OUT    The value of VALUIN converted to real (assuming it is actually
@@ -661,8 +669,10 @@ end function anyscalar_to_double
 !!     end function squarei
 !!
 !!     end program demo_anyscalar_to_real
+!!
 !!##AUTHOR
 !!    John S. Urban
+!!
 !!##LICENSE
 !!    MIT
 pure elemental function anyscalar_to_real(valuein) result(r_out)
@@ -723,6 +733,7 @@ end function anyscalar_to_real
 !!
 !!    VALUEIN  input argument of a procedure to convert to type INTEGER(KIND=int64).
 !!             May be of KIND kind=int8, kind=int16, kind=int32, kind=int64.
+!!
 !!##RESULTS
 !!             The value of VALUIN converted to INTEGER(KIND=INT64).
 !!##EXAMPLE
@@ -769,6 +780,7 @@ end function anyscalar_to_real
 !!
 !!##AUTHOR
 !!    John S. Urban
+!!
 !!##LICENSE
 !!    MIT
 impure elemental function anyscalar_to_int64(valuein) result(ii38)
@@ -856,6 +868,7 @@ end function anyscalar_to_int64
 !!
 !!##AUTHOR
 !!    John S. Urban
+!!
 !!##LICENSE
 !!    MIT
 impure function anyinteger_to_string(int) result(out)
