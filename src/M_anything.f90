@@ -166,15 +166,15 @@ contains
 !!
 !!   Expected output:
 !!
-!!                  0
-!!        give them some size ...
-!!                  3
-!!                  3
-!!                  4
-!!        back to empty ...
-!!                  0
-!!                  0
-!!                  0
+!!    >             0
+!!    >   give them some size ...
+!!    >             3
+!!    >             3
+!!    >             4
+!!    >   back to empty ...
+!!    >             0
+!!    >             0
+!!    >             0
 !!##AUTHOR
 !!    John S. Urban
 !!
