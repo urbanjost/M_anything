@@ -254,7 +254,7 @@
     <div class="col-md-9" id='text'>
     <h2 id="name">NAME</h2>
 <div class="codehilite"><pre><span></span><code><span class="n">M_anything</span><span class="p">(</span><span class="mi">3</span><span class="n">fm</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">M_anything</span><span class="o">]</span><span class="w"> </span><span class="n">procedures</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">polymorphism</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">arguments</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">different</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="n">generically</span><span class="w"></span>
-<span class="p">(</span><span class="nl">LICENSE</span><span class="p">:</span><span class="n">PD</span><span class="p">)</span><span class="w"></span>
+<span class="p">(</span><span class="nl">LICENSE</span><span class="p">:</span><span class="n">MIT</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 <h2 id="synopsis">SYNOPSIS</h2>
@@ -277,7 +277,48 @@ empty                   create an empty array
 </code></pre></div>
 
 <h2 id="example">EXAMPLE</h2>
-<p>Sample program:</p>
+<p>At the cost of casting to a different type these functions can
+ (among other uses such as in linked lists) allow for an alternative
+ to duplicating code using generic procedure methods.  For example,
+ the following SQUAREALL function can take many input types and return a
+ DOUBLEPRECISION value (it is a trivial example for demonstration purposes,
+ and does not check for overflow, etc.).:</p>
+<p>Sample program</p>
+<div class="codehilite"><pre><span></span><code> <span class="nv">program</span> <span class="nv">demo_anyscalar_to_double</span>
+ <span class="nv">use</span>, <span class="nv">intrinsic</span> :: <span class="nv">iso_fortran_env</span>, <span class="nv">only</span> : <span class="nv">int8</span>, <span class="nv">int16</span>, <span class="nv">int32</span>, <span class="nv">int64</span>
+ <span class="nv">use</span>, <span class="nv">intrinsic</span> :: <span class="nv">iso_fortran_env</span>, <span class="nv">only</span> : <span class="nv">real32</span>, <span class="nv">real64</span>, <span class="nv">real128</span>
+ <span class="nv">implicit</span> <span class="nv">none</span>
+    <span class="o">!</span> <span class="k">call</span> <span class="nl">same</span> <span class="nv">function</span> <span class="nv">with</span> <span class="nv">many</span> <span class="nv">scalar</span> <span class="nv">input</span> <span class="nv">types</span>
+    <span class="nv">write</span><span class="ss">(</span><span class="o">*</span>,<span class="o">*</span><span class="ss">)</span><span class="nv">squareall</span><span class="ss">(</span><span class="mi">2</span><span class="nv">_int8</span><span class="ss">)</span>
+    <span class="nv">write</span><span class="ss">(</span><span class="o">*</span>,<span class="o">*</span><span class="ss">)</span><span class="nv">squareall</span><span class="ss">(</span><span class="mi">2</span><span class="nv">_int16</span><span class="ss">)</span>
+    <span class="nv">write</span><span class="ss">(</span><span class="o">*</span>,<span class="o">*</span><span class="ss">)</span><span class="nv">squareall</span><span class="ss">(</span><span class="mi">2</span><span class="nv">_int32</span><span class="ss">)</span>
+    <span class="nv">write</span><span class="ss">(</span><span class="o">*</span>,<span class="o">*</span><span class="ss">)</span><span class="nv">squareall</span><span class="ss">(</span><span class="mi">2</span><span class="nv">_int64</span><span class="ss">)</span>
+    <span class="nv">write</span><span class="ss">(</span><span class="o">*</span>,<span class="o">*</span><span class="ss">)</span><span class="nv">squareall</span><span class="ss">(</span><span class="mi">2</span>.<span class="mi">0</span><span class="nv">_real32</span><span class="ss">)</span>
+    <span class="nv">write</span><span class="ss">(</span><span class="o">*</span>,<span class="o">*</span><span class="ss">)</span><span class="nv">squareall</span><span class="ss">(</span><span class="mi">2</span>.<span class="mi">0</span><span class="nv">_real64</span><span class="ss">)</span>
+    <span class="nv">write</span><span class="ss">(</span><span class="o">*</span>,<span class="o">*</span><span class="ss">)</span><span class="nv">squareall</span><span class="ss">(</span><span class="mi">2</span>.<span class="mi">0</span><span class="nv">_real128</span><span class="ss">)</span>
+ <span class="nv">contains</span>
+
+ <span class="nv">function</span> <span class="nv">squareall</span><span class="ss">(</span><span class="nv">invalue</span><span class="ss">)</span> <span class="nb">result</span> <span class="ss">(</span><span class="nv">dvalue</span><span class="ss">)</span>
+ <span class="nv">use</span> <span class="nv">M_anything</span>, <span class="nv">only</span> : <span class="nv">anyscalar_to_double</span>
+ <span class="nv">class</span><span class="ss">(</span><span class="o">*</span><span class="ss">)</span>,<span class="nv">intent</span><span class="ss">(</span><span class="nv">in</span><span class="ss">)</span>  :: <span class="nv">invalue</span>
+ <span class="nv">doubleprecision</span>      :: <span class="nv">invalue_local</span>
+ <span class="nv">doubleprecision</span>      :: <span class="nv">dvalue</span>
+    <span class="nv">invalue_local</span><span class="o">=</span><span class="nv">anyscalar_to_double</span><span class="ss">(</span><span class="nv">invalue</span><span class="ss">)</span>
+    <span class="nv">dvalue</span><span class="o">=</span><span class="nv">invalue_local</span><span class="o">*</span><span class="nv">invalue_local</span>
+ <span class="k">end</span> <span class="nv">function</span> <span class="nv">squareall</span>
+
+ <span class="k">end</span> <span class="nv">program</span> <span class="nv">demo_anyscalar_to_double</span>
+</code></pre></div>
+
+<p><code>Results:</code>text
+       4.00000000000000
+       4.00000000000000
+       4.00000000000000
+       4.00000000000000
+       4.00000000000000
+       4.00000000000000
+       4.00000000000000
+ ```</p>
 <h2 id="author">AUTHOR</h2>
 <div class="codehilite"><pre><span></span><code>John S. Urban
 </code></pre></div>
@@ -1315,7 +1356,7 @@ public subroutine <a href='../proc/bytes_to_anything.html'>bytes_to_anything</a>
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
-             on 2021-12-16 11:01  
+             on 2021-12-16 19:15  
             
           </p>
         </div>
