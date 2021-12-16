@@ -5,7 +5,7 @@
 !>
 !!##NAME
 !!    M_anything(3fm) - [M_anything] procedures that use polymorphism to allow arguments of different types generically
-!!    (LICENSE:PD)
+!!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
 !!
@@ -29,7 +29,51 @@
 !!
 !!##EXAMPLE
 !!
-!!   Sample program:
+!!
+!! At the cost of casting to a different type these functions can
+!! (among other uses such as in linked lists) allow for an alternative
+!! to duplicating code using generic procedure methods.  For example,
+!! the following SQUAREALL function can take many input types and return a
+!! DOUBLEPRECISION value (it is a trivial example for demonstration purposes,
+!! and does not check for overflow, etc.).:
+!!
+!!   Sample program
+!!
+!!     program demo_anyscalar_to_double
+!!     use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
+!!     use, intrinsic :: iso_fortran_env, only : real32, real64, real128
+!!     implicit none
+!!        ! call same function with many scalar input types
+!!        write(*,*)squareall(2_int8)
+!!        write(*,*)squareall(2_int16)
+!!        write(*,*)squareall(2_int32)
+!!        write(*,*)squareall(2_int64)
+!!        write(*,*)squareall(2.0_real32)
+!!        write(*,*)squareall(2.0_real64)
+!!        write(*,*)squareall(2.0_real128)
+!!     contains
+!!
+!!     function squareall(invalue) result (dvalue)
+!!     use M_anything, only : anyscalar_to_double
+!!     class(*),intent(in)  :: invalue
+!!     doubleprecision      :: invalue_local
+!!     doubleprecision      :: dvalue
+!!        invalue_local=anyscalar_to_double(invalue)
+!!        dvalue=invalue_local*invalue_local
+!!     end function squareall
+!!
+!!     end program demo_anyscalar_to_double
+!! ```
+!!   Results:
+!! ```text
+!!       4.00000000000000
+!!       4.00000000000000
+!!       4.00000000000000
+!!       4.00000000000000
+!!       4.00000000000000
+!!       4.00000000000000
+!!       4.00000000000000
+!! ```
 !!
 !!##AUTHOR
 !!    John S. Urban
@@ -84,7 +128,7 @@ contains
 !>
 !!##NAME
 !!    empty(3f) - [M_anything] set an allocatable array to zero
-!!    (LICENSE:PD)
+!!    (LICENSE:MIT)
 !!##SYNOPSIS
 !!
 !!    use M_anything, only : empty, assignment(=)
@@ -168,7 +212,7 @@ contains
 !>
 !!##NAME
 !!    bytes_to_anything(3f) - [M_anything] convert bytes(character)len=1):: array(:)) to standard types
-!!    (LICENSE:PD)
+!!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
 !!
@@ -230,7 +274,7 @@ end subroutine bytes_to_anything
 !>
 !!##NAME
 !!    anything_to_bytes(3f) - [M_anything] convert standard types to bytes (character(len=1):: array(:))
-!!    (LICENSE:PD)
+!!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
 !!
@@ -377,7 +421,7 @@ end function  anything_to_bytes_scalar
 !>
 !!##NAME
 !!    anyscalar_to_real128(3f) - [M_anything] convert integer or real parameter of any kind to real128
-!!    (LICENSE:PD)
+!!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
 !!
@@ -467,7 +511,7 @@ end function anyscalar_to_real128
 !>
 !!##NAME
 !!    anyscalar_to_double(3f) - [M_anything] convert integer or real parameter of any kind to doubleprecision
-!!    (LICENSE:PD)
+!!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
 !!
@@ -564,7 +608,7 @@ end function anyscalar_to_double
 !>
 !!##NAME
 !!    anyscalar_to_real(3f) - [M_anything] convert integer or real parameter of any kind to real
-!!    (LICENSE:PD)
+!!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
 !!
@@ -658,7 +702,7 @@ end function anyscalar_to_real
 !!##NAME
 !!
 !!    anyscalar_to_int64(3f) - [M_anything] convert integer any kind to integer(kind=int64)
-!!    (LICENSE:PD)
+!!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
 !!
@@ -764,7 +808,7 @@ end function anyscalar_to_int64
 !!##NAME
 !!
 !!    anyinteger_to_string(3f) - [M_anything] convert integer of any kind to a string
-!!    (LICENSE:PD)
+!!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
 !!
@@ -829,7 +873,7 @@ integer                      :: str(maxlen)
 integer,parameter            :: dig0=  ichar('0')
 integer,parameter            :: minus= ichar('-')
 
-   int_local = anyscalar_to_int64(int)           ! convert input to largest integer type
+   int_local = anyscalar_to_int64(int)            ! convert input to largest integer type
    intval = abs(int_local)
    do i=1,maxlen                                  ! generate digits from smallest significant digit to largest
       str(i) = dig0 + mod(intval,10_int64)
