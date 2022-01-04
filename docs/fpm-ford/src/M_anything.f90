@@ -4,7 +4,7 @@
 !===================================================================================================================================
 !>
 !!##NAME
-!!    M_anything(3fm) - [M_anything] procedures that use polymorphism to allow arguments of different types generically
+!!    M_anything(3fm) - [M_anything::INTRO] procedures that use polymorphism to allow arguments of different types generically
 !!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
@@ -32,7 +32,7 @@
 !!
 !! At the cost of casting to a different type these functions can
 !! (among other uses such as in linked lists) allow for an alternative
-!! to duplicating code using generic procedure methods.  For example,
+!! to duplicating code using generic procedure methods. For example,
 !! the following SQUAREALL function can take many input types and return a
 !! DOUBLEPRECISION value (it is a trivial example for demonstration purposes,
 !! and does not check for overflow, etc.).:
