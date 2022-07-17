@@ -15,6 +15,7 @@
 !!   use M_anything,only : anyscalar_to_real128
 !!   use M_anything,only : anyscalar_to_double
 !!   use M_anything,only : anything_to_bytes
+!!   use M_anything,only : get_type
 !!   use M_anything,only : bytes_to_anything
 !!   use M_anything,only : empty, assignment(=)
 !!
@@ -25,6 +26,7 @@
 !!    anyscalar_to_real128    convert integer or real parameter of any kind to real128
 !!    anyscalar_to_double     convert integer or real parameter of any kind to doubleprecision
 !!    anything_to_bytes       convert anything to bytes
+!!    get_type                return array of strings containing type names of arguments
 !!    empty                   create an empty array
 !!
 !!##EXAMPLE
@@ -91,6 +93,7 @@ public anyscalar_to_real     ! convert integer or real parameter of any kind to 
 public anyscalar_to_real128  ! convert integer or real parameter of any kind to real128
 public anyscalar_to_double   ! convert integer or real parameter of any kind to doubleprecision
 public anything_to_bytes
+public get_type
 public bytes_to_anything
 !!public setany
 
@@ -98,6 +101,11 @@ interface anything_to_bytes
    module procedure anything_to_bytes_arr
    module procedure anything_to_bytes_scalar
 end interface anything_to_bytes
+
+interface get_type
+   module procedure get_type_arr
+   module procedure get_type_scalar
+end interface get_type
 !===================================================================================================================================
 !   Because there is no builtin "empty array" object, I've tried to mimic
 !   it with some user-defined type (just for fun).  -- spectrum
@@ -279,7 +287,7 @@ end subroutine bytes_to_anything
 !!
 !!##SYNOPSIS
 !!
-!!    function anything_to_bytes_arr(anything) result(chars)
+!!    function anything_to_bytes(anything) result(chars)
 !!
 !!     class(*),intent(in)  :: anything
 !!             or
@@ -902,6 +910,118 @@ integer,parameter            :: minus= ichar('-')
       out(i-k+1:i-k+1)=char(str(k))
    enddo
 end function anyinteger_to_string
+!===================================================================================================================================
+!()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()!
+!===================================================================================================================================
+!>
+!!##NAME
+!!    get_type(3f) - [M_anything] return array of strings containing type
+!!    names of arguments
+!!    (LICENSE:MIT)
+!!
+!!##SYNOPSIS
+!!
+!!    function get_type(anything) result(chars)
+!!
+!!     class(*),intent(in)  :: anything
+!!             or
+!!     class(*),intent(in)  :: anything(..)
+!!
+!!     character(len=:),allocatable :: chars
+!!
+!!##DESCRIPTION
+!!
+!!    This function uses polymorphism to allow input arguments of different
+!!    types. It is used by other procedures that can take many
+!!    argument types as input options.
+!!
+!!##OPTIONS
+!!
+!!    VALUEIN  input array or scalar to return type of
+!!             May be of KIND INTEGER(kind=int8), INTEGER(kind=int16),
+!!             INTEGER(kind=int32), INTEGER(kind=int64),
+!!             REAL(kind=real32, REAL(kind=real64),
+!!             REAL(kind=real128), complex, or CHARACTER(len=*)
+!!##RETURN
+!!
+!!    CHARS    The returned value is an array of names
+!!
+!!##EXAMPLE
+!!
+!!
+!!   Sample program
+!!
+!!    program demo_get_type
+!!    use M_anything,      only : get_type
+!!    implicit none
+!!    integer :: i
+!!       write(*,*)get_type([(i*i,i=1,10)])
+!!       write(*,*)get_type([11.11,22.22,33.33])
+!!       write(*,*)get_type('This is a string')
+!!       write(*,*)get_type(30.0d0)
+!!    end program demo_get_type
+!!
+!!   Results:
+!!
+!!     int32
+!!     real32
+!!     character
+!!     real64
+!!
+!!##AUTHOR
+!!    John S. Urban
+!!##LICENSE
+!!    MIT
+function get_type_arr(anything) result(chars)
+implicit none
+
+! ident_8="@(#)M_anything::get_type_arr(3fp): any vector of intrinsics to bytes (an array of CHARACTER(LEN=1) variables)"
+
+class(*),intent(in) :: anything(:) ! anything(..)
+character(len=20)   :: chars
+   select type(anything)
+
+    type is (character(len=*));     chars='character'
+    type is (complex);              chars='complex'
+    type is (complex(kind=dp));     chars='complex_real64'
+    type is (integer(kind=int8));   chars='int8'
+    type is (integer(kind=int16));  chars='int16'
+    type is (integer(kind=int32));  chars='int32'
+    type is (integer(kind=int64));  chars='int64'
+    type is (real(kind=real32));    chars='real32'
+    type is (real(kind=real64));    chars='real64'
+    type is (real(kind=real128));   chars='real128'
+    type is (logical);              chars='logical'
+    class default
+      stop 'crud. get_type_arr(1) does not know about this type'
+
+   end select
+end function get_type_arr
+!-----------------------------------------------------------------------------------------------------------------------------------
+elemental impure function get_type_scalar(anything) result(chars)
+implicit none
+
+! ident_9="@(#)M_anything::get_type_scalar(3fp): anything to bytes (an array of CHARACTER(LEN=1) variables)"
+
+class(*),intent(in) :: anything
+character(len=20)   :: chars
+   select type(anything)
+    type is (character(len=*));     chars='character'
+    type is (complex);              chars='complex'
+    type is (complex(kind=dp));     chars='complex_real64'
+    type is (integer(kind=int8));   chars='int8'
+    type is (integer(kind=int16));  chars='int16'
+    type is (integer(kind=int32));  chars='int32'
+    type is (integer(kind=int64));  chars='int64'
+    type is (real(kind=real32));    chars='real32'
+    type is (real(kind=real64));    chars='real64'
+    type is (real(kind=real128));   chars='real128'
+    type is (logical);              chars='logical'
+    class default
+      stop 'crud. get_type_scalar(1) does not know about this type'
+
+   end select
+end function  get_type_scalar
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()!
 !===================================================================================================================================

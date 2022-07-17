@@ -8,4 +8,5 @@ append("anyscalar_to_real128.3m_anything.html");
 append("anything_to_bytes.3m_anything.html");
 append("bytes_to_anything.3m_anything.html");
 append("empty.3m_anything.html");
+append("get_type.3m_anything.html");
 }
