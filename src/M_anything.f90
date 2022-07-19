@@ -527,7 +527,7 @@ end function anyscalar_to_real128
 !!
 !!##SYNOPSIS
 !!
-!!    pure elemental function anyscalar_to_double(valuein) result(d_out)
+!!    impure elemental function anyscalar_to_double(valuein) result(d_out)
 !!
 !!     class(*),intent(in)  :: valuein
 !!     doubleprecision      :: d_out
@@ -584,7 +584,7 @@ end function anyscalar_to_real128
 !!
 !!##LICENSE
 !!    MIT
-pure elemental function anyscalar_to_double(valuein) result(d_out)
+impure elemental function anyscalar_to_double(valuein) result(d_out)
 use, intrinsic :: iso_fortran_env, only : error_unit !! ,input_unit,output_unit
 implicit none
 
@@ -601,20 +601,14 @@ doubleprecision,parameter :: big=huge(0.0d0)
    type is (real(kind=real32));    d_out=dble(valuein)
    type is (real(kind=real64));    d_out=dble(valuein)
    Type is (real(kind=real128))
-      !!if(valuein.gt.big)then
-      !!   write(error_unit,*)'*anyscalar_to_double* value too large ',valuein
-      !!endif
+      if(valuein.gt.big)then
+         write(error_unit,*)'*anyscalar_to_double* value too large ',valuein
+      endif
       d_out=dble(valuein)
    type is (logical);              d_out=merge(0.0d0,1.0d0,valuein)
-   type is (character(len=*));      read(valuein,*) d_out
-   !type is (real(kind=real128))
-   !   if(valuein.gt.big)then
-   !      write(error_unit,*)'*anyscalar_to_double* value too large ',valuein
-   !   endif
-   !   d_out=dble(valuein)
+   type is (character(len=*));     read(valuein,*) d_out
    class default
-     d_out=0.0d0
-     !!stop '*M_anything::anyscalar_to_double: unknown type'
+     stop '*M_anything::anyscalar_to_double: unknown type'
    end select
 end function anyscalar_to_double
 !===================================================================================================================================
