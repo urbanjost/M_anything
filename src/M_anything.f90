@@ -363,6 +363,8 @@ implicit none
 
 class(*),intent(in)          :: anything(:)
 character(len=1),allocatable :: chars(:)
+   if(allocated(chars))deallocate(chars)
+   allocate(chars( storage_size(anything)/8) )
    select type(anything)
 
     type is (character(len=*));     chars=transfer(anything,chars)
@@ -389,6 +391,8 @@ implicit none
 
 class(*),intent(in)          :: anything
 character(len=1),allocatable :: chars(:)
+   if(allocated(chars))deallocate(chars)
+   allocate(chars( storage_size(anything)/8) )
    select type(anything)
 
     type is (character(len=*));     chars=transfer(anything,chars)
@@ -602,7 +606,7 @@ doubleprecision,parameter :: big=huge(0.0d0)
    type is (real(kind=real64));    d_out=dble(valuein)
    Type is (real(kind=real128))
       if(valuein.gt.big)then
-         write(error_unit,*)'*anyscalar_to_double* value too large ',valuein
+         write(error_unit,'(*(g0,1x))')'*anyscalar_to_double* value too large ',valuein
       endif
       d_out=dble(valuein)
    type is (logical);              d_out=merge(0.0d0,1.0d0,valuein)
