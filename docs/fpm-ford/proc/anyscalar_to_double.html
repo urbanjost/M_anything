@@ -86,7 +86,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title=" 8.0% of total for procedures.">29 statements</a>
+    title=" 7.7% of total for procedures.">28 statements</a>
      </li> 
     <li><i class="fa fa-code"></i><a href="../src/M_anything.f90"> Source File</a></li>
   </ul>
@@ -203,11 +203,7 @@ scalar arguments as input options.
 <div class="codehilite"><pre><span></span><code>MIT
 </code></pre></div>
 
-<p>,input_unit,output_unit
-if(valuein.gt.big)then
-   write(error_unit,<em>)&rsquo;</em>anyscalar_to_double<em> value too large &lsquo;,valuein
-endif
-stop &lsquo;</em>M_anything::anyscalar_to_double: unknown type&rsquo;</p>
+<p>,input_unit,output_unit</p>
 
     <h3>Arguments</h3>
       <table class="table table-striped varlist">
@@ -254,7 +250,7 @@ stop &lsquo;</em>M_anything::anyscalar_to_double: unknown type&rsquo;</p>
 <span class="k">use</span><span class="p">,</span><span class="w"> </span><span class="k">intrinsic</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">iso_fortran_env</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">error_unit</span><span class="w"> </span><span class="c">!! ,input_unit,output_unit</span>
 <span class="k">implicit none</span><span class="w"></span>
 
-<span class="c">! ident_4=&quot;@(#)M_anything::anyscalar_to_double(3f): convert integer or real parameter of any kind to doubleprecision&quot;</span>
+<span class="c">! ident_4=&quot;@(#) M_anything anyscalar_to_double(3f) convert integer or real parameter of any kind to doubleprecision&quot;</span>
 
 <span class="k">class</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">       </span><span class="kd">::</span><span class="w"> </span><span class="n">valuein</span><span class="w"></span>
 <span class="n">doubleprecision</span><span class="w">           </span><span class="kd">::</span><span class="w"> </span><span class="n">d_out</span><span class="w"></span>
@@ -267,20 +263,14 @@ stop &lsquo;</em>M_anything::anyscalar_to_double: unknown type&rsquo;</p>
 <span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real32</span><span class="p">));</span><span class="w">    </span><span class="n">d_out</span><span class="o">=</span><span class="nb">dble</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
 <span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real64</span><span class="p">));</span><span class="w">    </span><span class="n">d_out</span><span class="o">=</span><span class="nb">dble</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
 <span class="w">   </span><span class="k">Type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real128</span><span class="p">))</span><span class="w"></span>
-<span class="w">      </span><span class="c">!!if(valuein.gt.big)then</span>
-<span class="w">      </span><span class="c">!!   write(error_unit,*)&#39;*anyscalar_to_double* value too large &#39;,valuein</span>
-<span class="w">      </span><span class="c">!!endif</span>
+<span class="w">      </span><span class="c">!IMPURE! if(valuein.gt.big)then</span>
+<span class="w">      </span><span class="c">!IMPURE!    write(error_unit,&#39;(*(g0,1x))&#39;)&#39;*anyscalar_to_double* value too large &#39;,valuein</span>
+<span class="w">      </span><span class="c">!IMPURE! endif</span>
 <span class="w">      </span><span class="n">d_out</span><span class="o">=</span><span class="nb">dble</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
 <span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">logical</span><span class="p">);</span><span class="w">              </span><span class="n">d_out</span><span class="o">=</span><span class="nb">merge</span><span class="p">(</span><span class="mf">0.0d0</span><span class="p">,</span><span class="mf">1.0d0</span><span class="p">,</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
-<span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">));</span><span class="w">      </span><span class="k">read</span><span class="p">(</span><span class="n">valuein</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">d_out</span><span class="w"></span>
-<span class="w">   </span><span class="c">!type is (real(kind=real128))</span>
-<span class="w">   </span><span class="c">!   if(valuein.gt.big)then</span>
-<span class="w">   </span><span class="c">!      write(error_unit,*)&#39;*anyscalar_to_double* value too large &#39;,valuein</span>
-<span class="w">   </span><span class="c">!   endif</span>
-<span class="w">   </span><span class="c">!   d_out=dble(valuein)</span>
+<span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">));</span><span class="w">     </span><span class="k">read</span><span class="p">(</span><span class="n">valuein</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">d_out</span><span class="w"></span>
 <span class="w">   </span><span class="k">class </span><span class="n">default</span><span class="w"></span>
-<span class="w">     </span><span class="n">d_out</span><span class="o">=</span><span class="mf">0.0d0</span><span class="w"></span>
-<span class="w">     </span><span class="c">!!stop &#39;*M_anything::anyscalar_to_double: unknown type&#39;</span>
+<span class="w">     </span><span class="c">!IMPURE! stop &#39;*M_anything::anyscalar_to_double: unknown type&#39;</span>
 <span class="w">   </span><span class="k">end select</span>
 <span class="k">end function </span><span class="n">anyscalar_to_double</span><span class="w"></span>
 </pre></div>
@@ -303,7 +293,7 @@ stop &lsquo;</em>M_anything::anyscalar_to_double: unknown type&rsquo;</p>
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2022-05-05 01:01            </p>
+ on 2022-08-15 05:16            </p>
         </div>
       </div>
       <br>

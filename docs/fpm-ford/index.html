@@ -87,7 +87,112 @@
       <div class="row" id='text'>
         <div class="col-md-8">
           <h1>M_anything</h1>
-          
+          <h1 id="experimental">EXPERIMENTAL</h1>
+<p>A WIP (Work In Progress)</p>
+<h2 id="name">NAME</h2>
+<p>M_anything(3fm) - [M_anything] procedures that use polymorphism to allow arguments of different types generically
+   (LICENSE:PD)</p>
+<h2 id="synopsis">SYNOPSIS</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">use</span><span class="w"> </span><span class="n">M_anything</span><span class="p">,</span><span class="n">only</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">anyinteger_to_string</span><span class="w">  </span>
+<span class="n">use</span><span class="w"> </span><span class="n">M_anything</span><span class="p">,</span><span class="n">only</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">anyscalar_to_int64</span><span class="w">   </span>
+<span class="n">use</span><span class="w"> </span><span class="n">M_anything</span><span class="p">,</span><span class="n">only</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">anyscalar_to_real</span><span class="w">    </span>
+<span class="n">use</span><span class="w"> </span><span class="n">M_anything</span><span class="p">,</span><span class="n">only</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">anyscalar_to_real128</span><span class="w"> </span>
+<span class="n">use</span><span class="w"> </span><span class="n">M_anything</span><span class="p">,</span><span class="n">only</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">anyscalar_to_double</span><span class="w"> </span>
+<span class="n">use</span><span class="w"> </span><span class="n">M_anything</span><span class="p">,</span><span class="n">only</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">anything_to_bytes</span><span class="w"></span>
+<span class="n">use</span><span class="w"> </span><span class="n">M_anything</span><span class="p">,</span><span class="n">only</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">bytes_to_anything</span><span class="w"></span>
+<span class="n">use</span><span class="w"> </span><span class="n">M_anything</span><span class="p">,</span><span class="n">only</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">empty</span><span class="p">,</span><span class="w"> </span><span class="n">assignment</span><span class="p">(</span><span class="o">=</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+<h2 id="description">DESCRIPTION</h2>
+<div class="codehilite"><pre><span></span><code>anyinteger_to_string    convert integer parameter of any kind to string
+anyscalar_to_int64      convert integer parameter of any kind to 64-bit integer
+anyscalar_to_real       convert integer or real parameter of any kind to real
+anyscalar_to_real128    convert integer or real parameter of any kind to real128
+anyscalar_to_double     convert integer or real parameter of any kind to doubleprecision
+anything_to_bytes       convert anything to bytes
+empty                   create an empty array
+</code></pre></div>
+
+<h2 id="example">EXAMPLE</h2>
+<p>Sample program:</p>
+<h2 id="author">AUTHOR</h2>
+<p>John S. Urban</p>
+<h2 id="license">LICENSE</h2>
+<p>MIT</p>
+<h2 id="building-the-module-using-make1">BUILDING THE MODULE USING make(1) <img alt="gmake" src="docs/images/gnu.gif"></h2>
+<div class="codehilite"><pre><span></span><code> <span class="nv">git</span> <span class="nv">clone</span> <span class="nv">https</span>:<span class="o">//</span><span class="nv">github</span>.<span class="nv">com</span><span class="o">/</span><span class="nv">urbanjost</span><span class="o">/</span><span class="nv">M_anything</span>.<span class="nv">git</span>
+ <span class="nv">cd</span> <span class="nv">M_anything</span><span class="o">/</span><span class="nv">src</span>
+ # <span class="nv">change</span> <span class="nv">Makefile</span> <span class="k">if</span> <span class="nv">not</span> <span class="nv">using</span> <span class="nv">one</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">listed</span> <span class="nv">compilers</span>
+
+ # <span class="k">for</span> <span class="nv">gfortran</span>
+ <span class="nv">make</span> <span class="nv">clean</span>
+ <span class="nv">make</span> <span class="nv">F90</span><span class="o">=</span><span class="nv">gfortran</span> <span class="nv">gfortran</span>
+
+ # <span class="k">for</span> <span class="nv">ifort</span>
+ <span class="nv">make</span> <span class="nv">clean</span>
+ <span class="nv">make</span> <span class="nv">F90</span><span class="o">=</span><span class="nv">ifort</span> <span class="nv">ifort</span>
+
+ # <span class="nv">REMOVE</span> <span class="nv">REFERENCES</span> <span class="nv">TO</span> <span class="mi">128</span><span class="o">-</span><span class="nv">BIT</span> <span class="nv">REALS</span>
+ # <span class="k">for</span> <span class="nv">nvfortran</span>
+ <span class="nv">make</span> <span class="nv">clean</span>
+ <span class="nv">make</span> <span class="nv">F90</span><span class="o">=</span><span class="nv">nvfortran</span> <span class="nv">nvfortran</span>
+</code></pre></div>
+
+<p>This will compile the Fortran module and basic example
+program that exercise the routine.</p>
+<h2 id="build-and-test-with-fpm">BUILD and TEST with FPM <img alt="-" src="docs/images/fpm_logo.gif"></h2>
+<p>Alternatively, download the github repository and build it with
+   fpm ( as described at <a href="https://github.com/fortran-lang/fpm">Fortran Package Manager</a> )</p>
+<p><code>bash
+        git clone https://github.com/urbanjost/M_anything.git
+        cd M_anything
+        fpm run "*"
+        fpm run --example "*"
+        fpm test</code></p>
+<p>or just list it as a dependency in your fpm.toml project file.</p>
+<div class="codehilite"><pre><span></span><code><span class="w">        </span><span class="k">[dependencies]</span><span class="w"></span>
+<span class="w">        </span><span class="n">M_anything</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://github.com/urbanjost/M_anything.git&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<h2 id="documentation">DOCUMENTATION   <img alt="docs" src="docs/images/docs.gif"></h2>
+<h3 id="user">USER</h3>
+<p><img alt="man-pages" src="docs/images/manpages.gif">
+   - There are man-pages in the repository download in the docs/ directory
+     that may be installed on ULS (Unix-Like Systems).</p>
+<ul>
+<li><a href="https://urbanjost.github.io/M_anything/manpages.zip">manpages.zip</a></li>
+<li>
+<p><a href="https://urbanjost.github.io/M_anything/manpages.tgz">manpages.tgz</a></p>
+</li>
+<li>
+<p>a simple index to the man-pages in HTML form for the
+   <a href="https://urbanjost.github.io/M_anything/man3.html">routines</a> 
+   and <a href="https://urbanjost.github.io/M_anything/man1.html">programs</a> </p>
+</li>
+<li>
+<p>A single page that uses javascript to combine all the HTML
+     descriptions of the man-pages is at 
+     <a href="https://urbanjost.github.io/M_anything/BOOK_M_anything.html">BOOK_M_anything</a>.</p>
+</li>
+<li>
+<p><a href="docs/CHANGELOG.md">CHANGELOG</a> provides a history of significant changes</p>
+</li>
+</ul>
+<h3 id="developer">DEVELOPER</h3>
+<ul>
+<li><a href="https://urbanjost.github.io/M_anything/fpm-ford/index.html">ford(1) output</a>.</li>
+<li><a href="https://urbanjost.github.io/M_anything/doxygen_out/html/index.html">doxygen(1) output</a>.</li>
+<li><a href="docs/STATUS.md">github action status</a> </li>
+</ul>
+<hr>
+<h2 id="pedigree">PEDIGREE</h2>
+<h2 id="references">REFERENCES <img alt="-" src="docs/images/ref.gif"></h2>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc4122">RFC-4122</a></li>
+<li><a href="http://fortranwiki.org/fortran/show/FoX">FOX</a></li>
+</ul>
+<hr>
+<hr>
         </div>
         <div class="col-md-4">
 	  <div class="well">
@@ -110,9 +215,9 @@
                     <li><a href='./sourcefile/demo_anyscalar_to_real128.f90.html'>demo_anyscalar_to_real128.f90</a></li>
                     <li><a href='./sourcefile/demo_anything_to_bytes.f90.html'>demo_anything_to_bytes.f90</a></li>
                     <li><a href='./sourcefile/demo_empty.f90.html'>demo_empty.f90</a></li>
+                    <li><a href='./sourcefile/demo_get_type.f90.html'>demo_get_type.f90</a></li>
                     <li><a href='./sourcefile/demo_m_anything.f90.html'>demo_M_anything.f90</a></li>
                     <li><a href='./sourcefile/m_anything.f90.html'>M_anything.f90</a></li>
-                    <li><a href='./sourcefile/scalars.f90.html'>scalars.f90</a></li>
 </ul>
           </div>
 		  <div class="col-xs-6 col-sm-4">
@@ -131,8 +236,8 @@
                     <li><a href='./interface/anything_to_bytes.html'>anything_to_bytes</a></li>
                     <li><a href='./interface/assignment%28%3D%29.html'>assignment(=)</a></li>
                     <li><a href='./proc/bytes_to_anything.html'>bytes_to_anything</a></li>
+                    <li><a href='./interface/get_type.html'>get_type</a></li>
                     <li><a href='./proc/squareall.html'>squareall</a></li>
-                    <li><a href='./proc/squarei.html'>squarei</a></li>
 </ul>
           </div>
       </div>
@@ -148,7 +253,7 @@
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2022-05-05 01:01            </p>
+ on 2022-08-15 05:16            </p>
         </div>
       </div>
       <br>

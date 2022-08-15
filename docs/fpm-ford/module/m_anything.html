@@ -86,7 +86,7 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="67.3% of total for modules and submodules.">290 statements</a>
+    title="71.9% of total for modules and submodules.">360 statements</a>
      </li> 
     <li><i class="fa fa-code"></i><a href="../src/M_anything.f90"> Source File</a></li>
   </ul>
@@ -124,6 +124,7 @@
     <div class="list-group">
       <a class="list-group-item" href="../module/m_anything.html#interface-anything_to_bytes">anything_to_bytes</a>
       <a class="list-group-item" href="../module/m_anything.html#interface-assignment%28%3D%29">assignment(=)</a>
+      <a class="list-group-item" href="../module/m_anything.html#interface-get_type">get_type</a>
     </div>
   </div>
 </div>
@@ -165,16 +166,18 @@
    use M_anything,only : anyscalar_to_real128
    use M_anything,only : anyscalar_to_double
    use M_anything,only : anything_to_bytes
+   use M_anything,only : get_type
    use M_anything,only : bytes_to_anything
    use M_anything,only : empty, assignment(=)</p>
 <h2 id="description">DESCRIPTION</h2>
-<div class="codehilite"><pre><span></span><code>anyinteger_to_string    convert integer parameter of any kind to string
-anyscalar_to_int64      convert integer parameter of any kind to 64-bit integer
-anyscalar_to_real       convert integer or real parameter of any kind to real
-anyscalar_to_real128    convert integer or real parameter of any kind to real128
-anyscalar_to_double     convert integer or real parameter of any kind to doubleprecision
-anything_to_bytes       convert anything to bytes
-empty                   create an empty array
+<div class="codehilite"><pre><span></span><code><span class="nv">anyinteger_to_string</span>    <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">parameter</span> <span class="nv">of</span> <span class="nv">any</span> <span class="nv">kind</span> <span class="nv">to</span> <span class="nv">string</span>
+<span class="nv">anyscalar_to_int64</span>      <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">parameter</span> <span class="nv">of</span> <span class="nv">any</span> <span class="nv">kind</span> <span class="nv">to</span> <span class="mi">64</span><span class="o">-</span><span class="nv">bit</span> <span class="nv">integer</span>
+<span class="nv">anyscalar_to_real</span>       <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">or</span> <span class="nv">real</span> <span class="nv">parameter</span> <span class="nv">of</span> <span class="nv">any</span> <span class="nv">kind</span> <span class="nv">to</span> <span class="nv">real</span>
+<span class="nv">anyscalar_to_real128</span>    <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">or</span> <span class="nv">real</span> <span class="nv">parameter</span> <span class="nv">of</span> <span class="nv">any</span> <span class="nv">kind</span> <span class="nv">to</span> <span class="nv">real128</span>
+<span class="nv">anyscalar_to_double</span>     <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">or</span> <span class="nv">real</span> <span class="nv">parameter</span> <span class="nv">of</span> <span class="nv">any</span> <span class="nv">kind</span> <span class="nv">to</span> <span class="nv">doubleprecision</span>
+<span class="nv">anything_to_bytes</span>       <span class="nv">convert</span> <span class="nv">anything</span> <span class="nv">to</span> <span class="nv">bytes</span>
+<span class="nv">get_type</span>                <span class="k">return</span> <span class="nv">array</span> <span class="nv">of</span> <span class="nv">strings</span> <span class="nv">containing</span> <span class="nv">type</span> <span class="nv">names</span> <span class="nv">of</span> <span class="nv">arguments</span>
+<span class="nv">empty</span>                   <span class="nv">create</span> <span class="nv">an</span> <span class="nv">empty</span> <span class="nv">array</span>
 </code></pre></div>
 
 <h2 id="example">EXAMPLE</h2>
@@ -275,6 +278,7 @@ end subroutine setany</p>
     <div class="list-group">
       <a class="list-group-item" href="../module/m_anything.html#interface-anything_to_bytes">anything_to_bytes</a>
       <a class="list-group-item" href="../module/m_anything.html#interface-assignment%28%3D%29">assignment(=)</a>
+      <a class="list-group-item" href="../module/m_anything.html#interface-get_type">get_type</a>
     </div>
   </div>
 </div>
@@ -458,6 +462,47 @@ end subroutine setany</p>
   </ul>
 </div>
 
+     <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="interface-get_type"></span><h3>public interface <a href='../interface/get_type.html'>get_type</a>  </h3></div>
+  <ul class="list-group">
+    <li class="list-group-item">
+    <h3>private function get_type_arr(anything) result(chars)</h3><p>Sample program</p><a href="../proc/get_type_arr.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+    
+<h4>Arguments</h4>      <table class="table table-striped varlist">
+<thead><tr><th>Type</th><th>Intent</th><th>Optional</th><th>Attributes</th><th></th><th>Name</th><th></th></thead>
+<tbody>
+<tr>
+  <td><span class="anchor" ></span>class(*),</td>
+<td>intent(in)</td>
+  <td></td>  <td></td><td>::</td>
+  <td><strong>anything</strong>(:)</td><td></td>
+</tr>
+</tbody>
+</table>
+
+<h4>Return Value <small>character(len=20)</small></h4>  
+
+    </li>
+    <li class="list-group-item">
+    <h3>private impure elemental function get_type_scalar(anything) result(chars)</h3>    
+<h4>Arguments</h4>      <table class="table table-striped varlist">
+<thead><tr><th>Type</th><th>Intent</th><th>Optional</th><th>Attributes</th><th></th><th>Name</th><th></th></thead>
+<tbody>
+<tr>
+  <td><span class="anchor" ></span>class(*),</td>
+<td>intent(in)</td>
+  <td></td>  <td></td><td>::</td>
+  <td><strong>anything</strong></td><td></td>
+</tr>
+</tbody>
+</table>
+
+<h4>Return Value <small>character(len=20)</small></h4>  
+
+    </li>
+  </ul>
+</div>
+
     </section>
   <br>
 
@@ -632,7 +677,7 @@ end subroutine setany</p>
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2022-05-05 01:01            </p>
+ on 2022-08-15 05:16            </p>
         </div>
       </div>
       <br>
