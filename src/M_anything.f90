@@ -359,7 +359,7 @@ end subroutine bytes_to_anything
 function anything_to_bytes_arr(anything) result(chars)
 implicit none
 
-! ident_1="@(#)M_anything::anything_to_bytes_arr(3fp): any vector of intrinsics to bytes (an array of CHARACTER(LEN=1) variables)"
+! ident_1="@(#) M_anything anything_to_bytes_arr(3fp) any vector of intrinsics to bytes (an array of CHARACTER(LEN=1) variables)"
 
 class(*),intent(in)          :: anything(:)
 character(len=1),allocatable :: chars(:)
@@ -387,7 +387,7 @@ end function anything_to_bytes_arr
 function  anything_to_bytes_scalar(anything) result(chars)
 implicit none
 
-! ident_2="@(#)M_anything::anything_to_bytes_scalar(3fp): anything to bytes (an array of CHARACTER(LEN=1) variables)"
+! ident_2="@(#) M_anything anything_to_bytes_scalar(3fp) anything to bytes (an array of CHARACTER(LEN=1) variables)"
 
 class(*),intent(in)          :: anything
 character(len=1),allocatable :: chars(:)
@@ -499,7 +499,7 @@ pure elemental function anyscalar_to_real128(valuein) result(d_out)
 use, intrinsic :: iso_fortran_env, only : error_unit !! ,input_unit,output_unit
 implicit none
 
-! ident_3="@(#)M_anything::anyscalar_to_real128(3f): convert integer or real parameter of any kind to real128"
+! ident_3="@(#) M_anything anyscalar_to_real128(3f) convert integer or real parameter of any kind to real128"
 
 class(*),intent(in)          :: valuein
 real(kind=real128)           :: d_out
@@ -531,7 +531,7 @@ end function anyscalar_to_real128
 !!
 !!##SYNOPSIS
 !!
-!!    impure elemental function anyscalar_to_double(valuein) result(d_out)
+!!    pure elemental function anyscalar_to_double(valuein) result(d_out)
 !!
 !!     class(*),intent(in)  :: valuein
 !!     doubleprecision      :: d_out
@@ -588,11 +588,11 @@ end function anyscalar_to_real128
 !!
 !!##LICENSE
 !!    MIT
-impure elemental function anyscalar_to_double(valuein) result(d_out)
+pure elemental function anyscalar_to_double(valuein) result(d_out)
 use, intrinsic :: iso_fortran_env, only : error_unit !! ,input_unit,output_unit
 implicit none
 
-! ident_4="@(#)M_anything::anyscalar_to_double(3f): convert integer or real parameter of any kind to doubleprecision"
+! ident_4="@(#) M_anything anyscalar_to_double(3f) convert integer or real parameter of any kind to doubleprecision"
 
 class(*),intent(in)       :: valuein
 doubleprecision           :: d_out
@@ -605,14 +605,14 @@ doubleprecision,parameter :: big=huge(0.0d0)
    type is (real(kind=real32));    d_out=dble(valuein)
    type is (real(kind=real64));    d_out=dble(valuein)
    Type is (real(kind=real128))
-      if(valuein.gt.big)then
-         write(error_unit,'(*(g0,1x))')'*anyscalar_to_double* value too large ',valuein
-      endif
+      !IMPURE! if(valuein.gt.big)then
+      !IMPURE!    write(error_unit,'(*(g0,1x))')'*anyscalar_to_double* value too large ',valuein
+      !IMPURE! endif
       d_out=dble(valuein)
    type is (logical);              d_out=merge(0.0d0,1.0d0,valuein)
    type is (character(len=*));     read(valuein,*) d_out
    class default
-     stop '*M_anything::anyscalar_to_double: unknown type'
+     !IMPURE! stop '*M_anything::anyscalar_to_double: unknown type'
    end select
 end function anyscalar_to_double
 !===================================================================================================================================
@@ -685,7 +685,7 @@ pure elemental function anyscalar_to_real(valuein) result(r_out)
 use, intrinsic :: iso_fortran_env, only : error_unit !! ,input_unit,output_unit
 implicit none
 
-! ident_5="@(#)M_anything::anyscalar_to_real(3f): convert integer or real parameter of any kind to real"
+! ident_5="@(#) M_anything anyscalar_to_real(3f) convert integer or real parameter of any kind to real"
 
 class(*),intent(in) :: valuein
 real                :: r_out
@@ -793,7 +793,7 @@ impure elemental function anyscalar_to_int64(valuein) result(ii38)
 use, intrinsic :: iso_fortran_env, only : error_unit !! ,input_unit,output_unit
 implicit none
 
-! ident_6="@(#)M_anything::anyscalar_to_int64(3f): convert integer parameter of any kind to 64-bit integer"
+! ident_6="@(#) M_anything anyscalar_to_int64(3f) convert integer parameter of any kind to 64-bit integer"
 
 class(*),intent(in)    :: valuein
    integer(kind=int64) :: ii38
@@ -880,7 +880,7 @@ end function anyscalar_to_int64
 impure function anyinteger_to_string(int) result(out)
 use,intrinsic :: iso_fortran_env, only : int64
 
-! ident_7="@(#)M_anything::anyinteger_to_string(3f): function that converts an integer value to a character string"
+! ident_7="@(#) M_anything anyinteger_to_string(3f) function that converts an integer value to a character string"
 
 class(*),intent(in)          :: int
 character(len=:),allocatable :: out
@@ -973,7 +973,7 @@ end function anyinteger_to_string
 function get_type_arr(anything) result(chars)
 implicit none
 
-! ident_8="@(#)M_anything::get_type_arr(3fp): any vector of intrinsics to bytes (an array of CHARACTER(LEN=1) variables)"
+! ident_8="@(#) M_anything get_type_arr(3fp) any vector of intrinsics to bytes (an array of CHARACTER(LEN=1) variables)"
 
 class(*),intent(in) :: anything(:) ! anything(..)
 character(len=20)   :: chars
@@ -999,7 +999,7 @@ end function get_type_arr
 elemental impure function get_type_scalar(anything) result(chars)
 implicit none
 
-! ident_9="@(#)M_anything::get_type_scalar(3fp): anything to bytes (an array of CHARACTER(LEN=1) variables)"
+! ident_9="@(#) M_anything get_type_scalar(3fp) anything to bytes (an array of CHARACTER(LEN=1) variables)"
 
 class(*),intent(in) :: anything
 character(len=20)   :: chars
