@@ -90,10 +90,10 @@ ship:
 	: make easily distributed archive files of manpages
 	mkdir -p ../docs
 	cd ../man/man3;\
-	   gzip *.3M_anything;\
+	   gzip *.3m_anything;\
 	   zip -r ../../docs/manpages.zip *gz;\
 	   tar cvfz ../../docs/manpages.tgz *gz;\
-	   gunzip *.3M_anything.gz
+	   gunzip *.3m_anything.gz
 
 .PHONY: run
 run: $(PROG)
