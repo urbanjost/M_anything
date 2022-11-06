@@ -126,19 +126,19 @@
      <li><i class="fa fa-list-ol"></i>
        <a data-toggle="tooltip"
     data-placement="bottom" data-html="true"
-    title="71.9% of total for modules and submodules.">360 statements</a>
+    title="75.6% of total for modules and submodules.">437 statements</a>
      </li> 
      
      
      
-    <li><i class="fa fa-code"></i><a href="../src/M_anything.f90"> Source File</a></li>
+    <li><i class="fa fa-code"></i><a href="../src/M_anything.F90"> Source File</a></li>
      
      
   </ul>
   <ol class="breadcrumb in-well text-right">
   
     
-     <li><a href='../sourcefile/m_anything.f90.html'>M_anything.f90</a></li>
+     <li><a href='../sourcefile/m_anything.f90.html'>M_anything.F90</a></li>
     
   
      <li class="active">M_anything</li>
@@ -217,6 +217,8 @@
       
       <a class="list-group-item" href="../module/m_anything.html#proc-anyscalar_to_real128">anyscalar_to_real128</a>
       
+      <a class="list-group-item" href="../module/m_anything.html#proc-anyscalar_to_string">anyscalar_to_string</a>
+      
     </div>
   </div>
 </div>
@@ -254,22 +256,24 @@
 </code></pre></div>
 
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>use M_anything,only : anyinteger_to_string
+<p>use M_anything,only : anyscalar_to_string
    use M_anything,only : anyscalar_to_int64
    use M_anything,only : anyscalar_to_real
    use M_anything,only : anyscalar_to_real128
    use M_anything,only : anyscalar_to_double
    use M_anything,only : anything_to_bytes
+   use M_anything,only : anyinteger_to_string
    use M_anything,only : get_type
    use M_anything,only : bytes_to_anything
    use M_anything,only : empty, assignment(=)</p>
 <h2 id="description">DESCRIPTION</h2>
-<div class="codehilite"><pre><span></span><code><span class="nv">anyinteger_to_string</span>    <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">parameter</span> <span class="nv">of</span> <span class="nv">any</span> <span class="nv">kind</span> <span class="nv">to</span> <span class="nv">string</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">anyscalar_to_string</span>     <span class="nv">convert</span> <span class="nv">intrinsic</span> <span class="nv">type</span> <span class="nv">to</span> <span class="nv">string</span>
 <span class="nv">anyscalar_to_int64</span>      <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">or</span> <span class="nv">real</span> <span class="nv">of</span> <span class="nv">any</span> <span class="nv">kind</span> <span class="nv">to</span> <span class="mi">64</span><span class="o">-</span><span class="nv">bit</span> <span class="nv">integer</span>
 <span class="nv">anyscalar_to_real</span>       <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">or</span> <span class="nv">real</span> <span class="nv">of</span> <span class="nv">any</span> <span class="nv">kind</span> <span class="nv">to</span> <span class="nv">real</span>
 <span class="nv">anyscalar_to_real128</span>    <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">or</span> <span class="nv">real</span> <span class="nv">of</span> <span class="nv">any</span> <span class="nv">kind</span> <span class="nv">to</span> <span class="nv">real128</span>
 <span class="nv">anyscalar_to_double</span>     <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">or</span> <span class="nv">real</span> <span class="nv">of</span> <span class="nv">any</span> <span class="nv">kind</span> <span class="nv">to</span> <span class="nv">doubleprecision</span>
 <span class="nv">anything_to_bytes</span>       <span class="nv">convert</span> <span class="nv">anything</span> <span class="nv">to</span> <span class="nv">bytes</span>
+<span class="nv">anyinteger_to_string</span>    <span class="nv">convert</span> <span class="nv">integer</span> <span class="nv">to</span> <span class="nv">string</span>
 <span class="nv">get_type</span>                <span class="k">return</span> <span class="nv">array</span> <span class="nv">of</span> <span class="nv">strings</span> <span class="nv">containing</span> <span class="nv">type</span> <span class="nv">names</span> <span class="nv">of</span> <span class="nv">arguments</span>
 <span class="nv">empty</span>                   <span class="nv">create</span> <span class="nv">an</span> <span class="nv">empty</span> <span class="nv">array</span>
 </code></pre></div>
@@ -428,6 +432,8 @@ end subroutine setany</p>
       <a class="list-group-item" href="../module/m_anything.html#proc-anyscalar_to_real">anyscalar_to_real</a>
       
       <a class="list-group-item" href="../module/m_anything.html#proc-anyscalar_to_real128">anyscalar_to_real128</a>
+      
+      <a class="list-group-item" href="../module/m_anything.html#proc-anyscalar_to_string">anyscalar_to_string</a>
       
     </div>
   </div>
@@ -1389,6 +1395,374 @@ public pure elemental function <a href='../proc/anyscalar_to_real128.html'>anysc
   </div>
 
     
+    
+  <div class="panel panel-default">
+  <div class="panel-heading codesum"><span class="anchor" id="proc-anyscalar_to_string"></span><h3>
+public pure function <a href='../proc/anyscalar_to_string.html'>anyscalar_to_string</a>(gen0, gen1, gen2, gen3, gen4, gen5, gen6, gen7, gen8, gen9, gena, genb, genc, gend, gene, genf, geng, genh, geni, genj, sep)
+    
+    
+   
+</h3></div>
+  <div class="panel-body">
+       
+    
+
+
+
+
+
+
+
+<p>Sample program:</p><a href="../proc/anyscalar_to_string.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+    
+    <h4>Arguments</h4>
+    
+      
+      
+<table class="table table-striped varlist">
+<thead><tr><th>Type</th>
+<th>Intent</th><th>Optional</th>
+<th>Attributes</th><th></th><th>Name</th><th></th></thead>
+
+
+
+<tbody>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gen0</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gen1</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gen2</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gen3</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gen4</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gen5</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gen6</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gen7</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gen8</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gen9</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gena</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>genb</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>genc</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gend</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>gene</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>genf</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>geng</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>genh</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>geni</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>class(*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>genj</strong></td><td></td>
+  
+</tr>
+
+  
+  
+  
+  
+<tr>
+  
+  <td><span class="anchor" ></span>character(len=*),</td>
+  <td>intent(in),</td>
+  <td>optional</td>
+  
+  <td></td><td>::</td>
+  <td><strong>sep</strong></td><td></td>
+  
+</tr>
+
+</tbody>
+</table>
+
+      
+    
+    
+
+  
+  
+  
+  
+     <h4>Return Value <small>character(len=:),
+  allocatable</small></h4>
+  
+    
+
+  </div>
+  </div>
+
+    
     </section>
     <br>
     
@@ -1491,7 +1865,7 @@ public subroutine <a href='../proc/bytes_to_anything.html'>bytes_to_anything</a>
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/cmacmackin/ford">FORD</a>
-             on 2022-11-06 10:39  
+             on 2022-11-06 11:06  
           </p>
         </div>
         <div class="col-xs-12 col-md-4 col-md-pull-4"><p class="text-center"> M_anything was developed by John S. Urban</p></div>

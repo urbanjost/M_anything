@@ -14,7 +14,7 @@ $(NULL)
 
 TESTFILES = \
 $(NULL)
-# ../test/test_suite_M_anything.f90 \
+# ../test/test_suite_M_anything.F90 \
 TPROG = ${TESTFILES:.f90=}
 
 CPROGFILES = 
@@ -23,7 +23,7 @@ PROG = ${PROGFILES:.f90=}
 
 CPROG = ${CPROGFILES:.c=}
 
-SRCS =  M_anything.f90 
+SRCS =  M_anything.F90 
 
 OBJS =  M_anything.o
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
