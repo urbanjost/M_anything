@@ -3,12 +3,13 @@
    (LICENSE:PD)
 
 ## SYNOPSIS
-    use M_anything,only : anyinteger_to_string  
+    use M_anything,only : anyscalar_to_string  
     use M_anything,only : anyscalar_to_int64   
     use M_anything,only : anyscalar_to_real    
     use M_anything,only : anyscalar_to_real128 
     use M_anything,only : anyscalar_to_double 
     use M_anything,only : anything_to_bytes
+    use M_anything,only : anyinteger_to_string  
     use M_anything,only : bytes_to_anything
     use M_anything,only : empty, assignment(=) 
 
@@ -19,11 +20,12 @@
   instead for input parameters. Future versions of Fortran are planned to allow
   for templating as another alternative.
 
-    anyinteger_to_string    convert integer parameter of any kind to string
+    anyscalar_to_string     convert intrinsic types to a a string
     anyscalar_to_int64      convert integer parameter of any kind to 64-bit integer
     anyscalar_to_real       convert integer or real parameter of any kind to real
     anyscalar_to_real128    convert integer or real parameter of any kind to real128
     anyscalar_to_double     convert integer or real parameter of any kind to doubleprecision
+    anyinteger_to_string    convert integer parameter of any kind to string
     anything_to_bytes       convert anything to bytes
     empty                   create an empty array
 
