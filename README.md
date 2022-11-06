@@ -137,6 +137,7 @@ program that exercise the routine.
    - [ford(1) output](https://urbanjost.github.io/M_anything/fpm-ford/index.html).
    - [doxygen(1) output](https://urbanjost.github.io/M_anything/doxygen_out/html/index.html).
    - [github action status](docs/STATUS.md) 
+<!--
 ---
 ## PEDIGREE
 
@@ -144,4 +145,5 @@ program that exercise the routine.
 
    * [RFC-4122](https://tools.ietf.org/html/rfc4122)
    * [FOX](http://fortranwiki.org/fortran/show/FoX)
+-->
 ---
