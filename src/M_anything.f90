@@ -21,10 +21,10 @@
 !!
 !!##DESCRIPTION
 !!    anyinteger_to_string    convert integer parameter of any kind to string
-!!    anyscalar_to_int64      convert integer parameter of any kind to 64-bit integer
-!!    anyscalar_to_real       convert integer or real parameter of any kind to real
-!!    anyscalar_to_real128    convert integer or real parameter of any kind to real128
-!!    anyscalar_to_double     convert integer or real parameter of any kind to doubleprecision
+!!    anyscalar_to_int64      convert integer or real of any kind to 64-bit integer
+!!    anyscalar_to_real       convert integer or real of any kind to real
+!!    anyscalar_to_real128    convert integer or real of any kind to real128
+!!    anyscalar_to_double     convert integer or real of any kind to doubleprecision
 !!    anything_to_bytes       convert anything to bytes
 !!    get_type                return array of strings containing type names of arguments
 !!    empty                   create an empty array
@@ -605,7 +605,7 @@ doubleprecision,parameter :: big=huge(0.0d0)
    type is (real(kind=real32));    d_out=dble(valuein)
    type is (real(kind=real64));    d_out=dble(valuein)
    Type is (real(kind=real128))
-      !IMPURE! if(valuein.gt.big)then
+      !IMPURE! if(valuein > big)then
       !IMPURE!    write(error_unit,'(*(g0,1x))')'*anyscalar_to_double* value too large ',valuein
       !IMPURE! endif
       d_out=dble(valuein)
@@ -697,12 +697,12 @@ real,parameter      :: big=huge(0.0)
    type is (integer(kind=int64));  r_out=real(valuein)
    type is (real(kind=real32));    r_out=real(valuein)
    type is (real(kind=real64))
-      !!if(valuein.gt.big)then
+      !!if(valuein > big)then
       !!   write(error_unit,*)'*anyscalar_to_real* value too large ',valuein
       !!endif
       r_out=real(valuein)
    type is (real(kind=real128))
-      !!if(valuein.gt.big)then
+      !!if(valuein > big)then
       !!   write(error_unit,*)'*anyscalar_to_real* value too large ',valuein
       !!endif
       r_out=real(valuein)
@@ -810,7 +810,7 @@ class(*),intent(in)    :: valuein
    type is (logical);              ii38=merge(0_int64,1_int64,valuein)
    type is (character(len=*))   ;
       read(valuein,*,iostat=ios,iomsg=message)ii38
-      if(ios.ne.0)then
+      if(ios /= 0)then
          write(error_unit,*)'*anyscalar_to_int64* ERROR: '//trim(message)
          stop 2
       endif

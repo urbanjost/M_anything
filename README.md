@@ -1,6 +1,3 @@
-#  EXPERIMENTAL
-   A WIP (Work In Progress)
-
 ## NAME
    M_anything(3fm) - [M_anything] procedures that use polymorphism to allow arguments of different types generically
    (LICENSE:PD)
@@ -16,6 +13,12 @@
     use M_anything,only : empty, assignment(=) 
 
 ## DESCRIPTION
+
+  Generic routines are generally more efficient than casting but can generate a
+  large amount of duplicate code. These procedures show how to use casting 
+  instead for input parameters. Future versions of Fortran are planned to allow
+  for templating as another alternative.
+
     anyinteger_to_string    convert integer parameter of any kind to string
     anyscalar_to_int64      convert integer parameter of any kind to 64-bit integer
     anyscalar_to_real       convert integer or real parameter of any kind to real
@@ -26,7 +29,43 @@
 
 ## EXAMPLE
   Sample program:
+```fortran
+      program demo_anyscalar_to_double
+      use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
+      use, intrinsic :: iso_fortran_env, only : real32, real64, real128
+      implicit none
+         ! call same function with many scalar input types
+         write(*,*)squareall(2_int8)
+         write(*,*)squareall(2_int16)
+         write(*,*)squareall(2_int32)
+         write(*,*)squareall(2_int64)
+         write(*,*)squareall(2.0_real32)
+         write(*,*)squareall(2.0_real64)
+         write(*,*)squareall(2.0_real128)
+      contains
 
+      function squareall(invalue) result (dvalue)
+      use M_anything, only : anyscalar_to_double
+      class(*),intent(in)  :: invalue
+      doubleprecision      :: invalue_local
+      doubleprecision      :: dvalue
+         invalue_local=anyscalar_to_double(invalue)
+         dvalue=invalue_local*invalue_local
+      end function squareall
+
+      end program demo_anyscalar_to_double
+```
+    Results:
+
+```text
+        4.00000000000000
+        4.00000000000000
+        4.00000000000000
+        4.00000000000000
+        4.00000000000000
+        4.00000000000000
+        4.00000000000000
+```
 ## AUTHOR
    John S. Urban
 
