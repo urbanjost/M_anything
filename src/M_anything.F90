@@ -9,27 +9,27 @@
 !!
 !!##SYNOPSIS
 !!
-!!   use M_anything,only : anyscalar_to_string
-!!   use M_anything,only : anyscalar_to_int64
-!!   use M_anything,only : anyscalar_to_real
-!!   use M_anything,only : anyscalar_to_real128
-!!   use M_anything,only : anyscalar_to_double
-!!   use M_anything,only : anything_to_bytes
-!!   use M_anything,only : anyinteger_to_string
-!!   use M_anything,only : get_type
-!!   use M_anything,only : bytes_to_anything
-!!   use M_anything,only : empty, assignment(=)
+!!      use M_anything,only : anyscalar_to_string
+!!      use M_anything,only : anyscalar_to_int64
+!!      use M_anything,only : anyscalar_to_real
+!!      use M_anything,only : anyscalar_to_real128
+!!      use M_anything,only : anyscalar_to_double
+!!      use M_anything,only : anything_to_bytes
+!!      use M_anything,only : anyinteger_to_string
+!!      use M_anything,only : get_type
+!!      use M_anything,only : bytes_to_anything
+!!      use M_anything,only : empty, assignment(=)
 !!
 !!##DESCRIPTION
-!!    anyscalar_to_string     convert intrinsic type to string
-!!    anyscalar_to_int64      convert integer or real of any kind to 64-bit integer
-!!    anyscalar_to_real       convert integer or real of any kind to real
-!!    anyscalar_to_real128    convert integer or real of any kind to real128
-!!    anyscalar_to_double     convert integer or real of any kind to doubleprecision
-!!    anything_to_bytes       convert anything to bytes
-!!    anyinteger_to_string    convert integer to string
-!!    get_type                return array of strings containing type names of arguments
-!!    empty                   create an empty array
+!!       anyscalar_to_string     convert intrinsic type to string
+!!       anyscalar_to_int64      convert integer or real of any kind to 64-bit integer
+!!       anyscalar_to_real       convert integer or real of any kind to real
+!!       anyscalar_to_real128    convert integer or real of any kind to real128
+!!       anyscalar_to_double     convert integer or real of any kind to doubleprecision
+!!       anything_to_bytes       convert anything to bytes
+!!       anyinteger_to_string    convert integer to string
+!!       get_type                return array of strings containing type names of arguments
+!!       empty                   create an empty array
 !!
 !!##EXAMPLE
 !!
@@ -256,6 +256,19 @@ contains
 !!
 !!   Sample program
 !!
+!!      program demo_bytes_to_anything
+!!      use M_anything,      only : bytes_to_anything
+!!      use M_anything,      only : anything_to_bytes
+!!      implicit none
+!!      character(len=1),allocatable :: chars(:)
+!!      integer :: ints(10)
+!!      integer :: i
+!!         chars=anything_to_bytes([(i*i,i=1,size(ints))])
+!!         write(*,'(/,4(1x,z2.2))')chars
+!!         call bytes_to_anything(chars,ints)
+!!         write(*,*)ints
+!!      end program demo_bytes_to_anything
+!!
 !!   Expected output
 !!
 !!##AUTHOR
@@ -264,7 +277,7 @@ contains
 !!    MIT
 subroutine bytes_to_anything(chars,anything)
    character(len=1),allocatable :: chars(:)
-   class(*) :: anything
+   class(*) :: anything(:)
    select type(anything)
     type is (character(len=*));     anything=transfer(chars,anything)
     type is (complex);              anything=transfer(chars,anything)
@@ -828,8 +841,8 @@ end function anyscalar_to_int64
 !===================================================================================================================================
 !>
 !!##NAME
-!!    anyscalar_to_string(3f) - [M_msg] converts up to twenty standard scalar type values to a string
-!!    (LICENSE:PD)
+!!    anyscalar_to_string(3f) - [M_anything] converts up to twenty standard scalar type values to a string
+!!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
 !!
@@ -857,14 +870,14 @@ end function anyscalar_to_int64
 !!    sep         separator string used between values. Defaults to a space.
 !!
 !!##RETURNS
-!!    anyscalar_to_string     description to print
+!!    anyscalar_to_string     a representation of the input as a string
 !!
 !!##EXAMPLES
 !!
 !!   Sample program:
 !!
 !!    program demo_anyscalar_to_string
-!!    use M_msg, only : anyscalar_to_string
+!!    use M_anything, only : anyscalar_to_string
 !!    implicit none
 !!    character(len=:),allocatable :: pr
 !!    character(len=:),allocatable :: frmt
@@ -896,9 +909,11 @@ end function anyscalar_to_int64
 !!
 !!  Output
 !!
-!!    HUGE(3f) integers 2147483647 and real 3.40282347E+38 and double 1.7976931348623157E+308
+!!    HUGE(3f) integers 2147483647 and real 3.40282347E+38
+!!    and double 1.7976931348623157E+308
 !!    real            : 3.40282347E+38 0.00000000 12345.6787 1.17549435E-38
-!!    doubleprecision : 1.7976931348623157E+308 0.0000000000000000 12345.678900000001 2.2250738585072014E-308
+!!    doubleprecision : 1.7976931348623157E+308 0.0000000000000000
+!!    12345.678900000001 2.2250738585072014E-308
 !!    complex         : (3.40282347E+38,1.17549435E-38)
 !!     format=(*(i9:,1x))
 !!     program will now stop
@@ -907,13 +922,13 @@ end function anyscalar_to_int64
 !!    John S. Urban
 !!
 !!##LICENSE
-!!    Public Domain
+!!    MIT
 pure function anyscalar_to_string(gen0, gen1, gen2, gen3, gen4, gen5, gen6, gen7, gen8, gen9, &
                                 & gena, genb, genc, gend, gene, genf, geng, genh, geni, genj, &
                                 & sep)
 implicit none
 
-! ident_7="@(#) M_msg anyscalar_to_string(3fp) writes a message to a string composed of any standard scalar types"
+! ident_7="@(#) M_anything anyscalar_to_string(3fp) writes a message to a string composed of any standard scalar types"
 
 class(*),intent(in),optional  :: gen0, gen1, gen2, gen3, gen4
 class(*),intent(in),optional  :: gen5, gen6, gen7, gen8, gen9

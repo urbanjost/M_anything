@@ -5,6 +5,7 @@ NULL=
 PROGFILES = \
  ../example/demo_anyinteger_to_string.f90 \
  ../example/demo_anyscalar_to_double.f90 \
+ ../example/demo_anyscalar_to_string.f90 \
  ../example/demo_anyscalar_to_int64.f90 \
  ../example/demo_anyscalar_to_real128.f90 \
  ../example/demo_anyscalar_to_real.f90 \
