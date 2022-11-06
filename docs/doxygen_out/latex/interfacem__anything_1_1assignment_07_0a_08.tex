@@ -1,0 +1,65 @@
+\hypertarget{interfacem__anything_1_1assignment_07_0a_08}{}\doxysection{m\+\_\+anything\+::assignment(=) Interface Reference}
+\label{interfacem__anything_1_1assignment_07_0a_08}\index{m\_anything::assignment(=)@{m\_anything::assignment(=)}}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \mbox{\hyperlink{interfacem__anything_1_1assignment_07_0a_08_a5808cc3dba1e3b70d0e91344fce2b58e}{ints\+\_\+empty\+\_\+}} (x, emp)
+\item 
+subroutine \mbox{\hyperlink{interfacem__anything_1_1assignment_07_0a_08_a7ce0b9ad828648b2322e099e5fec9ce1}{reals\+\_\+empty\+\_\+}} (x, emp)
+\item 
+subroutine \mbox{\hyperlink{interfacem__anything_1_1assignment_07_0a_08_ab28ff266856e244919cdc23694c5e431}{doubles\+\_\+empty\+\_\+}} (x, emp)
+\item 
+subroutine \mbox{\hyperlink{interfacem__anything_1_1assignment_07_0a_08_a73f7688d91782a66226dbf6951bc5a95}{strings\+\_\+empty\+\_\+}} (x, emp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{interfacem__anything_1_1assignment_07_0a_08_ab28ff266856e244919cdc23694c5e431}\label{interfacem__anything_1_1assignment_07_0a_08_ab28ff266856e244919cdc23694c5e431}} 
+\index{m\_anything::assignment(=)@{m\_anything::assignment(=)}!doubles\_empty\_@{doubles\_empty\_}}
+\index{doubles\_empty\_@{doubles\_empty\_}!m\_anything::assignment(=)@{m\_anything::assignment(=)}}
+\doxysubsubsection{\texorpdfstring{doubles\_empty\_()}{doubles\_empty\_()}}
+{\footnotesize\ttfamily subroutine m\+\_\+anything\+::assignment(=)\+::doubles\+\_\+empty\+\_\+ (\begin{DoxyParamCaption}\item[{doubleprecision, dimension(\+:), intent(inout), allocatable}]{x,  }\item[{type(\mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}), intent(in)}]{emp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{interfacem__anything_1_1assignment_07_0a_08_a5808cc3dba1e3b70d0e91344fce2b58e}\label{interfacem__anything_1_1assignment_07_0a_08_a5808cc3dba1e3b70d0e91344fce2b58e}} 
+\index{m\_anything::assignment(=)@{m\_anything::assignment(=)}!ints\_empty\_@{ints\_empty\_}}
+\index{ints\_empty\_@{ints\_empty\_}!m\_anything::assignment(=)@{m\_anything::assignment(=)}}
+\doxysubsubsection{\texorpdfstring{ints\_empty\_()}{ints\_empty\_()}}
+{\footnotesize\ttfamily subroutine m\+\_\+anything\+::assignment(=)\+::ints\+\_\+empty\+\_\+ (\begin{DoxyParamCaption}\item[{integer, dimension(\+:), intent(inout), allocatable}]{x,  }\item[{type(\mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}), intent(in)}]{emp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{namespacem__anything_autotoc_md6}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md6}
+empty(3f) -\/ \mbox{[}M\+\_\+anything\mbox{]} set an allocatable array to zero (L\+I\+C\+E\+N\+SE\+:M\+IT) \hypertarget{namespacem__anything_autotoc_md7}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md7}
+\begin{DoxyVerb}use M_anything, only : empty, assignment(=)
+\end{DoxyVerb}
+ \hypertarget{namespacem__anything_autotoc_md8}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md8}
+A convenience routine that sets an array to an empty set. \hypertarget{namespacem__anything_autotoc_md9}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md9}
+Sample program\+:
+
+program demo\+\_\+empty\+\_\+ use M\+\_\+anything, only \+: empty, assignment(=) integer, allocatable \+:: ints(\+:) character(\+:), allocatable \+:: strs(\+:) real, allocatable \+:: reals(\+:) ints=empty write($\ast$,$\ast$)size(ints)
+
+write($\ast$,$\ast$)\textquotesingle{}give them some size ...\textquotesingle{} reals = \mbox{[}1.\+0,2.\+0,3.\+0\mbox{]} ints = \mbox{[}1,2,3\mbox{]} strs = \mbox{[}character(len=10) \+:: \char`\"{}one\char`\"{},\char`\"{}two\char`\"{},\char`\"{}three\char`\"{},\char`\"{}four\char`\"{}\mbox{]} write($\ast$,$\ast$)size(ints) write($\ast$,$\ast$)size(reals) write($\ast$,$\ast$)size(strs)
+
+ints=empty reals=empty strs=empty write($\ast$,$\ast$)\textquotesingle{}back to empty ...\textquotesingle{} write($\ast$,$\ast$)size(ints) write($\ast$,$\ast$)size(reals) write($\ast$,$\ast$)size(strs)
+
+end program demo\+\_\+empty\+\_\+
+
+Expected output\+:
+
+$>$ 0 $>$ give them some size ... $>$ 3 $>$ 3 $>$ 4 $>$ back to empty ... $>$ 0 $>$ 0 $>$ 0 \hypertarget{namespacem__anything_autotoc_md10}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md10}
+John S. Urban\hypertarget{namespacem__anything_autotoc_md11}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md11}
+M\+IT \mbox{\Hypertarget{interfacem__anything_1_1assignment_07_0a_08_a7ce0b9ad828648b2322e099e5fec9ce1}\label{interfacem__anything_1_1assignment_07_0a_08_a7ce0b9ad828648b2322e099e5fec9ce1}} 
+\index{m\_anything::assignment(=)@{m\_anything::assignment(=)}!reals\_empty\_@{reals\_empty\_}}
+\index{reals\_empty\_@{reals\_empty\_}!m\_anything::assignment(=)@{m\_anything::assignment(=)}}
+\doxysubsubsection{\texorpdfstring{reals\_empty\_()}{reals\_empty\_()}}
+{\footnotesize\ttfamily subroutine m\+\_\+anything\+::assignment(=)\+::reals\+\_\+empty\+\_\+ (\begin{DoxyParamCaption}\item[{real, dimension(\+:), intent(inout), allocatable}]{x,  }\item[{type(\mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}), intent(in)}]{emp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{interfacem__anything_1_1assignment_07_0a_08_a73f7688d91782a66226dbf6951bc5a95}\label{interfacem__anything_1_1assignment_07_0a_08_a73f7688d91782a66226dbf6951bc5a95}} 
+\index{m\_anything::assignment(=)@{m\_anything::assignment(=)}!strings\_empty\_@{strings\_empty\_}}
+\index{strings\_empty\_@{strings\_empty\_}!m\_anything::assignment(=)@{m\_anything::assignment(=)}}
+\doxysubsubsection{\texorpdfstring{strings\_empty\_()}{strings\_empty\_()}}
+{\footnotesize\ttfamily subroutine m\+\_\+anything\+::assignment(=)\+::strings\+\_\+empty\+\_\+ (\begin{DoxyParamCaption}\item[{character(\+:), dimension(\+:), intent(inout), allocatable}]{x,  }\item[{type(\mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}), intent(in)}]{emp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/urbanjs/venus/\+V600/github/\+M\+\_\+anything/src/\mbox{\hyperlink{M__anything_8f90}{M\+\_\+anything.\+f90}}\end{DoxyCompactItemize}

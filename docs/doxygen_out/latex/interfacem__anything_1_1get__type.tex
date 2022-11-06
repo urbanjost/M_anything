@@ -1,0 +1,63 @@
+\hypertarget{interfacem__anything_1_1get__type}{}\doxysection{m\+\_\+anything\+::get\+\_\+type Interface Reference}
+\label{interfacem__anything_1_1get__type}\index{m\_anything::get\_type@{m\_anything::get\_type}}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+character(len=20) function \mbox{\hyperlink{interfacem__anything_1_1get__type_a6d4463fdff5151b0b65befc95489a39d}{get\+\_\+type\+\_\+arr}} (anything)
+\item 
+elemental impure character(len=20) function \mbox{\hyperlink{interfacem__anything_1_1get__type_ae8ccba9223a3a0ca4c5a5c7e296ce6c7}{get\+\_\+type\+\_\+scalar}} (anything)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{interfacem__anything_1_1get__type_a6d4463fdff5151b0b65befc95489a39d}\label{interfacem__anything_1_1get__type_a6d4463fdff5151b0b65befc95489a39d}} 
+\index{m\_anything::get\_type@{m\_anything::get\_type}!get\_type\_arr@{get\_type\_arr}}
+\index{get\_type\_arr@{get\_type\_arr}!m\_anything::get\_type@{m\_anything::get\_type}}
+\doxysubsubsection{\texorpdfstring{get\_type\_arr()}{get\_type\_arr()}}
+{\footnotesize\ttfamily character(len=20) function m\+\_\+anything\+::get\+\_\+type\+::get\+\_\+type\+\_\+arr (\begin{DoxyParamCaption}\item[{class($\ast$), dimension(\+:), intent(in)}]{anything }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{namespacem__anything_autotoc_md68}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md68}
+get\+\_\+type(3f) -\/ \mbox{[}M\+\_\+anything\mbox{]} return array of strings containing type names of arguments (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__anything_autotoc_md69}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md69}
+\begin{DoxyVerb}function get_type(anything) result(chars)
+
+ class(*),intent(in)  :: anything
+         or
+ class(*),intent(in)  :: anything(..)
+
+ character(len=:),allocatable :: chars
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md70}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md70}
+\begin{DoxyVerb}This function uses polymorphism to allow input arguments of different
+types. It is used by other procedures that can take many
+argument types as input options.
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md71}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__anything_autotoc_md71}
+\begin{DoxyVerb}VALUEIN  input array or scalar to return type of
+         May be of KIND INTEGER(kind=int8), INTEGER(kind=int16),
+         INTEGER(kind=int32), INTEGER(kind=int64),
+         REAL(kind=real32, REAL(kind=real64),
+         REAL(kind=real128), complex, or CHARACTER(len=*)
+\end{DoxyVerb}
+ \hypertarget{namespacem__anything_autotoc_md72}{}\doxysubsubsection{R\+E\+T\+U\+RN}\label{namespacem__anything_autotoc_md72}
+\begin{DoxyVerb}CHARS    The returned value is an array of names
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md73}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md73}
+Sample program
+
+program demo\+\_\+get\+\_\+type use M\+\_\+anything, only \+: \mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}} implicit none integer \+:: i write($\ast$,$\ast$)\mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}}(\mbox{[}(i$\ast$i,i=1,10)\mbox{]}) write($\ast$,$\ast$)\mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}}(\mbox{[}11.\+11,22.\+22,33.\+33\mbox{]}) write($\ast$,$\ast$)\mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}}(\textquotesingle{}This is a string\textquotesingle{}) write($\ast$,$\ast$)\mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}}(30.\+0d0) end program demo\+\_\+get\+\_\+type
+
+Results\+:
+
+int32 real32 character real64\hypertarget{namespacem__anything_autotoc_md74}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md74}
+John S. Urban \hypertarget{namespacem__anything_autotoc_md75}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md75}
+M\+IT \mbox{\Hypertarget{interfacem__anything_1_1get__type_ae8ccba9223a3a0ca4c5a5c7e296ce6c7}\label{interfacem__anything_1_1get__type_ae8ccba9223a3a0ca4c5a5c7e296ce6c7}} 
+\index{m\_anything::get\_type@{m\_anything::get\_type}!get\_type\_scalar@{get\_type\_scalar}}
+\index{get\_type\_scalar@{get\_type\_scalar}!m\_anything::get\_type@{m\_anything::get\_type}}
+\doxysubsubsection{\texorpdfstring{get\_type\_scalar()}{get\_type\_scalar()}}
+{\footnotesize\ttfamily elemental impure character(len=20) function m\+\_\+anything\+::get\+\_\+type\+::get\+\_\+type\+\_\+scalar (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{anything }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/urbanjs/venus/\+V600/github/\+M\+\_\+anything/src/\mbox{\hyperlink{M__anything_8f90}{M\+\_\+anything.\+f90}}\end{DoxyCompactItemize}

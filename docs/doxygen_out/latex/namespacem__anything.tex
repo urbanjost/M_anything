@@ -1,0 +1,497 @@
+\hypertarget{namespacem__anything}{}\doxysection{m\+\_\+anything Module Reference}
+\label{namespacem__anything}\index{m\_anything@{m\_anything}}
+\doxysubsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interfacem__anything_1_1anything__to__bytes}{anything\+\_\+to\+\_\+bytes}}
+\item 
+interface \mbox{\hyperlink{interfacem__anything_1_1assignment_07_0a_08}{assignment(=)}}
+\item 
+type \mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}
+\item 
+interface \mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \mbox{\hyperlink{namespacem__anything_afcfe05dc22180128691b5a927a18e128}{ints\+\_\+empty\+\_\+}} (x, emp)
+\item 
+subroutine \mbox{\hyperlink{namespacem__anything_a194a83c578ddeb7ddea8f1104c874f1f}{doubles\+\_\+empty\+\_\+}} (x, emp)
+\item 
+subroutine \mbox{\hyperlink{namespacem__anything_ad1f08daae5d997da54974e6ccf14bb51}{reals\+\_\+empty\+\_\+}} (x, emp)
+\item 
+subroutine \mbox{\hyperlink{namespacem__anything_a8626e75d3bb98d3c1a7ead89e334719f}{strings\+\_\+empty\+\_\+}} (x, emp)
+\item 
+subroutine, public \mbox{\hyperlink{namespacem__anything_a426ed79921650d9d1c8f9308b31f0f65}{bytes\+\_\+to\+\_\+anything}} (chars, anything)
+\item 
+character(len=1) function, dimension(\+:), allocatable \mbox{\hyperlink{namespacem__anything_a6ac00e86ef2d96db48851045b2cd662c}{anything\+\_\+to\+\_\+bytes\+\_\+arr}} (anything)
+\item 
+character(len=1) function, dimension(\+:), allocatable \mbox{\hyperlink{namespacem__anything_ad9522ae9993fae25ef5e1cc181cebe38}{anything\+\_\+to\+\_\+bytes\+\_\+scalar}} (anything)
+\item 
+pure elemental real(kind=real128) function, public \mbox{\hyperlink{namespacem__anything_a438e3f736473850fe065d5b8f94fefb5}{anyscalar\+\_\+to\+\_\+real128}} (valuein)
+\item 
+pure elemental doubleprecision function, public \mbox{\hyperlink{namespacem__anything_a2c58e9d734944f29fbe87c696f5839c5}{anyscalar\+\_\+to\+\_\+double}} (valuein)
+\item 
+pure elemental real function, public \mbox{\hyperlink{namespacem__anything_a57576a4baf147b3e89b20d679438d8d9}{anyscalar\+\_\+to\+\_\+real}} (valuein)
+\item 
+impure elemental integer(kind=int64) function, public \mbox{\hyperlink{namespacem__anything_aba1527db0215a5a8a20c015c48b8ebc9}{anyscalar\+\_\+to\+\_\+int64}} (valuein)
+\item 
+impure character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__anything_ab5e57496a414542d4d5d58e6786b8ace}{anyinteger\+\_\+to\+\_\+string}} (int)
+\item 
+character(len=20) function \mbox{\hyperlink{namespacem__anything_af7af75ce1cc8021220d97b9ebc7a7f37}{get\+\_\+type\+\_\+arr}} (anything)
+\item 
+elemental impure character(len=20) function \mbox{\hyperlink{namespacem__anything_ab68f8a3661bee024f1887d5352d3c56c}{get\+\_\+type\+\_\+scalar}} (anything)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+integer, parameter \mbox{\hyperlink{namespacem__anything_ab7b5587f91426df3cf07dc2395f209e9}{dp}} =kind(0.\+0d0)
+\item 
+type(\mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}), public \mbox{\hyperlink{namespacem__anything_a6f9652370cd85a527e9eafbb3987bc3d}{empty}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{namespacem__anything_autotoc_md0}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md0}
+M\+\_\+anything(3fm) -\/ \mbox{[}M\+\_\+anything\+::\+I\+N\+T\+RO\mbox{]} procedures that use polymorphism to allow arguments of different types generically (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__anything_autotoc_md1}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md1}
+use M\+\_\+anything,only \+: anyinteger\+\_\+to\+\_\+string use M\+\_\+anything,only \+: anyscalar\+\_\+to\+\_\+int64 use M\+\_\+anything,only \+: anyscalar\+\_\+to\+\_\+real use M\+\_\+anything,only \+: anyscalar\+\_\+to\+\_\+real128 use M\+\_\+anything,only \+: anyscalar\+\_\+to\+\_\+double use M\+\_\+anything,only \+: \mbox{\hyperlink{interfacem__anything_1_1anything__to__bytes}{anything\+\_\+to\+\_\+bytes}} use M\+\_\+anything,only \+: \mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}} use M\+\_\+anything,only \+: bytes\+\_\+to\+\_\+anything use M\+\_\+anything,only \+: empty, assignment(=)\hypertarget{namespacem__anything_autotoc_md2}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md2}
+anyinteger\+\_\+to\+\_\+string convert integer parameter of any kind to string anyscalar\+\_\+to\+\_\+int64 convert integer or real of any kind to 64-\/bit integer anyscalar\+\_\+to\+\_\+real convert integer or real of any kind to real anyscalar\+\_\+to\+\_\+real128 convert integer or real of any kind to real128 anyscalar\+\_\+to\+\_\+double convert integer or real of any kind to doubleprecision \mbox{\hyperlink{interfacem__anything_1_1anything__to__bytes}{anything\+\_\+to\+\_\+bytes}} convert anything to bytes \mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}} return array of strings containing type names of arguments empty create an empty array\hypertarget{namespacem__anything_autotoc_md3}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md3}
+At the cost of casting to a different type these functions can (among other uses such as in linked lists) allow for an alternative to duplicating code using generic procedure methods. For example, the following S\+Q\+U\+A\+R\+E\+A\+LL function can take many input types and return a D\+O\+U\+B\+L\+E\+P\+R\+E\+C\+I\+S\+I\+ON value (it is a trivial example for demonstration purposes, and does not check for overflow, etc.).\+:
+
+Sample program
+
+program demo\+\_\+anyscalar\+\_\+to\+\_\+double use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: int8, int16, int32, int64 use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: real32, real64, real128 implicit none ! call same function with many scalar input types write($\ast$,$\ast$)squareall(2\+\_\+int8) write($\ast$,$\ast$)squareall(2\+\_\+int16) write($\ast$,$\ast$)squareall(2\+\_\+int32) write($\ast$,$\ast$)squareall(2\+\_\+int64) write($\ast$,$\ast$)squareall(2.\+0\+\_\+real32) write($\ast$,$\ast$)squareall(2.\+0\+\_\+real64) write($\ast$,$\ast$)squareall(2.\+0\+\_\+real128) contains
+
+function squareall(invalue) result (dvalue) use M\+\_\+anything, only \+: anyscalar\+\_\+to\+\_\+double class($\ast$),intent(in) \+:: invalue doubleprecision \+:: invalue\+\_\+local doubleprecision \+:: dvalue invalue\+\_\+local=anyscalar\+\_\+to\+\_\+double(invalue) dvalue=invalue\+\_\+local$\ast$invalue\+\_\+local end function squareall
+
+end program demo\+\_\+anyscalar\+\_\+to\+\_\+double
+
+Results\+: \begin{DoxyVerb}4.00000000000000
+4.00000000000000
+4.00000000000000
+4.00000000000000
+4.00000000000000
+4.00000000000000
+4.00000000000000
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md4}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md4}
+John S. Urban\hypertarget{namespacem__anything_autotoc_md5}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md5}
+M\+IT 
+
+\doxysubsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacem__anything_ab5e57496a414542d4d5d58e6786b8ace}\label{namespacem__anything_ab5e57496a414542d4d5d58e6786b8ace}} 
+\index{m\_anything@{m\_anything}!anyinteger\_to\_string@{anyinteger\_to\_string}}
+\index{anyinteger\_to\_string@{anyinteger\_to\_string}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{anyinteger\_to\_string()}{anyinteger\_to\_string()}}
+{\footnotesize\ttfamily impure character(len=\+:) function, allocatable, public m\+\_\+anything\+::anyinteger\+\_\+to\+\_\+string (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{int }\end{DoxyParamCaption})}
+
+\hypertarget{namespacem__anything_autotoc_md60}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md60}
+\begin{DoxyVerb}anyinteger_to_string(3f) - [M_anything] convert integer of any kind to a string
+(LICENSE:MIT)
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md61}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md61}
+\begin{DoxyVerb}impure function anyinteger_to_string(intin) result(str)
+
+ character(len=:),allocatable :: anyinteger_to_string
+ class(*),intent(in)          :: intin
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md62}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md62}
+\begin{DoxyVerb}Converts an integer value to a string representing the value.
+This function allows arguments of different INTEGER types as input.
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md63}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__anything_autotoc_md63}
+\begin{DoxyVerb}VALUEIN  INTEGER input argument to be converted to a string.
+         May be of KIND kind=int8, kind=int16, kind=int32, kind=int64.
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md64}{}\doxysubsubsection{R\+E\+S\+U\+L\+TS}\label{namespacem__anything_autotoc_md64}
+The value of V\+A\+L\+U\+IN converted to a C\+H\+A\+R\+A\+C\+T\+ER string.\hypertarget{namespacem__anything_autotoc_md65}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md65}
+Sample program
+
+program demo\+\_\+anyinteger\+\_\+to\+\_\+string use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: int8, int16, int32, int64 use M\+\_\+anything, only \+: itoc=$>$anyinteger\+\_\+to\+\_\+string implicit none write($\ast$,$\ast$)itoc(huge(0\+\_\+int8)), \textquotesingle{}=$>$ 127\textquotesingle{} write($\ast$,$\ast$)itoc(huge(0\+\_\+int16)), \textquotesingle{}=$>$ 32767\textquotesingle{} write($\ast$,$\ast$)itoc(huge(0\+\_\+int32)), \textquotesingle{}=$>$ 2147483647\textquotesingle{} write($\ast$,$\ast$)itoc(huge(0\+\_\+int64)), \textquotesingle{}=$>$ 9223372036854775807\textquotesingle{},huge(0\+\_\+int64) write($\ast$,$\ast$)itoc(-\/(huge(0\+\_\+int64)-\/1)), \textquotesingle{}=$>$ -\/9223372036854775806\textquotesingle{} end program demo\+\_\+anyinteger\+\_\+to\+\_\+string
+
+Results\+:
+
+127=$>$ 127 32767=$>$ 32767 2147483647=$>$ 2147483647 9223372036854775807=$>$ 9223372036854775807 -\/9223372036854775806=$>$ -\/9223372036854775806\hypertarget{namespacem__anything_autotoc_md66}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md66}
+John S. Urban\hypertarget{namespacem__anything_autotoc_md67}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md67}
+M\+IT 
+
+References anyscalar\+\_\+to\+\_\+int64().
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacem__anything_ab5e57496a414542d4d5d58e6786b8ace_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacem__anything_a2c58e9d734944f29fbe87c696f5839c5}\label{namespacem__anything_a2c58e9d734944f29fbe87c696f5839c5}} 
+\index{m\_anything@{m\_anything}!anyscalar\_to\_double@{anyscalar\_to\_double}}
+\index{anyscalar\_to\_double@{anyscalar\_to\_double}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{anyscalar\_to\_double()}{anyscalar\_to\_double()}}
+{\footnotesize\ttfamily pure elemental doubleprecision function, public m\+\_\+anything\+::anyscalar\+\_\+to\+\_\+double (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{valuein }\end{DoxyParamCaption})}
+
+\hypertarget{namespacem__anything_autotoc_md36}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md36}
+anyscalar\+\_\+to\+\_\+double(3f) -\/ \mbox{[}M\+\_\+anything\mbox{]} convert integer or real parameter of any kind to doubleprecision (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__anything_autotoc_md37}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md37}
+\begin{DoxyVerb}pure elemental function anyscalar_to_double(valuein) result(d_out)
+
+ class(*),intent(in)  :: valuein
+ doubleprecision      :: d_out
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md38}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md38}
+\begin{DoxyVerb}This function uses polymorphism to allow input arguments of different
+types. It is used to create other procedures that can take many
+scalar arguments as input options.
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md39}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__anything_autotoc_md39}
+\begin{DoxyVerb}VALUEIN  input argument of a procedure to convert to type DOUBLEPRECISION.
+         May be of KIND kind=int8, kind=int16, kind=int32, kind=int64,
+         kind=real32, kind=real64, or kind=real128
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md40}{}\doxysubsubsection{R\+E\+S\+U\+L\+TS}\label{namespacem__anything_autotoc_md40}
+\begin{DoxyVerb}D_OUT    The value of VALUIN converted to doubleprecision (assuming
+         it is actually in the range of type DOUBLEPRECISION).
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md41}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md41}
+Sample program
+
+program demo\+\_\+anyscalar\+\_\+to\+\_\+double use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: int8, int16, int32, int64 use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: real32, real64, real128 implicit none ! call same function with many scalar input types write($\ast$,$\ast$)squarei(2\+\_\+int8) write($\ast$,$\ast$)squarei(2\+\_\+int16) write($\ast$,$\ast$)squarei(2\+\_\+int32) write($\ast$,$\ast$)squarei(2\+\_\+int64) write($\ast$,$\ast$)squarei(2.\+0\+\_\+real32) write($\ast$,$\ast$)squarei(2.\+0\+\_\+real64) write($\ast$,$\ast$)squarei(2.\+0\+\_\+real128) contains
+
+function squarei(invalue) result (dvalue) use M\+\_\+anything, only \+: anyscalar\+\_\+to\+\_\+double class($\ast$),intent(in) \+:: invalue doubleprecision \+:: invalue\+\_\+local doubleprecision \+:: dvalue invalue\+\_\+local=anyscalar\+\_\+to\+\_\+double(invalue) dvalue=invalue\+\_\+local$\ast$invalue\+\_\+local end function squarei
+
+end program demo\+\_\+anyscalar\+\_\+to\+\_\+double\hypertarget{namespacem__anything_autotoc_md42}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md42}
+John S. Urban\hypertarget{namespacem__anything_autotoc_md43}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md43}
+M\+IT \mbox{\Hypertarget{namespacem__anything_aba1527db0215a5a8a20c015c48b8ebc9}\label{namespacem__anything_aba1527db0215a5a8a20c015c48b8ebc9}} 
+\index{m\_anything@{m\_anything}!anyscalar\_to\_int64@{anyscalar\_to\_int64}}
+\index{anyscalar\_to\_int64@{anyscalar\_to\_int64}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{anyscalar\_to\_int64()}{anyscalar\_to\_int64()}}
+{\footnotesize\ttfamily impure elemental integer(kind=int64) function, public m\+\_\+anything\+::anyscalar\+\_\+to\+\_\+int64 (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{valuein }\end{DoxyParamCaption})}
+
+\hypertarget{namespacem__anything_autotoc_md52}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md52}
+\begin{DoxyVerb}anyscalar_to_int64(3f) - [M_anything] convert integer any kind to integer(kind=int64)
+(LICENSE:MIT)
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md53}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md53}
+\begin{DoxyVerb}impure elemental function anyscalar_to_int64(intin) result(value)
+
+ class(*),intent(in) :: intin
+ integer(kind=int64) :: value
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md54}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md54}
+\begin{DoxyVerb}This function uses polymorphism to allow arguments of different INTEGER types
+as input. It is typically used to create other procedures that can take
+many scalar arguments as input options, equivalent to passing the
+parameter VALUE as int(VALUE,0_int64).
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md55}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__anything_autotoc_md55}
+\begin{DoxyVerb}VALUEIN  input argument of a procedure to convert to type INTEGER(KIND=int64).
+         May be of KIND kind=int8, kind=int16, kind=int32, kind=int64.
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md56}{}\doxysubsubsection{R\+E\+S\+U\+L\+TS}\label{namespacem__anything_autotoc_md56}
+The value of V\+A\+L\+U\+IN converted to I\+N\+T\+E\+G\+ER(K\+I\+ND=I\+N\+T64). \hypertarget{namespacem__anything_autotoc_md57}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md57}
+\begin{DoxyVerb}Sample program
+
+ program demo_anyscalar_to_int64
+ use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
+ implicit none
+    ! call same function with many scalar input types
+    write(*,*)squarei(huge(0_int8)),huge(0_int8) , &
+    & '16129'
+    write(*,*)squarei(huge(0_int16)),huge(0_int16) , &
+    & '1073676289'
+    write(*,*)squarei(huge(0_int32)),huge(0_int32) , &
+    & '4611686014132420609'
+    write(*,*)squarei(huge(0_int64)),huge(0_int64) , &
+    & '85070591730234615847396907784232501249'
+ contains
+ !
+ function squarei(invalue)
+ use M_anything, only : anyscalar_to_int64
+ class(*),intent(in)  :: invalue
+ doubleprecision      :: invalue_local
+ doubleprecision      :: squarei
+    invalue_local=anyscalar_to_int64(invalue)
+    squarei=invalue_local*invalue_local
+ end function squarei
+ !
+ end program demo_anyscalar_to_int64
+\end{DoxyVerb}
+
+
+Results
+
+16129.\+000000000000 127 \textbackslash{} 16129 1073676289.\+0000000 32767 \textbackslash{} 1073676289 4.\+6116860141324206E+018 2147483647 \textbackslash{} 4611686014132420609 8.\+5070591730234616E+037 9223372036854775807 \textbackslash{} 85070591730234615847396907784232501249 2.\+8948022309329049E+076 170141183460469231731687303715884105727 \textbackslash{} 28948022309329048855892746252171976962977213799489202546401021394546514198529\hypertarget{namespacem__anything_autotoc_md58}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md58}
+John S. Urban\hypertarget{namespacem__anything_autotoc_md59}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md59}
+M\+IT Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacem__anything_aba1527db0215a5a8a20c015c48b8ebc9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacem__anything_a57576a4baf147b3e89b20d679438d8d9}\label{namespacem__anything_a57576a4baf147b3e89b20d679438d8d9}} 
+\index{m\_anything@{m\_anything}!anyscalar\_to\_real@{anyscalar\_to\_real}}
+\index{anyscalar\_to\_real@{anyscalar\_to\_real}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{anyscalar\_to\_real()}{anyscalar\_to\_real()}}
+{\footnotesize\ttfamily pure elemental real function, public m\+\_\+anything\+::anyscalar\+\_\+to\+\_\+real (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{valuein }\end{DoxyParamCaption})}
+
+\hypertarget{namespacem__anything_autotoc_md44}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md44}
+anyscalar\+\_\+to\+\_\+real(3f) -\/ \mbox{[}M\+\_\+anything\mbox{]} convert integer or real parameter of any kind to real (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__anything_autotoc_md45}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md45}
+\begin{DoxyVerb}pure elemental function anyscalar_to_real(valuein) result(r_out)
+
+ class(*),intent(in)  :: valuein
+ real                 :: r_out
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md46}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md46}
+\begin{DoxyVerb}This function uses polymorphism to allow input arguments of different types.
+It is used to create other procedures that can take
+many scalar arguments as input options.
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md47}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__anything_autotoc_md47}
+\begin{DoxyVerb}VALUEIN  input argument of a procedure to convert to type REAL.
+         May be of KIND kind=int8, kind=int16, kind=int32, kind=int64,
+         kind=real32, kind=real64, or kind=real128.
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md48}{}\doxysubsubsection{R\+E\+S\+U\+L\+TS}\label{namespacem__anything_autotoc_md48}
+\begin{DoxyVerb}R_OUT    The value of VALUIN converted to real (assuming it is actually
+         in the range of type REAL).
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md49}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md49}
+Sample program
+
+program demo\+\_\+anyscalar\+\_\+to\+\_\+real use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: int8, int16, int32, int64 use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: real32, real64, real128 implicit none ! call same function with many scalar input types write($\ast$,$\ast$)squarei(2\+\_\+int8) write($\ast$,$\ast$)squarei(2\+\_\+int16) write($\ast$,$\ast$)squarei(2\+\_\+int32) write($\ast$,$\ast$)squarei(2\+\_\+int64) write($\ast$,$\ast$)squarei(2.\+0\+\_\+real32) write($\ast$,$\ast$)squarei(2.\+0\+\_\+real64) write($\ast$,$\ast$)squarei(2.\+0\+\_\+real128) contains
+
+function squarei(invalue) result (dvalue) use M\+\_\+anything, only \+: anyscalar\+\_\+to\+\_\+real class($\ast$),intent(in) \+:: invalue real \+:: invalue\+\_\+local real \+:: dvalue invalue\+\_\+local=anyscalar\+\_\+to\+\_\+real(invalue) dvalue=invalue\+\_\+local$\ast$invalue\+\_\+local end function squarei
+
+end program demo\+\_\+anyscalar\+\_\+to\+\_\+real\hypertarget{namespacem__anything_autotoc_md50}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md50}
+John S. Urban\hypertarget{namespacem__anything_autotoc_md51}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md51}
+M\+IT \mbox{\Hypertarget{namespacem__anything_a438e3f736473850fe065d5b8f94fefb5}\label{namespacem__anything_a438e3f736473850fe065d5b8f94fefb5}} 
+\index{m\_anything@{m\_anything}!anyscalar\_to\_real128@{anyscalar\_to\_real128}}
+\index{anyscalar\_to\_real128@{anyscalar\_to\_real128}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{anyscalar\_to\_real128()}{anyscalar\_to\_real128()}}
+{\footnotesize\ttfamily pure elemental real(kind=real128) function, public m\+\_\+anything\+::anyscalar\+\_\+to\+\_\+real128 (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{valuein }\end{DoxyParamCaption})}
+
+\hypertarget{namespacem__anything_autotoc_md28}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md28}
+anyscalar\+\_\+to\+\_\+real128(3f) -\/ \mbox{[}M\+\_\+anything\mbox{]} convert integer or real parameter of any kind to real128 (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__anything_autotoc_md29}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md29}
+\begin{DoxyVerb}pure elemental function anyscalar_to_real128(valuein) result(d_out)
+
+ class(*),intent(in) :: valuein
+ real(kind=128)      :: d_out
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md30}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md30}
+\begin{DoxyVerb}This function uses polymorphism to allow input arguments of different
+types. It is used to create other procedures that can take many
+scalar arguments as input options.
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md31}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__anything_autotoc_md31}
+\begin{DoxyVerb}VALUEIN  input argument of a procedure to convert to type REAL128.
+         May be of KIND kind=int8, kind=int16, kind=int32, kind=int64,
+         kind=real32, kind=real64, or kind=real128
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md32}{}\doxysubsubsection{R\+E\+S\+U\+L\+TS}\label{namespacem__anything_autotoc_md32}
+\begin{DoxyVerb}D_OUT    The value of VALUIN converted to REAL128 (assuming
+         it is actually in the range of type REAL128).
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md33}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md33}
+Sample program
+
+program demo\+\_\+anyscalar\+\_\+to\+\_\+real128 use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: int8, int16, int32, int64 use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: real32, real64, real128 implicit none ! call same function with many scalar input types write($\ast$,$\ast$)squarei(2\+\_\+int8) write($\ast$,$\ast$)squarei(2\+\_\+int16) write($\ast$,$\ast$)squarei(2\+\_\+int32) write($\ast$,$\ast$)squarei(2\+\_\+int64) write($\ast$,$\ast$)squarei(2.\+0\+\_\+real32) write($\ast$,$\ast$)squarei(2.\+0\+\_\+real64) write($\ast$,$\ast$)squarei(2.\+0\+\_\+real128) contains
+
+function squarei(invalue) result (dvalue) use M\+\_\+anything, only \+: anyscalar\+\_\+to\+\_\+real128 class($\ast$),intent(in) \+:: invalue real(kind=real128) \+:: invalue\+\_\+local real(kind=real128) \+:: dvalue invalue\+\_\+local=anyscalar\+\_\+to\+\_\+real128(invalue) dvalue=invalue\+\_\+local$\ast$invalue\+\_\+local end function squarei
+
+end program demo\+\_\+anyscalar\+\_\+to\+\_\+real128\hypertarget{namespacem__anything_autotoc_md34}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md34}
+John S. Urban\hypertarget{namespacem__anything_autotoc_md35}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md35}
+M\+IT \mbox{\Hypertarget{namespacem__anything_a6ac00e86ef2d96db48851045b2cd662c}\label{namespacem__anything_a6ac00e86ef2d96db48851045b2cd662c}} 
+\index{m\_anything@{m\_anything}!anything\_to\_bytes\_arr@{anything\_to\_bytes\_arr}}
+\index{anything\_to\_bytes\_arr@{anything\_to\_bytes\_arr}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{anything\_to\_bytes\_arr()}{anything\_to\_bytes\_arr()}}
+{\footnotesize\ttfamily character(len=1) function, dimension(\+:), allocatable m\+\_\+anything\+::anything\+\_\+to\+\_\+bytes\+\_\+arr (\begin{DoxyParamCaption}\item[{class($\ast$), dimension(\+:), intent(in)}]{anything }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{namespacem__anything_autotoc_md20}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md20}
+anything\+\_\+to\+\_\+bytes(3f) -\/ \mbox{[}M\+\_\+anything\mbox{]} convert standard types to bytes (character(len=1)\+:: array(\+:)) (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__anything_autotoc_md21}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md21}
+\begin{DoxyVerb}function anything_to_bytes(anything) result(chars)
+
+ class(*),intent(in)  :: anything
+         or
+ class(*),intent(in)  :: anything(:)
+
+ character(len=1),allocatable :: chars(:)
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md22}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md22}
+\begin{DoxyVerb}This function uses polymorphism to allow input arguments of different
+types. It is used to create other procedures that can take many
+argument types as input options and convert them to a single type
+to simplify storing arbitrary data, to simplify generating data
+hashes, ...
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md23}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__anything_autotoc_md23}
+\begin{DoxyVerb}VALUEIN  input array or scalar to convert to type CHARACTER(LEN=1).
+         May be of KIND INTEGER(kind=int8), INTEGER(kind=int16),
+         INTEGER(kind=int32), INTEGER(kind=int64),
+         REAL(kind=real32, REAL(kind=real64),
+         REAL(kind=real128), complex, or CHARACTER(len=*)
+\end{DoxyVerb}
+ \hypertarget{namespacem__anything_autotoc_md24}{}\doxysubsubsection{R\+E\+T\+U\+RN}\label{namespacem__anything_autotoc_md24}
+\begin{DoxyVerb}CHARS    The returned value is an array of bytes (character(len=1)).
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md25}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md25}
+Sample program
+
+program demo\+\_\+anything\+\_\+to\+\_\+bytes use M\+\_\+anything, only \+: \mbox{\hyperlink{interfacem__anything_1_1anything__to__bytes}{anything\+\_\+to\+\_\+bytes}} !!use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: int8, int16, int32, int64 !!use, intrinsic \+:: iso\+\_\+fortran\+\_\+env, only \+: real32, real64, real128 implicit none integer \+:: i write($\ast$,\textquotesingle{}(/,4(1x,z2.\+2))\textquotesingle{})\mbox{\hyperlink{interfacem__anything_1_1anything__to__bytes}{anything\+\_\+to\+\_\+bytes}}(\mbox{[}(i$\ast$i,i=1,10)\mbox{]}) write($\ast$,\textquotesingle{}(/,4(1x,z2.\+2))\textquotesingle{})\mbox{\hyperlink{interfacem__anything_1_1anything__to__bytes}{anything\+\_\+to\+\_\+bytes}}(\mbox{[}11.\+11,22.\+22,33.\+33\mbox{]}) write($\ast$,\textquotesingle{}(/,4(1x,z2.\+2))\textquotesingle{})\mbox{\hyperlink{interfacem__anything_1_1anything__to__bytes}{anything\+\_\+to\+\_\+bytes}}(\textquotesingle{}This is a string\textquotesingle{}) end program demo\+\_\+anything\+\_\+to\+\_\+bytes
+
+Expected output \begin{DoxyVerb} 01 00 00 00
+ 04 00 00 00
+ 09 00 00 00
+ 10 00 00 00
+ 19 00 00 00
+ 24 00 00 00
+ 31 00 00 00
+ 40 00 00 00
+ 51 00 00 00
+ 64 00 00 00
+
+ 8F C2 31 41
+ 8F C2 B1 41
+ EC 51 05 42
+
+ 54 68 69 73
+ 20 69 73 20
+ 61 20 73 74
+ 72 69 6E 67
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md26}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md26}
+John S. Urban \hypertarget{namespacem__anything_autotoc_md27}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md27}
+M\+IT \mbox{\Hypertarget{namespacem__anything_ad9522ae9993fae25ef5e1cc181cebe38}\label{namespacem__anything_ad9522ae9993fae25ef5e1cc181cebe38}} 
+\index{m\_anything@{m\_anything}!anything\_to\_bytes\_scalar@{anything\_to\_bytes\_scalar}}
+\index{anything\_to\_bytes\_scalar@{anything\_to\_bytes\_scalar}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{anything\_to\_bytes\_scalar()}{anything\_to\_bytes\_scalar()}}
+{\footnotesize\ttfamily character(len=1) function, dimension(\+:), allocatable m\+\_\+anything\+::anything\+\_\+to\+\_\+bytes\+\_\+scalar (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{anything }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{namespacem__anything_a426ed79921650d9d1c8f9308b31f0f65}\label{namespacem__anything_a426ed79921650d9d1c8f9308b31f0f65}} 
+\index{m\_anything@{m\_anything}!bytes\_to\_anything@{bytes\_to\_anything}}
+\index{bytes\_to\_anything@{bytes\_to\_anything}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{bytes\_to\_anything()}{bytes\_to\_anything()}}
+{\footnotesize\ttfamily subroutine, public m\+\_\+anything\+::bytes\+\_\+to\+\_\+anything (\begin{DoxyParamCaption}\item[{character(len=1), dimension(\+:), allocatable}]{chars,  }\item[{class($\ast$)}]{anything }\end{DoxyParamCaption})}
+
+\hypertarget{namespacem__anything_autotoc_md12}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md12}
+bytes\+\_\+to\+\_\+anything(3f) -\/ \mbox{[}M\+\_\+anything\mbox{]} convert bytes(character)len=1)\+:: array(\+:)) to standard types (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__anything_autotoc_md13}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md13}
+subroutine bytes\+\_\+to\+\_\+anything(chars,anything)
+
+character(len=1),allocatable \+:: chars(\+:) class($\ast$) \+:: anything\hypertarget{namespacem__anything_autotoc_md14}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md14}
+\begin{DoxyVerb}This function uses polymorphism to allow input arguments of different
+types. It is used to create other procedures that can take many
+argument types as input options and convert them to a single type
+to simplify storing arbitrary data, to simplify generating data
+hashes, ...
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md15}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__anything_autotoc_md15}
+C\+H\+A\+RS The input value is an array of bytes (character(len=1)).\hypertarget{namespacem__anything_autotoc_md16}{}\doxysubsubsection{R\+E\+T\+U\+RN}\label{namespacem__anything_autotoc_md16}
+A\+N\+Y\+T\+H\+I\+NG May be of K\+I\+ND I\+N\+T\+E\+G\+ER(kind=int8), I\+N\+T\+E\+G\+ER(kind=int16), I\+N\+T\+E\+G\+ER(kind=int32), I\+N\+T\+E\+G\+ER(kind=int64), R\+E\+AL(kind=real32, R\+E\+AL(kind=real64), R\+E\+AL(kind=real128), complex, or C\+H\+A\+R\+A\+C\+T\+ER(len=$\ast$)\hypertarget{namespacem__anything_autotoc_md17}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md17}
+Sample program
+
+Expected output\hypertarget{namespacem__anything_autotoc_md18}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md18}
+John S. Urban \hypertarget{namespacem__anything_autotoc_md19}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md19}
+M\+IT \mbox{\Hypertarget{namespacem__anything_a194a83c578ddeb7ddea8f1104c874f1f}\label{namespacem__anything_a194a83c578ddeb7ddea8f1104c874f1f}} 
+\index{m\_anything@{m\_anything}!doubles\_empty\_@{doubles\_empty\_}}
+\index{doubles\_empty\_@{doubles\_empty\_}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{doubles\_empty\_()}{doubles\_empty\_()}}
+{\footnotesize\ttfamily subroutine m\+\_\+anything\+::doubles\+\_\+empty\+\_\+ (\begin{DoxyParamCaption}\item[{doubleprecision, dimension(\+:), intent(inout), allocatable}]{x,  }\item[{type(\mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}), intent(in)}]{emp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{namespacem__anything_af7af75ce1cc8021220d97b9ebc7a7f37}\label{namespacem__anything_af7af75ce1cc8021220d97b9ebc7a7f37}} 
+\index{m\_anything@{m\_anything}!get\_type\_arr@{get\_type\_arr}}
+\index{get\_type\_arr@{get\_type\_arr}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{get\_type\_arr()}{get\_type\_arr()}}
+{\footnotesize\ttfamily character(len=20) function m\+\_\+anything\+::get\+\_\+type\+\_\+arr (\begin{DoxyParamCaption}\item[{class($\ast$), dimension(\+:), intent(in)}]{anything }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{namespacem__anything_autotoc_md68}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md68}
+get\+\_\+type(3f) -\/ \mbox{[}M\+\_\+anything\mbox{]} return array of strings containing type names of arguments (L\+I\+C\+E\+N\+SE\+:M\+IT)\hypertarget{namespacem__anything_autotoc_md69}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md69}
+\begin{DoxyVerb}function get_type(anything) result(chars)
+
+ class(*),intent(in)  :: anything
+         or
+ class(*),intent(in)  :: anything(..)
+
+ character(len=:),allocatable :: chars
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md70}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md70}
+\begin{DoxyVerb}This function uses polymorphism to allow input arguments of different
+types. It is used by other procedures that can take many
+argument types as input options.
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md71}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__anything_autotoc_md71}
+\begin{DoxyVerb}VALUEIN  input array or scalar to return type of
+         May be of KIND INTEGER(kind=int8), INTEGER(kind=int16),
+         INTEGER(kind=int32), INTEGER(kind=int64),
+         REAL(kind=real32, REAL(kind=real64),
+         REAL(kind=real128), complex, or CHARACTER(len=*)
+\end{DoxyVerb}
+ \hypertarget{namespacem__anything_autotoc_md72}{}\doxysubsubsection{R\+E\+T\+U\+RN}\label{namespacem__anything_autotoc_md72}
+\begin{DoxyVerb}CHARS    The returned value is an array of names
+\end{DoxyVerb}
+\hypertarget{namespacem__anything_autotoc_md73}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md73}
+Sample program
+
+program demo\+\_\+get\+\_\+type use M\+\_\+anything, only \+: \mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}} implicit none integer \+:: i write($\ast$,$\ast$)\mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}}(\mbox{[}(i$\ast$i,i=1,10)\mbox{]}) write($\ast$,$\ast$)\mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}}(\mbox{[}11.\+11,22.\+22,33.\+33\mbox{]}) write($\ast$,$\ast$)\mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}}(\textquotesingle{}This is a string\textquotesingle{}) write($\ast$,$\ast$)\mbox{\hyperlink{interfacem__anything_1_1get__type}{get\+\_\+type}}(30.\+0d0) end program demo\+\_\+get\+\_\+type
+
+Results\+:
+
+int32 real32 character real64\hypertarget{namespacem__anything_autotoc_md74}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md74}
+John S. Urban \hypertarget{namespacem__anything_autotoc_md75}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md75}
+M\+IT \mbox{\Hypertarget{namespacem__anything_ab68f8a3661bee024f1887d5352d3c56c}\label{namespacem__anything_ab68f8a3661bee024f1887d5352d3c56c}} 
+\index{m\_anything@{m\_anything}!get\_type\_scalar@{get\_type\_scalar}}
+\index{get\_type\_scalar@{get\_type\_scalar}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{get\_type\_scalar()}{get\_type\_scalar()}}
+{\footnotesize\ttfamily elemental impure character(len=20) function m\+\_\+anything\+::get\+\_\+type\+\_\+scalar (\begin{DoxyParamCaption}\item[{class($\ast$), intent(in)}]{anything }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{namespacem__anything_afcfe05dc22180128691b5a927a18e128}\label{namespacem__anything_afcfe05dc22180128691b5a927a18e128}} 
+\index{m\_anything@{m\_anything}!ints\_empty\_@{ints\_empty\_}}
+\index{ints\_empty\_@{ints\_empty\_}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{ints\_empty\_()}{ints\_empty\_()}}
+{\footnotesize\ttfamily subroutine m\+\_\+anything\+::ints\+\_\+empty\+\_\+ (\begin{DoxyParamCaption}\item[{integer, dimension(\+:), intent(inout), allocatable}]{x,  }\item[{type(\mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}), intent(in)}]{emp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{namespacem__anything_autotoc_md6}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__anything_autotoc_md6}
+empty(3f) -\/ \mbox{[}M\+\_\+anything\mbox{]} set an allocatable array to zero (L\+I\+C\+E\+N\+SE\+:M\+IT) \hypertarget{namespacem__anything_autotoc_md7}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__anything_autotoc_md7}
+\begin{DoxyVerb}use M_anything, only : empty, assignment(=)
+\end{DoxyVerb}
+ \hypertarget{namespacem__anything_autotoc_md8}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__anything_autotoc_md8}
+A convenience routine that sets an array to an empty set. \hypertarget{namespacem__anything_autotoc_md9}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__anything_autotoc_md9}
+Sample program\+:
+
+program demo\+\_\+empty\+\_\+ use M\+\_\+anything, only \+: empty, assignment(=) integer, allocatable \+:: ints(\+:) character(\+:), allocatable \+:: strs(\+:) real, allocatable \+:: reals(\+:) ints=empty write($\ast$,$\ast$)size(ints)
+
+write($\ast$,$\ast$)\textquotesingle{}give them some size ...\textquotesingle{} reals = \mbox{[}1.\+0,2.\+0,3.\+0\mbox{]} ints = \mbox{[}1,2,3\mbox{]} strs = \mbox{[}character(len=10) \+:: \char`\"{}one\char`\"{},\char`\"{}two\char`\"{},\char`\"{}three\char`\"{},\char`\"{}four\char`\"{}\mbox{]} write($\ast$,$\ast$)size(ints) write($\ast$,$\ast$)size(reals) write($\ast$,$\ast$)size(strs)
+
+ints=empty reals=empty strs=empty write($\ast$,$\ast$)\textquotesingle{}back to empty ...\textquotesingle{} write($\ast$,$\ast$)size(ints) write($\ast$,$\ast$)size(reals) write($\ast$,$\ast$)size(strs)
+
+end program demo\+\_\+empty\+\_\+
+
+Expected output\+:
+
+$>$ 0 $>$ give them some size ... $>$ 3 $>$ 3 $>$ 4 $>$ back to empty ... $>$ 0 $>$ 0 $>$ 0 \hypertarget{namespacem__anything_autotoc_md10}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__anything_autotoc_md10}
+John S. Urban\hypertarget{namespacem__anything_autotoc_md11}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__anything_autotoc_md11}
+M\+IT \mbox{\Hypertarget{namespacem__anything_ad1f08daae5d997da54974e6ccf14bb51}\label{namespacem__anything_ad1f08daae5d997da54974e6ccf14bb51}} 
+\index{m\_anything@{m\_anything}!reals\_empty\_@{reals\_empty\_}}
+\index{reals\_empty\_@{reals\_empty\_}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{reals\_empty\_()}{reals\_empty\_()}}
+{\footnotesize\ttfamily subroutine m\+\_\+anything\+::reals\+\_\+empty\+\_\+ (\begin{DoxyParamCaption}\item[{real, dimension(\+:), intent(inout), allocatable}]{x,  }\item[{type(\mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}), intent(in)}]{emp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{namespacem__anything_a8626e75d3bb98d3c1a7ead89e334719f}\label{namespacem__anything_a8626e75d3bb98d3c1a7ead89e334719f}} 
+\index{m\_anything@{m\_anything}!strings\_empty\_@{strings\_empty\_}}
+\index{strings\_empty\_@{strings\_empty\_}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{strings\_empty\_()}{strings\_empty\_()}}
+{\footnotesize\ttfamily subroutine m\+\_\+anything\+::strings\+\_\+empty\+\_\+ (\begin{DoxyParamCaption}\item[{character(\+:), dimension(\+:), intent(inout), allocatable}]{x,  }\item[{type(\mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}), intent(in)}]{emp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacem__anything_ab7b5587f91426df3cf07dc2395f209e9}\label{namespacem__anything_ab7b5587f91426df3cf07dc2395f209e9}} 
+\index{m\_anything@{m\_anything}!dp@{dp}}
+\index{dp@{dp}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{dp}{dp}}
+{\footnotesize\ttfamily integer, parameter m\+\_\+anything\+::dp =kind(0.\+0d0)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{namespacem__anything_a6f9652370cd85a527e9eafbb3987bc3d}\label{namespacem__anything_a6f9652370cd85a527e9eafbb3987bc3d}} 
+\index{m\_anything@{m\_anything}!empty@{empty}}
+\index{empty@{empty}!m\_anything@{m\_anything}}
+\doxysubsubsection{\texorpdfstring{empty}{empty}}
+{\footnotesize\ttfamily type(\mbox{\hyperlink{structm__anything_1_1empty__t}{empty\+\_\+t}}), public m\+\_\+anything\+::empty}
+
