@@ -176,10 +176,10 @@
 <a id="ln-21" name="ln-21" href="#ln-21"></a><span class="c">!!</span>
 <a id="ln-22" name="ln-22" href="#ln-22"></a><span class="c">!!##DESCRIPTION</span>
 <a id="ln-23" name="ln-23" href="#ln-23"></a><span class="c">!!    anyinteger_to_string    convert integer parameter of any kind to string</span>
-<a id="ln-24" name="ln-24" href="#ln-24"></a><span class="c">!!    anyscalar_to_int64      convert integer parameter of any kind to 64-bit integer</span>
-<a id="ln-25" name="ln-25" href="#ln-25"></a><span class="c">!!    anyscalar_to_real       convert integer or real parameter of any kind to real</span>
-<a id="ln-26" name="ln-26" href="#ln-26"></a><span class="c">!!    anyscalar_to_real128    convert integer or real parameter of any kind to real128</span>
-<a id="ln-27" name="ln-27" href="#ln-27"></a><span class="c">!!    anyscalar_to_double     convert integer or real parameter of any kind to doubleprecision</span>
+<a id="ln-24" name="ln-24" href="#ln-24"></a><span class="c">!!    anyscalar_to_int64      convert integer or real of any kind to 64-bit integer</span>
+<a id="ln-25" name="ln-25" href="#ln-25"></a><span class="c">!!    anyscalar_to_real       convert integer or real of any kind to real</span>
+<a id="ln-26" name="ln-26" href="#ln-26"></a><span class="c">!!    anyscalar_to_real128    convert integer or real of any kind to real128</span>
+<a id="ln-27" name="ln-27" href="#ln-27"></a><span class="c">!!    anyscalar_to_double     convert integer or real of any kind to doubleprecision</span>
 <a id="ln-28" name="ln-28" href="#ln-28"></a><span class="c">!!    anything_to_bytes       convert anything to bytes</span>
 <a id="ln-29" name="ln-29" href="#ln-29"></a><span class="c">!!    get_type                return array of strings containing type names of arguments</span>
 <a id="ln-30" name="ln-30" href="#ln-30"></a><span class="c">!!    empty                   create an empty array</span>
@@ -760,7 +760,7 @@
 <a id="ln-605" name="ln-605" href="#ln-605"></a><span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real32</span><span class="p">));</span><span class="w">    </span><span class="n">d_out</span><span class="o">=</span><span class="nb">dble</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
 <a id="ln-606" name="ln-606" href="#ln-606"></a><span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real64</span><span class="p">));</span><span class="w">    </span><span class="n">d_out</span><span class="o">=</span><span class="nb">dble</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
 <a id="ln-607" name="ln-607" href="#ln-607"></a><span class="w">   </span><span class="k">Type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real128</span><span class="p">))</span><span class="w"></span>
-<a id="ln-608" name="ln-608" href="#ln-608"></a><span class="w">      </span><span class="c">!IMPURE! if(valuein.gt.big)then</span>
+<a id="ln-608" name="ln-608" href="#ln-608"></a><span class="w">      </span><span class="c">!IMPURE! if(valuein &gt; big)then</span>
 <a id="ln-609" name="ln-609" href="#ln-609"></a><span class="w">      </span><span class="c">!IMPURE!    write(error_unit,&#39;(*(g0,1x))&#39;)&#39;*anyscalar_to_double* value too large &#39;,valuein</span>
 <a id="ln-610" name="ln-610" href="#ln-610"></a><span class="w">      </span><span class="c">!IMPURE! endif</span>
 <a id="ln-611" name="ln-611" href="#ln-611"></a><span class="w">      </span><span class="n">d_out</span><span class="o">=</span><span class="nb">dble</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
@@ -852,12 +852,12 @@
 <a id="ln-697" name="ln-697" href="#ln-697"></a><span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">integer</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">int64</span><span class="p">));</span><span class="w">  </span><span class="n">r_out</span><span class="o">=</span><span class="kt">real</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
 <a id="ln-698" name="ln-698" href="#ln-698"></a><span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real32</span><span class="p">));</span><span class="w">    </span><span class="n">r_out</span><span class="o">=</span><span class="kt">real</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
 <a id="ln-699" name="ln-699" href="#ln-699"></a><span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real64</span><span class="p">))</span><span class="w"></span>
-<a id="ln-700" name="ln-700" href="#ln-700"></a><span class="w">      </span><span class="c">!!if(valuein.gt.big)then</span>
+<a id="ln-700" name="ln-700" href="#ln-700"></a><span class="w">      </span><span class="c">!!if(valuein &gt; big)then</span>
 <a id="ln-701" name="ln-701" href="#ln-701"></a><span class="w">      </span><span class="c">!!   write(error_unit,*)&#39;*anyscalar_to_real* value too large &#39;,valuein</span>
 <a id="ln-702" name="ln-702" href="#ln-702"></a><span class="w">      </span><span class="c">!!endif</span>
 <a id="ln-703" name="ln-703" href="#ln-703"></a><span class="w">      </span><span class="n">r_out</span><span class="o">=</span><span class="kt">real</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
 <a id="ln-704" name="ln-704" href="#ln-704"></a><span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real128</span><span class="p">))</span><span class="w"></span>
-<a id="ln-705" name="ln-705" href="#ln-705"></a><span class="w">      </span><span class="c">!!if(valuein.gt.big)then</span>
+<a id="ln-705" name="ln-705" href="#ln-705"></a><span class="w">      </span><span class="c">!!if(valuein &gt; big)then</span>
 <a id="ln-706" name="ln-706" href="#ln-706"></a><span class="w">      </span><span class="c">!!   write(error_unit,*)&#39;*anyscalar_to_real* value too large &#39;,valuein</span>
 <a id="ln-707" name="ln-707" href="#ln-707"></a><span class="w">      </span><span class="c">!!endif</span>
 <a id="ln-708" name="ln-708" href="#ln-708"></a><span class="w">      </span><span class="n">r_out</span><span class="o">=</span><span class="kt">real</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
@@ -965,7 +965,7 @@
 <a id="ln-810" name="ln-810" href="#ln-810"></a><span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">logical</span><span class="p">);</span><span class="w">              </span><span class="n">ii38</span><span class="o">=</span><span class="nb">merge</span><span class="p">(</span><span class="mi">0_int64</span><span class="p">,</span><span class="mi">1_int64</span><span class="p">,</span><span class="n">valuein</span><span class="p">)</span><span class="w"></span>
 <a id="ln-811" name="ln-811" href="#ln-811"></a><span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">))</span><span class="w">   </span><span class="p">;</span><span class="w"></span>
 <a id="ln-812" name="ln-812" href="#ln-812"></a><span class="w">      </span><span class="k">read</span><span class="p">(</span><span class="n">valuein</span><span class="p">,</span><span class="o">*</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">message</span><span class="p">)</span><span class="n">ii38</span><span class="w"></span>
-<a id="ln-813" name="ln-813" href="#ln-813"></a><span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">ios</span><span class="p">.</span><span class="n">ne</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="k">then</span>
+<a id="ln-813" name="ln-813" href="#ln-813"></a><span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">ios</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="k">then</span>
 <a id="ln-814" name="ln-814" href="#ln-814"></a><span class="k">         write</span><span class="p">(</span><span class="n">error_unit</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="s1">&#39;*anyscalar_to_int64* ERROR: &#39;</span><span class="o">//</span><span class="nb">trim</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="w"></span>
 <a id="ln-815" name="ln-815" href="#ln-815"></a><span class="w">         </span><span class="k">stop </span><span class="mi">2</span><span class="w"></span>
 <a id="ln-816" name="ln-816" href="#ln-816"></a><span class="w">      </span><span class="k">endif</span>
@@ -1200,7 +1200,7 @@
           <p class="text-right">
             Documentation generated by 
             <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
- on 2022-08-15 05:16            </p>
+ on 2022-11-06 08:06            </p>
         </div>
       </div>
       <br>
