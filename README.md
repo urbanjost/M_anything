@@ -74,7 +74,11 @@
 ## LICENSE
    MIT
 
-## BUILDING THE MODULE USING make(1) ![gmake](docs/images/gnu.gif)
+---
+![gmake](docs/images/gnu.gif)
+---
+
+## BUILDING THE MODULE USING make(1)
      git clone https://github.com/urbanjost/M_anything.git
      cd M_anything/src
      # change Makefile if not using one of the listed compilers
@@ -95,7 +99,11 @@
 This will compile the Fortran module and basic example
 program that exercise the routine.
 
-## BUILD and TEST with FPM ![-](docs/images/fpm_logo.gif)
+---
+![-](docs/images/fpm_logo.gif)
+---
+
+## BUILD and TEST with FPM
 
    Alternatively, download the github repository and build it with
    fpm ( as described at [Fortran Package Manager](https://github.com/fortran-lang/fpm) )
@@ -115,10 +123,18 @@ program that exercise the routine.
         M_anything        = { git = "https://github.com/urbanjost/M_anything.git" }
 ```
 
-## DOCUMENTATION   ![docs](docs/images/docs.gif)
+---
+![docs](docs/images/docs.gif)
+---
+
+## DOCUMENTATION
 
 ### USER
-![man-pages](docs/images/manpages.gif)
+---
+(docs/images/manpages.gif)
+---
+
+![man-pages]
    - There are man-pages in the repository download in the docs/ directory
      that may be installed on ULS (Unix-Like Systems).
 
@@ -143,7 +159,11 @@ program that exercise the routine.
 ---
 ## PEDIGREE
 
-## REFERENCES ![-](docs/images/ref.gif)
+---
+![-](docs/images/ref.gif)
+---
+
+## REFERENCES
 
    * [RFC-4122](https://tools.ietf.org/html/rfc4122)
    * [FOX](http://fortranwiki.org/fortran/show/FoX)
