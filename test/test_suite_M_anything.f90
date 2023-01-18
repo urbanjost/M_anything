@@ -95,6 +95,9 @@ call unit_check('anything_to_bytes',any(anything_to_bytes(huge(0_int64))     .eq
 call unit_check('anything_to_bytes',any(anything_to_bytes(huge(0.0_real32))  .eq. transfer(huge(0.0_real32),'A')) )
 call unit_check('anything_to_bytes',any(anything_to_bytes(huge(0.0_real64))  .eq. transfer(huge(0.0_real64),'A')) )
 call unit_check('anything_to_bytes',any(anything_to_bytes(huge(0.0_real128)) .eq. transfer(huge(0.0_real128),'A')) )
+call unit_check('anything_to_bytes',any(anything_to_bytes('this is a string') .eq. transfer('this is a string','A')) )
+call unit_check('anything_to_bytes',any(&
+        & anything_to_bytes(['aaaaaaaaaa','bbbbbbbbbb']) .eq. transfer(['aaaaaaaaaa','bbbbbbbbbb'],'A')) )
 call unit_check_done('anything_to_bytes',msg='')
 end subroutine test_anything_to_bytes
 !TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT

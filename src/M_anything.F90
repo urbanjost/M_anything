@@ -380,8 +380,10 @@ implicit none
 
 class(*),intent(in)          :: anything(:)
 character(len=1),allocatable :: chars(:)
+
    if(allocated(chars))deallocate(chars)
    allocate(chars( storage_size(anything)/8) )
+
    select type(anything)
     type is (character(len=*));     chars=transfer(anything,chars)
     type is (complex);              chars=transfer(anything,chars)
@@ -395,9 +397,10 @@ character(len=1),allocatable :: chars(:)
     type is (real(kind=real128));   chars=transfer(anything,chars)
     type is (logical);              chars=transfer(anything,chars)
     class default
-      stop 'crud. anything_to_bytes_arr(1) does not know about this type'
-
+      chars=transfer(anything,chars) ! should work for everything, does not with some compilers
+      !stop 'crud. anything_to_bytes_arr(1) does not know about this type'
    end select
+
 end function anything_to_bytes_arr
 !-----------------------------------------------------------------------------------------------------------------------------------
 function  anything_to_bytes_scalar(anything) result(chars)
@@ -409,6 +412,7 @@ class(*),intent(in)          :: anything
 character(len=1),allocatable :: chars(:)
    if(allocated(chars))deallocate(chars)
    allocate(chars( storage_size(anything)/8) )
+
    select type(anything)
     type is (character(len=*));     chars=transfer(anything,chars)
     type is (complex);              chars=transfer(anything,chars)
@@ -422,9 +426,10 @@ character(len=1),allocatable :: chars(:)
     type is (real(kind=real128));   chars=transfer(anything,chars)
     type is (logical);              chars=transfer(anything,chars)
     class default
-      stop 'crud. anything_to_bytes_scalar(1) does not know about this type'
-
+      chars=transfer(anything,chars) ! should work for everything, does not with some compilers
+      !stop 'crud. anything_to_bytes_scalar(1) does not know about this type'
    end select
+
 end function  anything_to_bytes_scalar
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()!
