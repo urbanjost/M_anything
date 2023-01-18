@@ -382,7 +382,7 @@ class(*),intent(in)          :: anything(:)
 character(len=1),allocatable :: chars(:)
 
    if(allocated(chars))deallocate(chars)
-   allocate(chars( storage_size(anything)/8) )
+   allocate(chars( storage_size(anything)/8 * size(anything) ) )
 
    select type(anything)
     type is (character(len=*));     chars=transfer(anything,chars)
