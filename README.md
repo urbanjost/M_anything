@@ -1,8 +1,8 @@
-## NAME
+## Name
    M_anything(3fm) - [M_anything] procedures that use polymorphism to allow arguments of different types generically
    (LICENSE:PD)
 
-## SYNOPSIS
+## Synopsis
     use M_anything,only : anyscalar_to_string  
     use M_anything,only : anyscalar_to_int64   
     use M_anything,only : anyscalar_to_real    
@@ -13,7 +13,7 @@
     use M_anything,only : bytes_to_anything
     use M_anything,only : empty, assignment(=) 
 
-## DESCRIPTION
+## Description
 
   Generic routines are generally more efficient than casting but can generate a
   large amount of duplicate code. These procedures show how to use casting 
@@ -29,7 +29,7 @@
     anything_to_bytes       convert anything to bytes
     empty                   create an empty array
 
-## EXAMPLE
+## Example
   Sample program:
 ```fortran
       program demo_anyscalar_to_double
@@ -68,17 +68,17 @@
         4.00000000000000
         4.00000000000000
 ```
-## AUTHOR
+## Author
    John S. Urban
 
-## LICENSE
+## License
    MIT
 
 ---
 ![gmake](docs/images/gnu.gif)
 ---
 
-## BUILDING THE MODULE USING make(1)
+## Building the Module Using make(1)
      git clone https://github.com/urbanjost/M_anything.git
      cd M_anything/src
      # change Makefile if not using one of the listed compilers
@@ -103,7 +103,7 @@ program that exercise the routine.
 ![-](docs/images/fpm_logo.gif)
 ---
 
-## BUILD and TEST with FPM
+## Build and Test with fpm
 
    Alternatively, download the github repository and build it with
    fpm ( as described at [Fortran Package Manager](https://github.com/fortran-lang/fpm) )
@@ -127,9 +127,9 @@ program that exercise the routine.
 ![docs](docs/images/docs.gif)
 ---
 
-## DOCUMENTATION
+## Documentation
 
-### USER
+### User
 ---
 (docs/images/manpages.gif)
 ---
@@ -151,19 +151,19 @@ program that exercise the routine.
 
    - [CHANGELOG](docs/CHANGELOG.md) provides a history of significant changes
 
-### DEVELOPER
+### Developer
    - [ford(1) output](https://urbanjost.github.io/M_anything/fpm-ford/index.html).
    - [doxygen(1) output](https://urbanjost.github.io/M_anything/doxygen_out/html/index.html).
    - [github action status](docs/STATUS.md) 
 <!--
 ---
-## PEDIGREE
+## Pedigree
 
 ---
 ![-](docs/images/ref.gif)
 ---
 
-## REFERENCES
+## References
 
    * [RFC-4122](https://tools.ietf.org/html/rfc4122)
    * [FOX](http://fortranwiki.org/fortran/show/FoX)

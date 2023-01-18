@@ -383,7 +383,6 @@ character(len=1),allocatable :: chars(:)
    if(allocated(chars))deallocate(chars)
    allocate(chars( storage_size(anything)/8) )
    select type(anything)
-
     type is (character(len=*));     chars=transfer(anything,chars)
     type is (complex);              chars=transfer(anything,chars)
     type is (complex(kind=dp));     chars=transfer(anything,chars)
@@ -411,7 +410,6 @@ character(len=1),allocatable :: chars(:)
    if(allocated(chars))deallocate(chars)
    allocate(chars( storage_size(anything)/8) )
    select type(anything)
-
     type is (character(len=*));     chars=transfer(anything,chars)
     type is (complex);              chars=transfer(anything,chars)
     type is (complex(kind=dp));     chars=transfer(anything,chars)
@@ -734,28 +732,31 @@ end function anyscalar_to_real
 !>
 !!##NAME
 !!
-!!    anyscalar_to_int64(3f) - [M_anything] convert integer any kind to integer(kind=int64)
+!!    anyscalar_to_int64(3f) - [M_anything] convert intrinsic scalar types
+!!    to integer(kind=int64)
 !!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
 !!
 !!
-!!    impure elemental function anyscalar_to_int64(intin) result(value)
+!!    impure elemental function anyscalar_to_int64(valin) result(value)
 !!
-!!     class(*),intent(in) :: intin
+!!     class(*),intent(in) :: valin
 !!     integer(kind=int64) :: value
 !!
 !!##DESCRIPTION
 !!
-!!    This function uses polymorphism to allow arguments of different INTEGER types
+!!    This function uses polymorphism to allow arguments of different types
 !!    as input. It is typically used to create other procedures that can take
 !!    many scalar arguments as input options, equivalent to passing the
-!!    parameter VALUE as int(VALUE,0_int64).
+!!    parameter VALUE as int(VALUE,0_int64) for integer; nint(VALUE,0_int64)
+!!    for real values, returning 0_int64 for .true. and 1_int64 for logical,
+!!    and the same as int(VALUE,0_int64) for character variables if the
+!!    character variables represent an integer value.
 !!
 !!##OPTIONS
 !!
 !!    VALUEIN  input argument of a procedure to convert to type INTEGER(KIND=int64).
-!!             May be of KIND kind=int8, kind=int16, kind=int32, kind=int64.
 !!
 !!##RESULTS
 !!             The value of VALUIN converted to INTEGER(KIND=INT64).
@@ -821,9 +822,9 @@ class(*),intent(in)    :: valuein
    type is (integer(kind=int16));  ii38=int(valuein,kind=int64)
    type is (integer(kind=int32));  ii38=valuein
    type is (integer(kind=int64));  ii38=valuein
-   type is (real(kind=real32));    ii38=int(valuein,kind=int64)
-   type is (real(kind=real64));    ii38=int(valuein,kind=int64)
-   Type is (real(kind=real128));   ii38=int(valuein,kind=int64)
+   type is (real(kind=real32));    ii38=nint(valuein,kind=int64)
+   type is (real(kind=real64));    ii38=nint(valuein,kind=int64)
+   Type is (real(kind=real128));   ii38=nint(valuein,kind=int64)
    type is (logical);              ii38=merge(0_int64,1_int64,valuein)
    type is (character(len=*))   ;
       read(valuein,*,iostat=ios,iomsg=message)ii38
