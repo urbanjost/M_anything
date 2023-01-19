@@ -8,7 +8,7 @@
     <meta name="author" content="John S. Urban" >
     <link rel="icon" href="../favicon.png">
 
-    <title>demo_empty_ &ndash; M_anything</title>
+    <title>demo_anyscalar_to_string &ndash; M_anything</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pygments.css" rel="stylesheet">
@@ -76,7 +76,7 @@
 
     <div class="container">
   <div class="row">
-    <h1>demo_empty_      <small>Program</small>
+    <h1>demo_anyscalar_to_string      <small>Program</small>
       
     </h1>
       <div class="row" id="info-bar">
@@ -87,17 +87,17 @@
           <li id="statements"><i class="fa fa-list-ol"></i>
             <a data-toggle="tooltip"
                data-placement="bottom" data-html="true"
-               title=" 9.2% of total for programs.">22 statements</a>
+               title=" 7.9% of total for programs.">19 statements</a>
           </li>
 
             <li id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/demo_empty.f90"> Source File</a>
+              <a href="../src/demo_anyscalar_to_string.f90"> Source File</a>
             </li>
         </ul>
         <ol class="breadcrumb in-well text-right">
-              <li><a href='../sourcefile/demo_empty.f90.html'>demo_empty.f90</a></li>
-          <li class="active">demo_empty_</li>
+              <li><a href='../sourcefile/demo_anyscalar_to_string.f90.html'>demo_anyscalar_to_string.f90</a></li>
+          <li class="active">demo_anyscalar_to_string</li>
         </ol>
       </div>
     </div>
@@ -123,9 +123,9 @@
       </div>
       <div id="vars-0" class="panel-collapse collapse">
         <div class="list-group">
-            <a class="list-group-item" href="../program/demo_empty_.html#variable-ints">ints</a>
-            <a class="list-group-item" href="../program/demo_empty_.html#variable-reals">reals</a>
-            <a class="list-group-item" href="../program/demo_empty_.html#variable-strs">strs</a>
+            <a class="list-group-item" href="../program/demo_anyscalar_to_string.html#variable-biggest~2">biggest</a>
+            <a class="list-group-item" href="../program/demo_anyscalar_to_string.html#variable-frmt">frmt</a>
+            <a class="list-group-item" href="../program/demo_anyscalar_to_string.html#variable-pr">pr</a>
         </div>
       </div>
     </div>
@@ -150,7 +150,7 @@
     <div class="panel panel-primary">
       <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
       <div class="list-group">
-        <a class="list-group-item" href="../program/demo_empty_.html#src">demo_empty_</a>
+        <a class="list-group-item" href="../program/demo_anyscalar_to_string.html#src">demo_anyscalar_to_string</a>
       </div>
     </div>
 
@@ -186,9 +186,9 @@
       </div>
       <div id="vars-1" class="panel-collapse collapse">
         <div class="list-group">
-            <a class="list-group-item" href="../program/demo_empty_.html#variable-ints">ints</a>
-            <a class="list-group-item" href="../program/demo_empty_.html#variable-reals">reals</a>
-            <a class="list-group-item" href="../program/demo_empty_.html#variable-strs">strs</a>
+            <a class="list-group-item" href="../program/demo_anyscalar_to_string.html#variable-biggest~2">biggest</a>
+            <a class="list-group-item" href="../program/demo_anyscalar_to_string.html#variable-frmt">frmt</a>
+            <a class="list-group-item" href="../program/demo_anyscalar_to_string.html#variable-pr">pr</a>
         </div>
       </div>
     </div>
@@ -213,7 +213,7 @@
     <div class="panel panel-primary">
       <div class="panel-heading text-left"><h3 class="panel-title">Source Code</h3></div>
       <div class="list-group">
-        <a class="list-group-item" href="../program/demo_empty_.html#src">demo_empty_</a>
+        <a class="list-group-item" href="../program/demo_anyscalar_to_string.html#src">demo_anyscalar_to_string</a>
       </div>
     </div>
 
@@ -236,14 +236,14 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-ints"></span>
-              integer,
+              <span class="anchor" id="variable-biggest~2"></span>
+              integer
             </td>
             <td>
-              allocatable
+              
             </td>
             <td>::</td>
-            <td><strong>ints</strong>(:)</td>
+            <td><strong>biggest</strong></td>
                 <td></td>
                 <td></td>
             <td>
@@ -252,14 +252,14 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-reals"></span>
-              real,
+              <span class="anchor" id="variable-frmt"></span>
+              character(len=:),
             </td>
             <td>
               allocatable
             </td>
             <td>::</td>
-            <td><strong>reals</strong>(:)</td>
+            <td><strong>frmt</strong></td>
                 <td></td>
                 <td></td>
             <td>
@@ -268,14 +268,14 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-strs"></span>
-              character,
+              <span class="anchor" id="variable-pr"></span>
+              character(len=:),
             </td>
             <td>
               allocatable
             </td>
             <td>::</td>
-            <td><strong>strs</strong>(:)</td>
+            <td><strong>pr</strong></td>
                 <td></td>
                 <td></td>
             <td>
@@ -297,31 +297,36 @@
     
     <section>
     <h2 id="src">Source Code</h2>
-    <div class="highlight"><pre><span></span><span class="w">     </span><span class="k">program </span><span class="n">demo_empty_</span><span class="w"></span>
-<span class="w">     </span><span class="k">use </span><span class="n">M_anything</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">empty</span><span class="p">,</span><span class="w"> </span><span class="n">assignment</span><span class="p">(</span><span class="o">=</span><span class="p">)</span><span class="w"></span>
-<span class="w">     </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">allocatable</span><span class="w">      </span><span class="kd">::</span><span class="w"> </span><span class="n">ints</span><span class="p">(:)</span><span class="w"></span>
-<span class="w">     </span><span class="kt">character</span><span class="p">(:),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">strs</span><span class="p">(:)</span><span class="w"></span>
-<span class="w">     </span><span class="kt">real</span><span class="p">,</span><span class="w"> </span><span class="k">allocatable</span><span class="w">      </span><span class="kd">::</span><span class="w"> </span><span class="n">reals</span><span class="p">(:)</span><span class="w"></span>
-<span class="w">        </span><span class="n">ints</span><span class="o">=</span><span class="n">empty</span><span class="w"></span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">size</span><span class="p">(</span><span class="n">ints</span><span class="p">)</span><span class="w"></span>
+    <div class="highlight"><pre><span></span><span class="w">     </span><span class="k">program </span><span class="n">demo_anyscalar_to_string</span><span class="w"></span>
+<span class="w">     </span><span class="k">use </span><span class="n">M_anything</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">anyscalar_to_string</span><span class="w"></span>
+<span class="w">     </span><span class="k">implicit none</span>
+<span class="k">     </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pr</span><span class="w"></span>
+<span class="w">     </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="p">:),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">frmt</span><span class="w"></span>
+<span class="w">     </span><span class="kt">integer</span><span class="w">                      </span><span class="kd">::</span><span class="w"> </span><span class="n">biggest</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="s1">&#39;give them some size ...&#39;</span><span class="w"></span>
-<span class="w">        </span><span class="n">reals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="n">ints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="n">strs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="p">,</span><span class="s2">&quot;two&quot;</span><span class="p">,</span><span class="s2">&quot;three&quot;</span><span class="p">,</span><span class="s2">&quot;four&quot;</span><span class="p">]</span><span class="w"></span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">size</span><span class="p">(</span><span class="n">ints</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">size</span><span class="p">(</span><span class="n">reals</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">size</span><span class="p">(</span><span class="n">strs</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="n">pr</span><span class="o">=</span><span class="n">anyscalar_to_string</span><span class="p">(</span><span class="s1">&#39;HUGE(3f) integers&#39;</span><span class="p">,</span><span class="nb">huge</span><span class="p">(</span><span class="mi">0</span><span class="p">),&amp;</span><span class="w"></span>
+<span class="w">     </span><span class="p">&amp;</span><span class="s1">&#39;and real&#39;</span><span class="p">,</span><span class="nb">huge</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span><span class="s1">&#39;and double&#39;</span><span class="p">,</span><span class="nb">huge</span><span class="p">(</span><span class="mf">0.0d0</span><span class="p">))</span><span class="w"></span>
+<span class="w">     </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">pr</span><span class="w"></span>
+<span class="w">     </span><span class="n">pr</span><span class="o">=</span><span class="n">anyscalar_to_string</span><span class="p">(</span><span class="s1">&#39;real            :&#39;</span><span class="p">,</span><span class="nb">huge</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span><span class="mf">0.0</span><span class="p">,</span><span class="mi">1234</span><span class="mf">5.6789</span><span class="p">,</span><span class="nb">tiny</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">pr</span><span class="w"></span>
+<span class="w">     </span><span class="n">pr</span><span class="o">=</span><span class="n">anyscalar_to_string</span><span class="p">(</span><span class="s1">&#39;doubleprecision :&#39;</span><span class="p">,</span><span class="nb">huge</span><span class="p">(</span><span class="mf">0.0d0</span><span class="p">),</span><span class="mf">0.0d0</span><span class="p">,</span><span class="mi">1234</span><span class="mf">5.6789d0</span><span class="p">,</span><span class="nb">tiny</span><span class="p">(</span><span class="mf">0.0d0</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">pr</span><span class="w"></span>
+<span class="w">     </span><span class="n">pr</span><span class="o">=</span><span class="n">anyscalar_to_string</span><span class="p">(</span><span class="s1">&#39;complex         :&#39;</span><span class="p">,</span><span class="nb">cmplx</span><span class="p">(</span><span class="nb">huge</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span><span class="nb">tiny</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="s1">&#39;(a)&#39;</span><span class="p">)</span><span class="n">pr</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">ints</span><span class="o">=</span><span class="n">empty</span><span class="w"></span>
-<span class="w">        </span><span class="n">reals</span><span class="o">=</span><span class="n">empty</span><span class="w"></span>
-<span class="w">        </span><span class="n">strs</span><span class="o">=</span><span class="n">empty</span><span class="w"></span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="s1">&#39;back to empty ...&#39;</span><span class="w"></span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">size</span><span class="p">(</span><span class="n">ints</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">size</span><span class="p">(</span><span class="n">reals</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">size</span><span class="p">(</span><span class="n">strs</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="c">! create a format on the fly</span>
+<span class="w">     </span><span class="n">biggest</span><span class="o">=</span><span class="nb">huge</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="n">frmt</span><span class="o">=</span><span class="n">anyscalar_to_string</span><span class="p">(</span><span class="s1">&#39;(*(i&#39;</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="n">biggest</span><span class="p">))),</span><span class="s1">&#39;:,1x))&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="w">     </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="s1">&#39;format=&#39;</span><span class="p">,</span><span class="n">frmt</span><span class="w"></span>
 
-<span class="w">     </span><span class="k">end program </span><span class="n">demo_empty_</span><span class="w"></span>
+<span class="w">     </span><span class="c">! although it will often work, using anyscalar_to_string(3f)</span>
+<span class="w">     </span><span class="c">! in an I/O statement is not recommended</span>
+<span class="w">     </span><span class="c">! because if an error occurs anyscalar_to_string(3f) will try</span>
+<span class="w">     </span><span class="c">! to write while part of an I/O statement</span>
+<span class="w">     </span><span class="c">! which not all compilers can handle and is currently non-standard</span>
+<span class="w">     </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="n">anyscalar_to_string</span><span class="p">(</span><span class="s1">&#39;program will now stop&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">     </span><span class="k">end program </span><span class="n">demo_anyscalar_to_string</span><span class="w"></span>
 </pre></div>
 
     </section>

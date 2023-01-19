@@ -2,6 +2,12 @@
 ! This module and the example function squarei() that uses it shows how you
 ! can use polymorphism to allow arguments of different types generically by casting
 !===================================================================================================================================
+#ifdef __NVCOMPILER
+#undef HAS_REAL128
+#else
+#define HAS_REAL128
+#endif
+!===================================================================================================================================
 !>
 !!##NAME
 !!    M_anything(3fm) - [M_anything::INTRO] procedures that use polymorphism to allow arguments of different types generically
@@ -86,13 +92,17 @@
 module M_anything
 use, intrinsic :: ISO_FORTRAN_ENV, only : INT8, INT16, INT32, INT64       !  1           2           4           8
 use, intrinsic :: ISO_FORTRAN_ENV, only : REAL32, REAL64, REAL128         !  4           8          10
+use, intrinsic :: ISO_FORTRAN_ENV, only : CSZ => CHARACTER_STORAGE_SIZE
+use, intrinsic :: iso_fortran_env, only : stderr => error_unit !! ,input_unit,output_unit
 implicit none
 private
 integer,parameter        :: dp=kind(0.0d0)
 public anyscalar_to_string   ! convert integer parameter of any kind to string
 public anyscalar_to_int64    ! convert integer parameter of any kind to 64-bit integer
 public anyscalar_to_real     ! convert integer or real parameter of any kind to real
+#ifdef HAS_REAL128
 public anyscalar_to_real128  ! convert integer or real parameter of any kind to real128
+#endif
 public anyscalar_to_double   ! convert integer or real parameter of any kind to doubleprecision
 public anything_to_bytes
 public get_type
@@ -266,10 +276,22 @@ contains
 !!         chars=anything_to_bytes([(i*i,i=1,size(ints))])
 !!         write(*,'(/,4(1x,z2.2))')chars
 !!         call bytes_to_anything(chars,ints)
-!!         write(*,*)ints
+!!         write(*,'(*(g0,1x))')ints
 !!      end program demo_bytes_to_anything
 !!
-!!   Expected output
+!! Results:
+!!  >
+!!  >  01 00 00 00
+!!  >  04 00 00 00
+!!  >  09 00 00 00
+!!  >  10 00 00 00
+!!  >  19 00 00 00
+!!  >  24 00 00 00
+!!  >  31 00 00 00
+!!  >  40 00 00 00
+!!  >  51 00 00 00
+!!  >  64 00 00 00
+!!  >  1     4     9    16    25    36    49    64    81   100
 !!
 !!##AUTHOR
 !!    John S. Urban
@@ -288,7 +310,9 @@ subroutine bytes_to_anything(chars,anything)
     type is (integer(kind=int64));  anything=transfer(chars,anything)
     type is (real(kind=real32));    anything=transfer(chars,anything)
     type is (real(kind=real64));    anything=transfer(chars,anything)
+#ifdef HAS_REAL128
     type is (real(kind=real128));   anything=transfer(chars,anything)
+#endif
     type is (logical);              anything=transfer(chars,anything)
     class default
       stop 'crud. bytes_to_anything(1) does not know about this type'
@@ -338,8 +362,6 @@ end subroutine bytes_to_anything
 !!
 !!    program demo_anything_to_bytes
 !!    use M_anything,      only : anything_to_bytes
-!!    !!use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
-!!    !!use, intrinsic :: iso_fortran_env, only : real32, real64, real128
 !!    implicit none
 !!    integer :: i
 !!       write(*,'(/,4(1x,z2.2))')anything_to_bytes([(i*i,i=1,10)])
@@ -374,7 +396,6 @@ end subroutine bytes_to_anything
 !!##LICENSE
 !!    MIT
 function anything_to_bytes_arr(anything) result(chars)
-implicit none
 
 ! ident_1="@(#) M_anything anything_to_bytes_arr(3fp) any vector of intrinsics to bytes (an array of CHARACTER(LEN=1) variables)"
 
@@ -382,7 +403,7 @@ class(*),intent(in)          :: anything(:)
 character(len=1),allocatable :: chars(:)
 
    if(allocated(chars))deallocate(chars)
-   allocate(chars( storage_size(anything)/8 * size(anything) ) )
+   allocate(chars( storage_size(anything)/CSZ * size(anything) ) )
 
    select type(anything)
     type is (character(len=*));     chars=transfer(anything,chars)
@@ -394,7 +415,9 @@ character(len=1),allocatable :: chars(:)
     type is (integer(kind=int64));  chars=transfer(anything,chars)
     type is (real(kind=real32));    chars=transfer(anything,chars)
     type is (real(kind=real64));    chars=transfer(anything,chars)
+#ifdef HAS_REAL128
     type is (real(kind=real128));   chars=transfer(anything,chars)
+#endif
     type is (logical);              chars=transfer(anything,chars)
     class default
       chars=transfer(anything,chars) ! should work for everything, does not with some compilers
@@ -404,14 +427,13 @@ character(len=1),allocatable :: chars(:)
 end function anything_to_bytes_arr
 !-----------------------------------------------------------------------------------------------------------------------------------
 function  anything_to_bytes_scalar(anything) result(chars)
-implicit none
 
 ! ident_2="@(#) M_anything anything_to_bytes_scalar(3fp) anything to bytes (an array of CHARACTER(LEN=1) variables)"
 
 class(*),intent(in)          :: anything
 character(len=1),allocatable :: chars(:)
    if(allocated(chars))deallocate(chars)
-   allocate(chars( storage_size(anything)/8) )
+   allocate(chars( storage_size(anything)/CSZ) )
 
    select type(anything)
     type is (character(len=*));     chars=transfer(anything,chars)
@@ -423,7 +445,9 @@ character(len=1),allocatable :: chars(:)
     type is (integer(kind=int64));  chars=transfer(anything,chars)
     type is (real(kind=real32));    chars=transfer(anything,chars)
     type is (real(kind=real64));    chars=transfer(anything,chars)
+#ifdef HAS_REAL128
     type is (real(kind=real128));   chars=transfer(anything,chars)
+#endif
     type is (logical);              chars=transfer(anything,chars)
     class default
       chars=transfer(anything,chars) ! should work for everything, does not with some compilers
@@ -435,7 +459,6 @@ end function  anything_to_bytes_scalar
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()!
 !===================================================================================================================================
 !!subroutine setany(anything,default,answer)
-!!implicit none
 !!
 !!$@(#) M_anything::setany(3fp): set absent parameter to default value
 !!
@@ -515,9 +538,8 @@ end function  anything_to_bytes_scalar
 !!
 !!##LICENSE
 !!    MIT
+#ifdef HAS_REAL128
 pure elemental function anyscalar_to_real128(valuein) result(d_out)
-use, intrinsic :: iso_fortran_env, only : error_unit !! ,input_unit,output_unit
-implicit none
 
 ! ident_3="@(#) M_anything anyscalar_to_real128(3f) convert integer or real parameter of any kind to real128"
 
@@ -535,12 +557,12 @@ character(len=3)             :: readable
    type is (logical);              d_out=merge(0.0_real128,1.0_real128,valuein)
    type is (character(len=*));     read(valuein,*) d_out
    class default
-    !!d_out=huge(0.0_real128)
     readable='NaN'
     read(readable,*)d_out
     !!stop '*M_anything::anyscalar_to_real128: unknown type'
    end select
 end function anyscalar_to_real128
+#endif
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()!
 !===================================================================================================================================
@@ -609,8 +631,6 @@ end function anyscalar_to_real128
 !!##LICENSE
 !!    MIT
 pure elemental function anyscalar_to_double(valuein) result(d_out)
-use, intrinsic :: iso_fortran_env, only : error_unit !! ,input_unit,output_unit
-implicit none
 
 ! ident_4="@(#) M_anything anyscalar_to_double(3f) convert integer or real parameter of any kind to doubleprecision"
 
@@ -624,11 +644,13 @@ doubleprecision,parameter :: big=huge(0.0d0)
    type is (integer(kind=int64));  d_out=dble(valuein)
    type is (real(kind=real32));    d_out=dble(valuein)
    type is (real(kind=real64));    d_out=dble(valuein)
+#ifdef HAS_REAL128
    Type is (real(kind=real128))
       !IMPURE! if(valuein > big)then
-      !IMPURE!    write(error_unit,'(*(g0,1x))')'*anyscalar_to_double* value too large ',valuein
+      !IMPURE!    write(stderr,'(*(g0,1x))')'*anyscalar_to_double* value too large ',valuein
       !IMPURE! endif
       d_out=dble(valuein)
+#endif
    type is (logical);              d_out=merge(0.0d0,1.0d0,valuein)
    type is (character(len=*));     read(valuein,*) d_out
    class default
@@ -702,8 +724,6 @@ end function anyscalar_to_double
 !!##LICENSE
 !!    MIT
 pure elemental function anyscalar_to_real(valuein) result(r_out)
-use, intrinsic :: iso_fortran_env, only : error_unit !! ,input_unit,output_unit
-implicit none
 
 ! ident_5="@(#) M_anything anyscalar_to_real(3f) convert integer or real parameter of any kind to real"
 
@@ -718,17 +738,18 @@ real,parameter      :: big=huge(0.0)
    type is (real(kind=real32));    r_out=real(valuein)
    type is (real(kind=real64))
       !!if(valuein > big)then
-      !!   write(error_unit,*)'*anyscalar_to_real* value too large ',valuein
+      !!   write(stderr,*)'*anyscalar_to_real* value too large ',valuein
       !!endif
       r_out=real(valuein)
+#ifdef HAS_REAL128
    type is (real(kind=real128))
       !!if(valuein > big)then
-      !!   write(error_unit,*)'*anyscalar_to_real* value too large ',valuein
+      !!   write(stderr,*)'*anyscalar_to_real* value too large ',valuein
       !!endif
       r_out=real(valuein)
+#endif
    type is (logical);              r_out=merge(0.0d0,1.0d0,valuein)
    type is (character(len=*));     read(valuein,*) r_out
-   !type is (real(kind=real128));  r_out=real(valuein)
    end select
 end function anyscalar_to_real
 !===================================================================================================================================
@@ -813,8 +834,6 @@ end function anyscalar_to_real
 !!##LICENSE
 !!    MIT
 impure elemental function anyscalar_to_int64(valuein) result(ii38)
-use, intrinsic :: iso_fortran_env, only : error_unit !! ,input_unit,output_unit
-implicit none
 
 ! ident_6="@(#) M_anything anyscalar_to_int64(3f) convert integer parameter of any kind to 64-bit integer"
 
@@ -829,16 +848,18 @@ class(*),intent(in)    :: valuein
    type is (integer(kind=int64));  ii38=valuein
    type is (real(kind=real32));    ii38=nint(valuein,kind=int64)
    type is (real(kind=real64));    ii38=nint(valuein,kind=int64)
+#ifdef HAS_REAL128
    Type is (real(kind=real128));   ii38=nint(valuein,kind=int64)
+#endif
    type is (logical);              ii38=merge(0_int64,1_int64,valuein)
    type is (character(len=*))   ;
       read(valuein,*,iostat=ios,iomsg=message)ii38
       if(ios /= 0)then
-         write(error_unit,*)'*anyscalar_to_int64* ERROR: '//trim(message)
+         write(stderr,*)'*anyscalar_to_int64* ERROR: '//trim(message)
          stop 2
       endif
    class default
-      write(error_unit,*)'*anyscalar_to_int64* ERROR: unknown integer type'
+      write(stderr,*)'*anyscalar_to_int64* ERROR: unknown integer type'
       stop 3
    end select
 end function anyscalar_to_int64
@@ -932,7 +953,6 @@ end function anyscalar_to_int64
 pure function anyscalar_to_string(gen0, gen1, gen2, gen3, gen4, gen5, gen6, gen7, gen8, gen9, &
                                 & gena, genb, genc, gend, gene, genf, geng, genh, geni, genj, &
                                 & sep)
-implicit none
 
 ! ident_7="@(#) M_anything anyscalar_to_string(3fp) writes a message to a string composed of any standard scalar types"
 
@@ -980,8 +1000,6 @@ character(len=:),allocatable  :: sep_local
 contains
 !===================================================================================================================================
 pure subroutine print_generic(generic,line,istart,increment,sep)
-!use, intrinsic :: iso_fortran_env, only : int8, int16, int32, biggest=>int64, real32, real64, dp=>real128
-use,intrinsic :: iso_fortran_env, only : int8, int16, int32, int64, real32, real64, real128
 class(*),intent(in) :: generic
 character(len=4096),intent(inout) :: line
 integer,intent(inout) :: istart
@@ -994,8 +1012,7 @@ character(len=*),intent(in) :: sep
       type is (integer(kind=int64));    write(line(istart:),'(i0)') generic
       type is (real(kind=real32));      write(line(istart:),'(1pg0)') generic
       type is (real(kind=real64));      write(line(istart:),'(1pg0)') generic
-#ifdef __NVCOMPILER
-#else
+#ifdef HAS_REAL128
       type is (real(kind=real128));     write(line(istart:),'(1pg0)') generic
 #endif
       type is (logical);                write(line(istart:),'(l1)') generic
@@ -1066,7 +1083,6 @@ end function anyscalar_to_string
 !!##LICENSE
 !!    MIT
 impure function anyinteger_to_string(int) result(out)
-use,intrinsic :: iso_fortran_env, only : int64
 
 ! ident_8="@(#) M_anything anyinteger_to_string(3f) function that converts an integer value to a character string"
 
@@ -1159,7 +1175,6 @@ end function anyinteger_to_string
 !!##LICENSE
 !!    MIT
 function get_type_arr(anything) result(chars)
-implicit none
 
 ! ident_9="@(#) M_anything get_type_arr(3fp) any vector of intrinsics to bytes (an array of CHARACTER(LEN=1) variables)"
 
@@ -1176,7 +1191,9 @@ character(len=20)   :: chars
     type is (integer(kind=int64));  chars='int64'
     type is (real(kind=real32));    chars='real32'
     type is (real(kind=real64));    chars='real64'
+#ifdef HAS_REAL128
     type is (real(kind=real128));   chars='real128'
+#endif
     type is (logical);              chars='logical'
     class default
       stop 'crud. get_type_arr(1) does not know about this type'
@@ -1185,7 +1202,6 @@ character(len=20)   :: chars
 end function get_type_arr
 !-----------------------------------------------------------------------------------------------------------------------------------
 elemental impure function get_type_scalar(anything) result(chars)
-implicit none
 
 ! ident_10="@(#) M_anything get_type_scalar(3fp) anything to bytes (an array of CHARACTER(LEN=1) variables)"
 
@@ -1201,7 +1217,9 @@ character(len=20)   :: chars
     type is (integer(kind=int64));  chars='int64'
     type is (real(kind=real32));    chars='real32'
     type is (real(kind=real64));    chars='real64'
+#ifdef HAS_REAL128
     type is (real(kind=real128));   chars='real128'
+#endif
     type is (logical);              chars='logical'
     class default
       stop 'crud. get_type_scalar(1) does not know about this type'
