@@ -2,11 +2,19 @@
 ! This module and the example function squarei() that uses it shows how you
 ! can use polymorphism to allow arguments of different types generically by casting
 !===================================================================================================================================
+
 #ifdef __NVCOMPILER
 #undef HAS_REAL128
 #else
 #define HAS_REAL128
 #endif
+
+#ifdef Linux_ifx
+#ifndef __INTEL_LLVM_COMPILER
+#define __INTEL_LLVM_COMPILER  IFX
+#endif
+#endif
+
 !===================================================================================================================================
 !>
 !!##NAME
