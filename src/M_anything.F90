@@ -49,7 +49,7 @@
 !!
 !!   Sample program
 !!
-!!     program demo_anyscalar_to_double
+!!     program demo_M_anything
 !!     use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
 !!     use, intrinsic :: iso_fortran_env, only : real32, real64, real128
 !!     implicit none
@@ -72,7 +72,7 @@
 !!        dvalue=invalue_local*invalue_local
 !!     end function squareall
 !!
-!!     end program demo_anyscalar_to_double
+!!     end program demo_M_anything
 !!
 !!   Results:
 !!
@@ -396,6 +396,7 @@ end subroutine bytes_to_anything
 !!##LICENSE
 !!    MIT
 function anything_to_bytes_arr(anything) result(chars)
+! this seems like it should just be a call to transfer(), but seems to need the select type on at least several compilers
 
 ! ident_1="@(#) M_anything anything_to_bytes_arr(3fp) any vector of intrinsics to bytes (an array of CHARACTER(LEN=1) variables)"
 
@@ -420,8 +421,11 @@ character(len=1),allocatable :: chars(:)
 #endif
     type is (logical);              chars=transfer(anything,chars)
     class default
+!#ifdef __INTEL_LLVM_COMPILER
+!      stop 'crud. anything_to_bytes_arr(1) does not know about this type'
+!#else
       chars=transfer(anything,chars) ! should work for everything, does not with some compilers
-      !stop 'crud. anything_to_bytes_arr(1) does not know about this type'
+!#endif
    end select
 
 end function anything_to_bytes_arr
@@ -450,8 +454,11 @@ character(len=1),allocatable :: chars(:)
 #endif
     type is (logical);              chars=transfer(anything,chars)
     class default
+#ifdef __INTEL_LLVM_COMPILER
+      stop 'crud. anything_to_bytes_arr(1) does not know about this type'
+#else
       chars=transfer(anything,chars) ! should work for everything, does not with some compilers
-      !stop 'crud. anything_to_bytes_scalar(1) does not know about this type'
+#endif
    end select
 
 end function  anything_to_bytes_scalar
