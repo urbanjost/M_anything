@@ -14,7 +14,7 @@ homepage = "https://github.com/urbanjost/M_anything.git"
 auto-executables = true
 auto-tests = true
 auto-examples = true
-module-naming = true
+#module-naming = true
 
 [install]
 library = true
