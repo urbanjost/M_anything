@@ -2,7 +2,7 @@ module M_test_suite_M_anything
 use, intrinsic :: ISO_FORTRAN_ENV, only : INT8, INT16, INT32, INT64       !  1           2           4           8
 use, intrinsic :: ISO_FORTRAN_ENV, only : REAL32, REAL64, REAL128         !  4           8          10
 use M_msg
-use M_verify,   only : unit_check_command, unit_check_keep_going, unit_check_level
+use M_verify,   only : unit_check_level
 use M_anything, only : anyinteger_to_string, anyscalar_to_int64
 use M_anything, only : anyscalar_to_real, anyscalar_to_double, anyscalar_to_real128
 use M_anything, only : anything_to_bytes, bytes_to_anything
@@ -195,11 +195,9 @@ end module M_test_suite_M_anything
 !==================================================================================================================================!
 program runtest
 use M_msg
-use M_verify, only : unit_check_command, unit_check_keep_going, unit_check_level, unit_check_stop
+use M_verify, only : unit_check_level, unit_check_stop
 use M_test_suite_M_anything
 implicit none
-   unit_check_command=''
-   unit_check_keep_going=.true.
    unit_check_level=0
    call test_suite_M_anything()
    call unit_check_stop()
