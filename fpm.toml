@@ -14,7 +14,7 @@ homepage = "https://github.com/urbanjost/M_anything.git"
 auto-executables = true
 auto-tests = true
 auto-examples = true
-#module-naming = true
+module-naming = true
 
 [install]
 library = true
@@ -24,4 +24,4 @@ name="test_suite_M_anything"
 source-dir="test"
 main="test_suite_M_anything.f90"
 [test.dependencies]
-M_framework = { git = "https://github.com/urbanjost/M_framework.git" }
+M_framework = { namespace = "GPF" }
