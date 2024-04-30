@@ -1,27 +1,28 @@
 # TOML file for fpm as described at https://fpm.fortran-lang.org/en/spec/manifest.html
-name = "M_anything"
-version = "1.0.0"
-license = "MIT"
-author = ["John S. Urban"]
-maintainer = "urbanjost@comcast.com"
-copyright = "Copyright 2021, John S. Urban"
+name        = "M_anything"
+version     = "1.0.0"
+license     = "MIT"
+author      = ["John S. Urban"]
+maintainer  = "urbanjost@comcast.com"
+copyright   = "Copyright 2021, John S. Urban"
 description = "module to cast or promote intrinsic types"
-categories = ["types"]
-keywords = ["fortran", "cast", "mold" ]
-homepage = "https://github.com/urbanjost/M_anything.git"
+categories  = ["types"]
+keywords    = ["fortran", "cast", "mold" ]
+homepage    = "https://github.com/urbanjost/M_anything.git"
 
 [build]
-auto-executables = true
-auto-tests = true
-auto-examples = true
-module-naming = true
+   auto-executables = true
+   auto-tests = true
+   auto-examples = true
+   module-naming = true
 
 [install]
-library = true
+   library = true
 
 [[test]]
-name="test_suite_M_anything"
-source-dir="test"
-main="test_suite_M_anything.f90"
-[test.dependencies]
-M_framework = { namespace = "GPF" }
+   name="test_suite_M_anything"
+   source-dir="test"
+   main="test_suite_M_anything.f90"
+   [test.dependencies]
+   M_framework = { git = "https://github.com/urbanjost/M_framework.git" }
+   #M_framework = { namespace = "GPF" }
