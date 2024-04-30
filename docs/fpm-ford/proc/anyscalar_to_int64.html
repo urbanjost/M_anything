@@ -1,0 +1,354 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="cast and promote intrinsic types">
+    <meta name="author" content="John S. Urban" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>anyscalar_to_int64 &ndash; M_anything</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">M_anything </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/programs.html">Programs</a>
+                </li>
+            </ul>
+              <div class="d-flex align-items-end flex-grow-1">
+                <form action="../search.html" role="search" class="ms-auto">
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+                </form>
+              </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>anyscalar_to_int64
+      <small>Function</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 7.7% of total for procedures.">33 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/M_anything.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/m_anything.f90.html'>M_anything.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/m_anything.html'>M_anything</a></li>
+            <li class="breadcrumb-item active" aria-current="page">anyscalar_to_int64</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+    $('[data-bs-toggle="tooltip"]').tooltip()
+    })
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/anyscalar_to_int64.html#src">anyscalar_to_int64</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>public impure elemental function anyscalar_to_int64(valuein) result(ii38)  
+</h2>
+    
+
+    <h2 id="name">NAME</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">anyscalar_to_int64</span><span class="p">(</span><span class="mi">3</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">[</span><span class="n">M_anything</span><span class="o">]</span><span class="w"> </span><span class="nf">convert</span><span class="w"> </span><span class="n">intrinsic</span><span class="w"> </span><span class="n">scalar</span><span class="w"> </span><span class="n">types</span>
+<span class="k">to</span><span class="w"> </span><span class="k">integer</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="p">(</span><span class="nl">LICENSE</span><span class="p">:</span><span class="n">MIT</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="synopsis">SYNOPSIS</h2>
+<div class="codehilite"><pre><span></span><code>impure elemental function anyscalar_to_int64(valin) result(value)
+
+ class(*),intent(in) :: valin
+ integer(kind=int64) :: value
+</code></pre></div>
+
+<h2 id="description">DESCRIPTION</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">This</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">uses</span><span class="w"> </span><span class="n">polymorphism</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">arguments</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">different</span><span class="w"> </span><span class="n">types</span>
+<span class="k">as</span><span class="w"> </span><span class="n">input</span><span class="o">.</span><span class="w"> </span><span class="n">It</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">typically</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">procedures</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">take</span>
+<span class="n">many</span><span class="w"> </span><span class="n">scalar</span><span class="w"> </span><span class="n">arguments</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">equivalent</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">passing</span><span class="w"> </span><span class="n">the</span>
+<span class="n">parameter</span><span class="w"> </span><span class="n">VALUE</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">(</span><span class="n">VALUE</span><span class="p">,</span><span class="mi">0</span><span class="n">_int64</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">integer</span><span class="p">;</span><span class="w"> </span><span class="n">nint</span><span class="p">(</span><span class="n">VALUE</span><span class="p">,</span><span class="mi">0</span><span class="n">_int64</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="n">real</span><span class="w"> </span><span class="n">values</span><span class="p">,</span><span class="w"> </span><span class="n">returning</span><span class="w"> </span><span class="mi">0</span><span class="n">_int64</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="o">.</span><span class="n">true</span><span class="o">.</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="mi">1</span><span class="n">_int64</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">logical</span><span class="p">,</span>
+<span class="ow">and</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">(</span><span class="n">VALUE</span><span class="p">,</span><span class="mi">0</span><span class="n">_int64</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">character</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">the</span>
+<span class="n">character</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="n">represent</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">integer</span><span class="w"> </span><span class="n">value</span><span class="o">.</span>
+</code></pre></div>
+
+<h2 id="options">OPTIONS</h2>
+<div class="codehilite"><pre><span></span><code><span class="nx">VALUEIN</span><span class="w">  </span><span class="nx">input</span><span class="w"> </span><span class="nx">argument</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">procedure</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">convert</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">INTEGER</span><span class="p">(</span><span class="nx">KIND</span><span class="p">=</span><span class="nx">int64</span><span class="p">).</span>
+</code></pre></div>
+
+<h2 id="results">RESULTS</h2>
+<div class="codehilite"><pre><span></span><code>         The value of VALUIN converted to INTEGER(KIND=INT64).
+</code></pre></div>
+
+<h2 id="example">EXAMPLE</h2>
+<div class="codehilite"><pre><span></span><code><span class="nx">Sample</span><span class="w"> </span><span class="nx">program</span>
+
+<span class="w"> </span><span class="nx">program</span><span class="w"> </span><span class="nx">demo_anyscalar_to_int64</span>
+<span class="w"> </span><span class="nx">use</span><span class="p">,</span><span class="w"> </span><span class="nx">intrinsic</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="nx">iso_fortran_env</span><span class="p">,</span><span class="w"> </span><span class="nx">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">int8</span><span class="p">,</span><span class="w"> </span><span class="nx">int16</span><span class="p">,</span><span class="w"> </span><span class="nx">int32</span><span class="p">,</span><span class="w"> </span><span class="nx">int64</span>
+<span class="w"> </span><span class="nx">implicit</span><span class="w"> </span><span class="nx">none</span>
+<span class="w">    </span><span class="p">!</span><span class="w"> </span><span class="nx">call</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">many</span><span class="w"> </span><span class="nx">scalar</span><span class="w"> </span><span class="nx">input</span><span class="w"> </span><span class="nx">types</span>
+<span class="w">    </span><span class="nx">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="nx">squarei</span><span class="p">(</span><span class="nx">huge</span><span class="p">(</span><span class="mi">0</span><span class="nx">_int8</span><span class="p">)),</span><span class="nx">huge</span><span class="p">(</span><span class="mi">0</span><span class="nx">_int8</span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="err">&#39;</span><span class="mi">16129</span><span class="err">&#39;</span>
+<span class="w">    </span><span class="nx">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="nx">squarei</span><span class="p">(</span><span class="nx">huge</span><span class="p">(</span><span class="mi">0</span><span class="nx">_int16</span><span class="p">)),</span><span class="nx">huge</span><span class="p">(</span><span class="mi">0</span><span class="nx">_int16</span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="err">&#39;</span><span class="mi">1073676289</span><span class="err">&#39;</span>
+<span class="w">    </span><span class="nx">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="nx">squarei</span><span class="p">(</span><span class="nx">huge</span><span class="p">(</span><span class="mi">0</span><span class="nx">_int32</span><span class="p">)),</span><span class="nx">huge</span><span class="p">(</span><span class="mi">0</span><span class="nx">_int32</span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="err">&#39;</span><span class="mi">4611686014132420609</span><span class="err">&#39;</span>
+<span class="w">    </span><span class="nx">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="nx">squarei</span><span class="p">(</span><span class="nx">huge</span><span class="p">(</span><span class="mi">0</span><span class="nx">_int64</span><span class="p">)),</span><span class="nx">huge</span><span class="p">(</span><span class="mi">0</span><span class="nx">_int64</span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span>
+<span class="w">    </span><span class="o">&amp;</span><span class="w"> </span><span class="err">&#39;</span><span class="mi">85070591730234615847396907784232501249</span><span class="err">&#39;</span>
+<span class="w"> </span><span class="nx">contains</span>
+<span class="w"> </span><span class="p">!</span>
+<span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="nx">squarei</span><span class="p">(</span><span class="nx">invalue</span><span class="p">)</span>
+<span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">M_anything</span><span class="p">,</span><span class="w"> </span><span class="nx">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">anyscalar_to_int64</span>
+<span class="w"> </span><span class="kd">class</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="nx">intent</span><span class="p">(</span><span class="k">in</span><span class="p">)</span><span class="w">  </span><span class="o">::</span><span class="w"> </span><span class="nx">invalue</span>
+<span class="w"> </span><span class="nx">doubleprecision</span><span class="w">      </span><span class="o">::</span><span class="w"> </span><span class="nx">invalue_local</span>
+<span class="w"> </span><span class="nx">doubleprecision</span><span class="w">      </span><span class="o">::</span><span class="w"> </span><span class="nx">squarei</span>
+<span class="w">    </span><span class="nx">invalue_local</span><span class="p">=</span><span class="nx">anyscalar_to_int64</span><span class="p">(</span><span class="nx">invalue</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">squarei</span><span class="p">=</span><span class="nx">invalue_local</span><span class="o">*</span><span class="nx">invalue_local</span>
+<span class="w"> </span><span class="nx">end</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="nx">squarei</span>
+<span class="w"> </span><span class="p">!</span>
+<span class="w"> </span><span class="nx">end</span><span class="w"> </span><span class="nx">program</span><span class="w"> </span><span class="nx">demo_anyscalar_to_int64</span>
+</code></pre></div>
+
+<p>Results</p>
+<div class="codehilite"><pre><span></span><code><span class="mf">16129.000000000000</span><span class="w">       </span><span class="mf">127</span><span class="w"> </span><span class="err">!!</span><span class="w">    </span><span class="mf">16129</span>
+<span class="mf">1073676289.0000000</span><span class="w">       </span><span class="mf">32767</span><span class="w"> </span><span class="err">!!</span><span class="w">    </span><span class="mf">1073676289</span>
+<span class="mf">4.6116860141324206E+018</span><span class="w">  </span><span class="mf">2147483647</span><span class="w"> </span><span class="err">!!</span><span class="w">    </span><span class="mf">4611686014132420609</span>
+<span class="mf">8.5070591730234616E+037</span><span class="w">  </span><span class="mf">9223372036854775807</span><span class="w"> </span><span class="err">!!</span><span class="w">    </span><span class="mf">85070591730234615847396907784232501249</span>
+<span class="mf">2.8948022309329049E+076</span><span class="w"> </span><span class="mf">170141183460469231731687303715884105727</span><span class="w"> </span><span class="err">!!</span><span class="w">    </span><span class="mf">28948022309329048855892746252171976962977213799489202546401021394546514198529</span>
+</code></pre></div>
+
+<h2 id="author">AUTHOR</h2>
+<div class="codehilite"><pre><span></span><code>John S. Urban
+</code></pre></div>
+
+<h2 id="license">LICENSE</h2>
+<div class="codehilite"><pre><span></span><code>MIT
+</code></pre></div>
+
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-valuein~4"></span>
+              class(*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>valuein</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <h3>Return Value
+        <small>
+          <span class="anchor" id="variable-ii38"></span>
+          integer(kind=int64)
+        </small>
+      </h3>
+      
+    <br>
+
+
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="k">impure elemental function </span><span class="n">anyscalar_to_int64</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">ii38</span><span class="p">)</span>
+
+<span class="c">! ident_6=&quot;@(#) M_anything anyscalar_to_int64(3f) convert integer parameter of any kind to 64-bit integer&quot;</span>
+
+<span class="k">class</span><span class="p">(</span><span class="o">*</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">    </span><span class="kd">::</span><span class="w"> </span><span class="n">valuein</span>
+<span class="w">   </span><span class="kt">integer</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ii38</span>
+<span class="w">   </span><span class="kt">integer</span><span class="w">             </span><span class="kd">::</span><span class="w"> </span><span class="n">ios</span>
+<span class="w">   </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">message</span>
+<span class="w">   </span><span class="k">select type</span><span class="p">(</span><span class="n">valuein</span><span class="p">)</span>
+<span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">integer</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">int8</span><span class="p">));</span><span class="w">   </span><span class="n">ii38</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">valuein</span><span class="p">,</span><span class="nb">kind</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">integer</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">int16</span><span class="p">));</span><span class="w">  </span><span class="n">ii38</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">valuein</span><span class="p">,</span><span class="nb">kind</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">integer</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">int32</span><span class="p">));</span><span class="w">  </span><span class="n">ii38</span><span class="o">=</span><span class="n">valuein</span>
+<span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">integer</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">int64</span><span class="p">));</span><span class="w">  </span><span class="n">ii38</span><span class="o">=</span><span class="n">valuein</span>
+<span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real32</span><span class="p">));</span><span class="w">    </span><span class="n">ii38</span><span class="o">=</span><span class="nb">nint</span><span class="p">(</span><span class="n">valuein</span><span class="p">,</span><span class="nb">kind</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real64</span><span class="p">));</span><span class="w">    </span><span class="n">ii38</span><span class="o">=</span><span class="nb">nint</span><span class="p">(</span><span class="n">valuein</span><span class="p">,</span><span class="nb">kind</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="cp">#ifdef HAS_REAL128</span>
+<span class="w">   </span><span class="k">Type is</span><span class="w"> </span><span class="p">(</span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">real128</span><span class="p">));</span><span class="w">   </span><span class="n">ii38</span><span class="o">=</span><span class="nb">nint</span><span class="p">(</span><span class="n">valuein</span><span class="p">,</span><span class="nb">kind</span><span class="o">=</span><span class="n">int64</span><span class="p">)</span>
+<span class="cp">#endif</span>
+<span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">logical</span><span class="p">);</span><span class="w">              </span><span class="n">ii38</span><span class="o">=</span><span class="nb">merge</span><span class="p">(</span><span class="mi">0_int64</span><span class="p">,</span><span class="mi">1_int64</span><span class="p">,</span><span class="n">valuein</span><span class="p">)</span>
+<span class="w">   </span><span class="k">type is</span><span class="w"> </span><span class="p">(</span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">))</span><span class="w">   </span><span class="p">;</span>
+<span class="w">      </span><span class="k">read</span><span class="p">(</span><span class="n">valuein</span><span class="p">,</span><span class="o">*</span><span class="p">,</span><span class="n">iostat</span><span class="o">=</span><span class="n">ios</span><span class="p">,</span><span class="n">iomsg</span><span class="o">=</span><span class="n">message</span><span class="p">)</span><span class="n">ii38</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">ios</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="k">then</span>
+<span class="k">         write</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="s1">&#39;*anyscalar_to_int64* ERROR: &#39;</span><span class="o">//</span><span class="nb">trim</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="w">         </span><span class="k">stop </span><span class="mi">2</span>
+<span class="w">      </span><span class="k">endif</span>
+<span class="k">   class </span><span class="n">default</span>
+<span class="w">      </span><span class="k">write</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="s1">&#39;*anyscalar_to_int64* ERROR: unknown integer type&#39;</span>
+<span class="w">      </span><span class="k">stop </span><span class="mi">3</span>
+<span class="w">   </span><span class="k">end select</span>
+<span class="k">end function </span><span class="n">anyscalar_to_int64</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              M_anything
+ was developed by John S. Urban<br>              &copy; 2024 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+ on 2024-04-30 00:22              </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+
+    <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="../tipuesearch/tipuesearch_content.js"></script>
+          <script src="../tipuesearch/tipuesearch_set.js"></script>
+          <script src="../tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>
