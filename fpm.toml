@@ -27,8 +27,8 @@ homepage    = "https://github.com/urbanjost/M_anything.git"
    # can use various registries, including local mirrors
    #M_framework = { namespace = "GPF" }
    #
-   #M_framework = { git = "https://github.com/urbanjost/M_framework.git" }
+   M_framework = { git = "https://github.com/urbanjost/M_framework.git" }
    #
    # For off-line work use the GLINKS directory with links to the packages
    # ln -f -s $HOME/github/GLINKS GLINKS
-   M_framework  = { path = "GLINKS/M_framework" }
+   #M_framework  = { path = "GLINKS/M_framework" }
