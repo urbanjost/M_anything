@@ -1,0 +1,980 @@
+anyinteger_to_string (3m_anything) - [M_anything] convert integer of any kind to a string (LICENSE:MIT)
+anyscalar_to_double (3m_anything) - [M_anything] convert integer or real parameter of any kind to doubleprecision (LICENSE:MIT)
+anyscalar_to_int64 (3m_anything) - [M_anything] convert intrinsic scalar types to integer(kind=int64) (LICENSE:MIT)
+anyscalar_to_real (3m_anything) - [M_anything] convert integer or real parameter of any kind to real (LICENSE:MIT)
+anyscalar_to_real128 (3m_anything) - [M_anything] convert integer or real parameter of any kind to real128 (LICENSE:MIT)
+anyscalar_to_string (3m_anything) - [M_anything] converts up to twenty standard scalar type values to a string (LICENSE:MIT)
+anything_to_bytes (3m_anything) - [M_anything] convert standard types to bytes (character(len=1):: array(:)) (LICENSE:MIT)
+bytes_to_anything (3m_anything) - [M_anything] convert bytes(character)len=1):: array(:)) to standard types (LICENSE:MIT)
+empty (3m_anything)  - [M_anything] set an allocatable array to zero (LICENSE:MIT)
+get_type (3m_anything) - [M_anything] return array of strings containing type names of arguments (LICENSE:MIT)
+M_anything (3m_anything) - [M_anything::INTRO] procedures that use polymorphism to allow arguments of different types generically (LICENSE:MIT)
+unique (1)	     - [FUNIX] generate a UUID (Universally Unique ID) string per RFC 4122 (LICENSE:PD)
+unique.1.man(1m_anything)			     unique.1.man(1m_anything)
+
+
+
+NAME
+  unique(1f) - [FUNIX] generate a UUID (Universally Unique ID) string per RFC
+  4122 (LICENSE:PD)
+
+
+SYNOPSIS
+  unique [[ --method] NAME][ -urn][ -repeat N]]|[ --help|--version]
+
+DESCRIPTION
+  unique(3f) generates UUID strings according to the RFC 4122 standard.
+
+  A universally unique identifier (UUID) is a 128-bit number used to identify
+  information in computer systems. When generated according to standard
+  methods UUIDs are for practical purposes unique.
+
+  Standard methods 0,1, and 4 are supported as described in RFC 4122.
+
+  UUID strings are particularly useful as keys for relational database
+  entries, and for building unique temporary file names (especially in cross-
+  mounted filesystems that more than one OS is utilizing).
+
+OPTIONS
+  --method NAME
+    Select the UUID version type. Supported methods are nil|0, random|4,
+    time|1.
+
+    0.	Nil UUID (ie. ''00000000-0000-0000-0000-000000000000'')
+
+    1.	time-based UUID
+
+    2.	Not implemented
+
+    3.	Not implemented
+
+    4.	pseudo-RNG(Random Number Generator) based
+
+    5.	Not implemented
+
+  --urn
+    RFC 4122 defines a Uniform Resource Name (URN) namespace for UUIDs. IE.,
+    the output is prefixed with "urn:uuid:".
+
+  --repeat N
+    Number of UUID strings to generate
+
+  --help
+    display this help and exit
+
+  --version
+    output version information and exit
+
+EXAMPLES
+  Sample commands
+
+     unique
+     4bb8051e-4af3-11e8-6603-4254ffee9a14
+
+     unique -urn
+     urn:uuid:e9fd7cab-69f2-4cd6-4b5e-d54b9fbf617a
+
+     unique -method time -repeat 4
+     f2a2faf0-833a-11e9-7373-5eb4cfd7e237
+     f2a2faf0-833a-11e9-7373-afbb9f7b9100
+     f2a2faf0-833a-11e9-7373-cde3ffff3681
+     f2a2faf0-833a-11e9-7373-271cfbfd42bc
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+  Public Domain
+
+
+
+			       December 16, 2021     unique.1.man(1m_anything)
+anyscalar_to_double(3m_anything)	      anyscalar_to_double(3m_anything)
+
+
+
+NAME
+  anyscalar_to_double(3f) - [M_anything] convert integer or real parameter of
+  any kind to doubleprecision (LICENSE:MIT)
+
+
+SYNOPSIS
+  pure elemental function anyscalar_to_double(valuein) result(d_out)
+
+      class(*),intent(in)  :: valuein
+      doubleprecision	   :: d_out
+
+
+DESCRIPTION
+  This function uses polymorphism to allow input arguments of different types.
+  It is used to create other procedures that can take many scalar arguments as
+  input options.
+
+OPTIONS
+  VALUEIN
+    input argument of a procedure to convert to type DOUBLEPRECISION.  May be
+    of KIND kind=int8, kind=int16, kind=int32, kind=int64, kind=real32,
+    kind=real64, or kind=real128
+
+RESULTS
+  D_OUT
+    The value of VALUIN converted to doubleprecision (assuming it is actually
+    in the range of type DOUBLEPRECISION).
+
+EXAMPLE
+  Sample program
+
+      program demo_anyscalar_to_double
+      use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
+      use, intrinsic :: iso_fortran_env, only : real32, real64, real128
+      implicit none
+	 ! call same function with many scalar input types
+	 write(*,*)squarei(2_int8)
+	 write(*,*)squarei(2_int16)
+	 write(*,*)squarei(2_int32)
+	 write(*,*)squarei(2_int64)
+	 write(*,*)squarei(2.0_real32)
+	 write(*,*)squarei(2.0_real64)
+	 write(*,*)squarei(2.0_real128)
+      contains
+
+      function squarei(invalue) result (dvalue)
+      use M_anything, only : anyscalar_to_double
+      class(*),intent(in)  :: invalue
+      doubleprecision	   :: invalue_local
+      doubleprecision	   :: dvalue
+	 invalue_local=anyscalar_to_double(invalue)
+	 dvalue=invalue_local*invalue_local
+      end function squarei
+
+      end program demo_anyscalar_to_double
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 2024anyscalar_to_double(3m_anything)
+anyscalar_to_real(3m_anything)			anyscalar_to_real(3m_anything)
+
+
+
+NAME
+  anyscalar_to_real(3f) - [M_anything] convert integer or real parameter of
+  any kind to real (LICENSE:MIT)
+
+
+SYNOPSIS
+  pure elemental function anyscalar_to_real(valuein) result(r_out)
+
+      class(*),intent(in)  :: valuein
+      real		   :: r_out
+
+
+DESCRIPTION
+  This function uses polymorphism to allow input arguments of different types.
+  It is used to create other procedures that can take many scalar arguments as
+  input options.
+
+OPTIONS
+  VALUEIN
+    input argument of a procedure to convert to type REAL.  May be of KIND
+    kind=int8, kind=int16, kind=int32, kind=int64, kind=real32, kind=real64,
+    or kind=real128.
+
+RESULTS
+  R_OUT
+    The value of VALUIN converted to real (assuming it is actually in the
+    range of type REAL).
+
+EXAMPLE
+  Sample program
+
+      program demo_anyscalar_to_real
+      use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
+      use, intrinsic :: iso_fortran_env, only : real32, real64, real128
+      implicit none
+	 ! call same function with many scalar input types
+	 write(*,*)squarei(2_int8)
+	 write(*,*)squarei(2_int16)
+	 write(*,*)squarei(2_int32)
+	 write(*,*)squarei(2_int64)
+	 write(*,*)squarei(2.0_real32)
+	 write(*,*)squarei(2.0_real64)
+	 write(*,*)squarei(2.0_real128)
+      contains
+
+      function squarei(invalue) result (dvalue)
+      use M_anything, only : anyscalar_to_real
+      class(*),intent(in)  :: invalue
+      real		   :: invalue_local
+      real		   :: dvalue
+	 invalue_local=anyscalar_to_real(invalue)
+	 dvalue=invalue_local*invalue_local
+      end function squarei
+
+      end program demo_anyscalar_to_real
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 2024	anyscalar_to_real(3m_anything)
+anyscalar_to_real128(3m_anything)	     anyscalar_to_real128(3m_anything)
+
+
+
+NAME
+  anyscalar_to_real128(3f) - [M_anything] convert integer or real parameter of
+  any kind to real128 (LICENSE:MIT)
+
+
+SYNOPSIS
+  pure elemental function anyscalar_to_real128(valuein) result(d_out)
+
+      class(*),intent(in) :: valuein
+      real(kind=128)	  :: d_out
+
+
+DESCRIPTION
+  This function uses polymorphism to allow input arguments of different types.
+  It is used to create other procedures that can take many scalar arguments as
+  input options.
+
+OPTIONS
+  VALUEIN
+    input argument of a procedure to convert to type REAL128.  May be of KIND
+    kind=int8, kind=int16, kind=int32, kind=int64, kind=real32, kind=real64,
+    or kind=real128
+
+RESULTS
+  D_OUT
+    The value of VALUIN converted to REAL128 (assuming it is actually in the
+    range of type REAL128).
+
+EXAMPLE
+  Sample program
+
+      program demo_anyscalar_to_real128
+      use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
+      use, intrinsic :: iso_fortran_env, only : real32, real64, real128
+      implicit none
+	 ! call same function with many scalar input types
+	 write(*,*)squarei(2_int8)
+	 write(*,*)squarei(2_int16)
+	 write(*,*)squarei(2_int32)
+	 write(*,*)squarei(2_int64)
+	 write(*,*)squarei(2.0_real32)
+	 write(*,*)squarei(2.0_real64)
+	 write(*,*)squarei(2.0_real128)
+      contains
+
+      function squarei(invalue) result (dvalue)
+      use M_anything, only : anyscalar_to_real128
+      class(*),intent(in)  :: invalue
+      real(kind=real128)   :: invalue_local
+      real(kind=real128)   :: dvalue
+	 invalue_local=anyscalar_to_real128(invalue)
+	 dvalue=invalue_local*invalue_local
+      end function squarei
+
+      end program demo_anyscalar_to_real128
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 202anyscalar_to_real128(3m_anything)
+empty(3m_anything)					    empty(3m_anything)
+
+
+
+NAME
+  empty(3f) - [M_anything] set an allocatable array to zero (LICENSE:MIT)
+
+SYNOPSIS
+  use M_anything, only : empty, assignment(=)
+
+DESCRIPTION
+  A convenience routine that sets an array to an empty set.
+
+EXAMPLE
+  Sample program:
+
+     program demo_empty_
+     use M_anything, only : empty, assignment(=)
+     integer, allocatable      :: ints(:)
+     character(:), allocatable :: strs(:)
+     real, allocatable	    :: reals(:)
+	ints=empty
+	write(*,*)size(ints)
+
+	write(*,*)'give them some size ...'
+	reals = [1.0,2.0,3.0]
+	ints = [1,2,3]
+	strs = [character(len=10) :: "one","two","three","four"]
+	write(*,*)size(ints)
+	write(*,*)size(reals)
+	write(*,*)size(strs)
+
+	ints=empty
+	reals=empty
+	strs=empty
+	write(*,*)'back to empty ...'
+	write(*,*)size(ints)
+	write(*,*)size(reals)
+	write(*,*)size(strs)
+
+     end program demo_empty_
+
+  Expected output:
+
+     >		   0
+     >	 give them some size ...
+     >		   3
+     >		   3
+     >		   4
+     >	 back to empty ...
+     >		   0
+     >		   0
+     >		   0
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 2024		    empty(3m_anything)
+get_type(3m_anything)					 get_type(3m_anything)
+
+
+
+NAME
+  get_type(3f) - [M_anything] return array of strings containing type names of
+  arguments (LICENSE:MIT)
+
+
+SYNOPSIS
+  function get_type(anything) result(chars)
+
+      class(*),intent(in)  :: anything
+	      or
+      class(*),intent(in)  :: anything(..)
+
+      character(len=:),allocatable :: chars
+
+
+DESCRIPTION
+  This function uses polymorphism to allow input arguments of different types.
+  It is used by other procedures that can take many argument types as input
+  options.
+
+OPTIONS
+  VALUEIN
+    input array or scalar to return type of May be of KIND INTEGER(kind=int8),
+    INTEGER(kind=int16), INTEGER(kind=int32), INTEGER(kind=int64),
+    REAL(kind=real32, REAL(kind=real64), REAL(kind=real128), complex, or
+    CHARACTER(len=*)
+
+RETURN
+  CHARS
+    The returned value is an array of names
+
+EXAMPLE
+  Sample program
+
+     program demo_get_type
+     use M_anything,	  only : get_type
+     implicit none
+     integer :: i
+	write(*,*)get_type([(i*i,i=1,10)])
+	write(*,*)get_type([11.11,22.22,33.33])
+	write(*,*)get_type('This is a string')
+	write(*,*)get_type(30.0d0)
+     end program demo_get_type
+
+  Results:
+
+      int32
+      real32
+      character
+      real64
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 2024		 get_type(3m_anything)
+M_anything(3m_anything) 			       M_anything(3m_anything)
+
+
+
+NAME
+  M_anything(3fm) - [M_anything::INTRO] procedures that use polymorphism to
+  allow arguments of different types generically (LICENSE:MIT)
+
+
+SYNOPSIS
+  use M_anything,only : anyscalar_to_string use M_anything,only :
+  anyscalar_to_int64 use M_anything,only : anyscalar_to_real use
+  M_anything,only : anyscalar_to_real128 use M_anything,only :
+  anyscalar_to_double use M_anything,only : anything_to_bytes use
+  M_anything,only : anyinteger_to_string use M_anything,only : get_type use
+  M_anything,only : bytes_to_anything use M_anything,only : empty,
+  assignment(=)
+
+DESCRIPTION
+  anyscalar_to_string
+    convert intrinsic type to string
+
+  anyscalar_to_int64
+    convert integer or real of any kind to 64-bit integer
+
+  anyscalar_to_real
+    convert integer or real of any kind to real
+
+  anyscalar_to_real128
+    convert integer or real of any kind to real128
+
+  anyscalar_to_double
+    convert integer or real of any kind to doubleprecision
+
+  anything_to_bytes
+    convert anything to bytes
+
+  anyinteger_to_string
+    convert integer to string
+
+  get_type
+    return array of strings containing type names of arguments
+
+  empty
+    create an empty array
+
+EXAMPLE
+  At the cost of casting to a different type these functions can (among other
+  uses such as in linked lists) allow for an alternative to duplicating code
+  using generic procedure methods. For example, the following SQUAREALL
+  function can take many input types and return a DOUBLEPRECISION value (it is
+  a trivial example for demonstration purposes, and does not check for
+  overflow, etc.).:
+
+    Sample program
+
+      program demo_M_anything
+      use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
+      use, intrinsic :: iso_fortran_env, only : real32, real64, real128
+      implicit none
+	 ! call same function with many scalar input types
+	 write(*,*)squareall(2_int8)
+	 write(*,*)squareall(2_int16)
+	 write(*,*)squareall(2_int32)
+	 write(*,*)squareall(2_int64)
+	 write(*,*)squareall(2.0_real32)
+	 write(*,*)squareall(2.0_real64)
+	 write(*,*)squareall(2.0_real128)
+      contains
+
+      function squareall(invalue) result (dvalue)
+      use M_anything, only : anyscalar_to_double
+      class(*),intent(in)  :: invalue
+      doubleprecision	   :: invalue_local
+      doubleprecision	   :: dvalue
+	 invalue_local=anyscalar_to_double(invalue)
+	 dvalue=invalue_local*invalue_local
+      end function squareall
+
+      end program demo_M_anything
+
+    Results:
+
+	4.00000000000000
+	4.00000000000000
+	4.00000000000000
+	4.00000000000000
+	4.00000000000000
+	4.00000000000000
+	4.00000000000000
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 2024	       M_anything(3m_anything)
+anyscalar_to_string(3m_anything)	      anyscalar_to_string(3m_anything)
+
+
+
+NAME
+  anyscalar_to_string(3f) - [M_anything] converts up to twenty standard scalar
+  type values to a string (LICENSE:MIT)
+
+
+SYNOPSIS
+  Syntax:
+
+       pure function anyscalar_to_string(g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,&
+       & ga,gb,gc,gd,ge,gf,gg,gh,gi,gj,sep)
+       class(*),intent(in),optional  :: g0,g1,g2,g3,g4,g5,g6,g7,g8,g9
+       class(*),intent(in),optional  :: ga,gb,gc,gd,ge,gf,gg,gh,gi,gj
+       character(len=*),intent(in),optional :: sep
+       character,len=(:),allocatable :: anyscalar_to_string
+
+
+DESCRIPTION
+  anyscalar_to_string(3f) builds a space-separated string from up to twenty
+  scalar values.
+
+OPTIONS
+  g[0-9a-j]
+    optional value to print the value of after the message. May be of type
+    INTEGER, LOGICAL, REAL, DOUBLEPRECISION, COMPLEX, or CHARACTER.
+
+    Optionally, all the generic values can be single-dimensioned arrays.
+    Currently, mixing scalar arguments and array arguments is not supported.
+
+  sep
+    separator string used between values. Defaults to a space.
+
+RETURNS
+  anyscalar_to_string
+    a representation of the input as a string
+
+EXAMPLES
+  Sample program:
+
+     program demo_anyscalar_to_string
+     use M_anything, only : anyscalar_to_string
+     implicit none
+     character(len=:),allocatable :: pr
+     character(len=:),allocatable :: frmt
+     integer			  :: biggest
+
+     pr=anyscalar_to_string('HUGE(3f) integers',huge(0),&
+     &'and real',huge(0.0),'and double',huge(0.0d0))
+     write(*,'(a)')pr
+     pr=anyscalar_to_string('real	     :',huge(0.0),0.0,12345.6789,tiny(0.0) )
+     write(*,'(a)')pr
+     pr=anyscalar_to_string('doubleprecision :',huge(0.0d0),0.0d0,12345.6789d0,tiny(0.0d0) )
+     write(*,'(a)')pr
+     pr=anyscalar_to_string('complex	     :',cmplx(huge(0.0),tiny(0.0)) )
+     write(*,'(a)')pr
+
+     ! create a format on the fly
+     biggest=huge(0)
+     frmt=anyscalar_to_string('(*(i',int(log10(real(biggest))),':,1x))',sep='')
+     write(*,*)'format=',frmt
+
+     ! although it will often work, using anyscalar_to_string(3f)
+     ! in an I/O statement is not recommended
+     ! because if an error occurs anyscalar_to_string(3f) will try
+     ! to write while part of an I/O statement
+     ! which not all compilers can handle and is currently non-standard
+     write(*,*)anyscalar_to_string('program will now stop')
+
+     end program demo_anyscalar_to_string
+
+  Output
+
+     HUGE(3f) integers 2147483647 and real 3.40282347E+38
+     and double 1.7976931348623157E+308
+     real	     : 3.40282347E+38 0.00000000 12345.6787 1.17549435E-38
+     doubleprecision : 1.7976931348623157E+308 0.0000000000000000
+     12345.678900000001 2.2250738585072014E-308
+     complex	     : (3.40282347E+38,1.17549435E-38)
+      format=(*(i9:,1x))
+      program will now stop
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 2024anyscalar_to_string(3m_anything)
+anything_to_bytes(3m_anything)			anything_to_bytes(3m_anything)
+
+
+
+NAME
+  anything_to_bytes(3f) - [M_anything] convert standard types to bytes
+  (character(len=1):: array(:)) (LICENSE:MIT)
+
+
+SYNOPSIS
+  function anything_to_bytes(anything) result(chars)
+
+      class(*),intent(in)  :: anything
+	      or
+      class(*),intent(in)  :: anything(:)
+
+      character(len=1),allocatable :: chars(:)
+
+
+DESCRIPTION
+  This function uses polymorphism to allow input arguments of different types.
+  It is used to create other procedures that can take many argument types as
+  input options and convert them to a single type to simplify storing
+  arbitrary data, to simplify generating data hashes, ...
+
+OPTIONS
+  VALUEIN
+    input array or scalar to convert to type CHARACTER(LEN=1).	May be of KIND
+    INTEGER(kind=int8), INTEGER(kind=int16), INTEGER(kind=int32),
+    INTEGER(kind=int64), REAL(kind=real32, REAL(kind=real64),
+    REAL(kind=real128), complex, or CHARACTER(len=*)
+
+RETURN
+  CHARS
+    The returned value is an array of bytes (character(len=1)).
+
+EXAMPLE
+  Sample program
+
+     program demo_anything_to_bytes
+     use M_anything,	  only : anything_to_bytes
+     implicit none
+     integer :: i
+	write(*,'(/,4(1x,z2.2))')anything_to_bytes([(i*i,i=1,10)])
+	write(*,'(/,4(1x,z2.2))')anything_to_bytes([11.11,22.22,33.33])
+	write(*,'(/,4(1x,z2.2))')anything_to_bytes('This is a string')
+     end program demo_anything_to_bytes
+
+  Expected output
+
+	 01 00 00 00
+	 04 00 00 00
+	 09 00 00 00
+	 10 00 00 00
+	 19 00 00 00
+	 24 00 00 00
+	 31 00 00 00
+	 40 00 00 00
+	 51 00 00 00
+	 64 00 00 00
+
+	 8F C2 31 41
+	 8F C2 B1 41
+	 EC 51 05 42
+
+	 54 68 69 73
+	 20 69 73 20
+	 61 20 73 74
+	 72 69 6E 67
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 2024	anything_to_bytes(3m_anything)
+bytes_to_anything(3m_anything)			bytes_to_anything(3m_anything)
+
+
+
+NAME
+  bytes_to_anything(3f) - [M_anything] convert bytes(character)len=1)::
+  array(:)) to standard types (LICENSE:MIT)
+
+
+SYNOPSIS
+  subroutine bytes_to_anything(chars,anything)
+
+     character(len=1),allocatable :: chars(:)
+     class(*) :: anything
+
+
+DESCRIPTION
+  This function uses polymorphism to allow input arguments of different types.
+  It is used to create other procedures that can take many argument types as
+  input options and convert them to a single type to simplify storing
+  arbitrary data, to simplify generating data hashes, ...
+
+OPTIONS
+  CHARS
+    The input value is an array of bytes (character(len=1)).
+
+RETURN
+  ANYTHING
+    May be of KIND INTEGER(kind=int8), INTEGER(kind=int16),
+    INTEGER(kind=int32), INTEGER(kind=int64), REAL(kind=real32,
+    REAL(kind=real64), REAL(kind=real128), complex, or CHARACTER(len=*)
+
+EXAMPLE
+  Sample program
+
+	program demo_bytes_to_anything
+	use, intrinsic :: ISO_FORTRAN_ENV, only: &
+	     CSZ => CHARACTER_STORAGE_SIZE &
+	     stderr => error_unit
+	use :: M_anything, only : bytes_to_anything, anything_to_bytes
+	implicit none
+	character(len=1), allocatable :: chars(:)
+	character(len=:), allocatable :: line
+	character(len=:), allocatable :: lines(:)
+	integer :: ints(10)
+	integer :: i, int
+	integer,allocatable :: somesize(:)
+
+	call header('integer array to bytes')
+	chars = anything_to_bytes([(i*i, i=1, size(ints))])
+	write (*, '(/,4(1x,z2.2))') chars
+	call bytes_to_anything(chars, ints)
+	write(*,*)'and bytes back to integer array'
+	write (*, '(/,*(g0,1x))') ints
+
+	call header('integer scalar to bytes')
+	chars = anything_to_bytes(1234)
+	write (*, '(/,"CHARS=",*(1x,z2.2))') chars
+	call bytes_to_anything(chars, int)
+	write(*,*)'and bytes back to integer scalar'
+	write (*, '(/,"INT=",*(g0,1x))') int
+
+	call header('a string')
+	chars = anything_to_bytes('this is a string')
+	write (*, '(/,"CHARS=",*(1x,z2.2))') chars
+	write (*, '(/,"CHARS=",*(g0,1x))') chars
+	! string must be long enough to hold chars
+	line=repeat(' ',size(chars))
+	call bytes_to_anything(chars, line)
+	write (*, '(/,"LINE=",*(g0,1x))') line
+
+	call header(&
+	'a string array (have to know length or size you wish to return to)')
+	chars = anything_to_bytes([character(len=4) :: 'a', 'bb', 'ccc' ])
+	write (*, '(/,"CHARS=",*(1x,z2.2))') chars
+	write (*, '(/,"CHARS=",*(g0,1x))') chars
+	! string must be long enough to hold chars, and have enough elements
+	! can just return as a scalar string if unknown length
+	lines=[repeat(' ',size(chars))]
+	! of for that matter just work with the chars(1) array,
+	! but assuming know length in this case
+	lines=[(repeat('#',4),i=1,3)]
+	call bytes_to_anything(chars, lines)
+	write (*, '(/,"LINES=",*("[",g0,"]",1x:))') lines
+
+	call header('calculating size to allocate for non-string types')
+	! make sure array is of sufficient size to hold results
+	chars = anything_to_bytes([11,22,33,44])
+	write (*, '(/,"CHARS=",*(1x,z2.2))') chars
+	allocate(somesize(size(chars)/(storage_size(0)/CSZ)))
+	call bytes_to_anything(chars, somesize)
+	write (*, '(/,"SOMESIZE=",*("[",g0,"]",1x:))') somesize
+	contains
+	subroutine header(line)
+	character(len=*),intent(in) :: line
+	write(*,'(*(a))')'#',repeat('=',len(line)+2),'#'
+	write(*,'("|",1x,a,1x,"|")') line
+	write(*,'(*(a))')'#',repeat('=',len(line)+2),'#'
+	end subroutine header
+	end program demo_bytes_to_anything
+
+  Results:
+
+      > #========================#
+      > | integer array to bytes |
+      > #========================#
+      >
+      >  01 00 00 00
+      >  04 00 00 00
+      >  09 00 00 00
+      >  10 00 00 00
+      >  19 00 00 00
+      >  24 00 00 00
+      >  31 00 00 00
+      >  40 00 00 00
+      >  51 00 00 00
+      >  64 00 00 00
+      >  and bytes back to integer array
+      >
+      > 1 4 9 16 25 36 49 64 81 100
+      > #=========================#
+      > | integer scalar to bytes |
+      > #=========================#
+      >
+      > CHARS= D2 04 00 00
+      >  and bytes back to integer scalar
+      >
+      > INT=1234
+      > #==========#
+      > | a string |
+      > #==========#
+      >
+      > CHARS= 74 68 69 73 20 69 73 20 61 20 73 74 72 69 6E 67
+      >
+      > CHARS=t h i s	i s   a   s t r i n g
+      >
+      > LINE=this is a string
+      > #====================================================================#
+      > | a string array (have to know length or size you wish to return to) |
+      > #====================================================================#
+      >
+      > CHARS= 61 20 20 20 62 62 20 20 63 63 63 20
+      >
+      > CHARS=a       b b     c c c
+      >
+      > LINES=[a   ] [bb  ] [ccc ]
+      > #===================================================#
+      > | calculating size to allocate for non-string types |
+      > #===================================================#
+      >
+      > CHARS= 0B 00 00 00 16 00 00 00 21 00 00 00 2C 00 00 00
+      >
+      > SOMESIZE=[11] [22] [33] [44]
+
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 2024	bytes_to_anything(3m_anything)
+anyscalar_to_int64(3m_anything) 	       anyscalar_to_int64(3m_anything)
+
+
+
+NAME
+  anyscalar_to_int64(3f) - [M_anything] convert intrinsic scalar types to
+  integer(kind=int64) (LICENSE:MIT)
+
+
+SYNOPSIS
+  impure elemental function anyscalar_to_int64(valin) result(value)
+
+      class(*),intent(in) :: valin
+      integer(kind=int64) :: value
+
+
+DESCRIPTION
+  This function uses polymorphism to allow arguments of different types as
+  input. It is typically used to create other procedures that can take many
+  scalar arguments as input options, equivalent to passing the parameter VALUE
+  as int(VALUE,0_int64) for integer; nint(VALUE,0_int64) for real values,
+  returning 0_int64 for .true. and 1_int64 for logical, and the same as
+  int(VALUE,0_int64) for character variables if the character variables
+  represent an integer value.
+
+OPTIONS
+  VALUEIN
+    input argument of a procedure to convert to type INTEGER(KIND=int64).
+
+RESULTS
+  The value of VALUIN converted to INTEGER(KIND=INT64).
+
+EXAMPLE
+  Sample program
+
+      program demo_anyscalar_to_int64
+      use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
+      implicit none
+	 ! call same function with many scalar input types
+	 write(*,*)squarei(huge(0_int8)),huge(0_int8) , &
+	 & '16129'
+	 write(*,*)squarei(huge(0_int16)),huge(0_int16) , &
+	 & '1073676289'
+	 write(*,*)squarei(huge(0_int32)),huge(0_int32) , &
+	 & '4611686014132420609'
+	 write(*,*)squarei(huge(0_int64)),huge(0_int64) , &
+	 & '85070591730234615847396907784232501249'
+      contains
+      !
+      function squarei(invalue)
+      use M_anything, only : anyscalar_to_int64
+      class(*),intent(in)  :: invalue
+      doubleprecision	   :: invalue_local
+      doubleprecision	   :: squarei
+	 invalue_local=anyscalar_to_int64(invalue)
+	 squarei=invalue_local*invalue_local
+      end function squarei
+      !
+      end program demo_anyscalar_to_int64
+
+  Results
+
+     16129.000000000000       127 \
+     16129
+     1073676289.0000000       32767 \
+     1073676289
+     4.6116860141324206E+018  2147483647 \
+     4611686014132420609
+     8.5070591730234616E+037  9223372036854775807 \
+     85070591730234615847396907784232501249
+     2.8948022309329049E+076 170141183460469231731687303715884105727 \
+     28948022309329048855892746252171976962977213799489202546401021394546514198529
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 2024 anyscalar_to_int64(3m_anything)
+anyinteger_to_string(3m_anything)	     anyinteger_to_string(3m_anything)
+
+
+
+NAME
+  anyinteger_to_string(3f) - [M_anything] convert integer of any kind to a
+  string (LICENSE:MIT)
+
+
+SYNOPSIS
+  impure function anyinteger_to_string(intin) result(str)
+
+      character(len=:),allocatable :: anyinteger_to_string
+      class(*),intent(in)	   :: intin
+
+
+DESCRIPTION
+  Converts an integer value to a string representing the value.  This function
+  allows arguments of different INTEGER types as input.
+
+OPTIONS
+  VALUEIN
+    INTEGER input argument to be converted to a string.  May be of KIND
+    kind=int8, kind=int16, kind=int32, kind=int64.
+
+RESULTS
+  The value of VALUIN converted to a CHARACTER string.
+
+EXAMPLE
+  Sample program
+
+     program demo_anyinteger_to_string
+     use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
+     use M_anything, only : itoc=>anyinteger_to_string
+     implicit none
+	write(*,*)itoc(huge(0_int8)),	    '=> 127'
+	write(*,*)itoc(huge(0_int16)),	    '=> 32767'
+	write(*,*)itoc(huge(0_int32)),	    '=> 2147483647'
+	write(*,*)itoc(huge(0_int64)),	    '=> 9223372036854775807',huge(0_int64)
+	write(*,*)itoc(-(huge(0_int64)-1)), '=> -9223372036854775806'
+     end program demo_anyinteger_to_string
+
+  Results:
+
+     127=> 127
+     32767=> 32767
+     2147483647=> 2147483647
+     9223372036854775807=> 9223372036854775807
+     -9223372036854775806=> -9223372036854775806
+
+
+AUTHOR
+  John S. Urban
+
+LICENSE
+   MIT
+				 June 22, 202anyinteger_to_string(3m_anything)
