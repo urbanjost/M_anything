@@ -3,10 +3,6 @@
    (LICENSE:PD)
 
 ## Synopsis
-<iframe
-   src="https://urbanjost.github.io/M_anything/man3.html"
-</iframe>
-<!--
     use M_anything,only : anyscalar_to_string  
     use M_anything,only : anyscalar_to_int64   
     use M_anything,only : anyscalar_to_real    
@@ -16,7 +12,6 @@
     use M_anything,only : anyinteger_to_string  
     use M_anything,only : bytes_to_anything
     use M_anything,only : empty, assignment(=) 
--->
 
 ## Description
 
@@ -135,9 +130,7 @@ program that exercise the routine.
 ## Documentation
 
 ### User
----
 ![man-pages](docs/images/manpages.gif)
----
 
    - a simple index to the man-pages in HTML form for the
    [routines](https://urbanjost.github.io/M_anything/man3.html) 
