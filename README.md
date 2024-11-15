@@ -3,6 +3,10 @@
    (LICENSE:PD)
 
 ## Synopsis
+<iframe
+   src="https://urbanjost.github.io/M_anything/man3.html"
+</iframe>
+<!--
     use M_anything,only : anyscalar_to_string  
     use M_anything,only : anyscalar_to_int64   
     use M_anything,only : anyscalar_to_real    
@@ -12,6 +16,7 @@
     use M_anything,only : anyinteger_to_string  
     use M_anything,only : bytes_to_anything
     use M_anything,only : empty, assignment(=) 
+-->
 
 ## Description
 
@@ -131,15 +136,8 @@ program that exercise the routine.
 
 ### User
 ---
-(docs/images/manpages.gif)
+![man-pages](docs/images/manpages.gif)
 ---
-
-![man-pages]
-   - There are man-pages in the repository download in the docs/ directory
-     that may be installed on ULS (Unix-Like Systems).
-
-   + [manpages.zip](https://urbanjost.github.io/M_anything/manpages.zip)
-   + [manpages.tgz](https://urbanjost.github.io/M_anything/manpages.tgz)
 
    - a simple index to the man-pages in HTML form for the
    [routines](https://urbanjost.github.io/M_anything/man3.html) 
@@ -148,6 +146,12 @@ program that exercise the routine.
    - A single page that uses javascript to combine all the HTML
      descriptions of the man-pages is at 
      [BOOK_M_anything](https://urbanjost.github.io/M_anything/BOOK_M_anything.html).
+
+   - There are man-pages in the repository download in the docs/ directory
+     that may be installed on ULS (Unix-Like Systems).
+
+   + [manpages.zip](https://urbanjost.github.io/M_anything/manpages.zip)
+   + [manpages.tgz](https://urbanjost.github.io/M_anything/manpages.tgz)
 
    - [CHANGELOG](docs/CHANGELOG.md) provides a history of significant changes
 

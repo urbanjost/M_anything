@@ -5,6 +5,6 @@
         write(*,*)itoc(huge(0_int8)),       '=> 127'
         write(*,*)itoc(huge(0_int16)),      '=> 32767'
         write(*,*)itoc(huge(0_int32)),      '=> 2147483647'
-        write(*,*)itoc(huge(0_int64)),      '=> 9223372036854775807',huge(0_int64)
-        write(*,*)itoc(-(huge(0_int64)-1)), '=> -9223372036854775806'
+        write(*,*)itoc(huge(0_int64)),      '=> 9223372036854775807'
+        write(*,*)itoc(-huge(0_int64)-1)    '=> -9223372036854775808'
      end program demo_anyinteger_to_string
