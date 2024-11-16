@@ -5,7 +5,7 @@
             <li></li>
         </ul>
         <!-- Other embed HTML element/text into SVG -->
-	<iframe src="https://urbanjost.github.io/M_anything/man3.html"</iframe>
+	<iframe src="https://urbanjost.github.io/M_anything/man3.html"></iframe>
     </div>
 </foreignObject>
 </svg>
