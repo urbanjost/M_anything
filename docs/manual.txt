@@ -9,9 +9,6 @@ bytes_to_anything (3m_anything) - [M_anything] convert bytes(character)len=1):: 
 empty (3m_anything)  - [M_anything] set an allocatable array to zero (LICENSE:MIT)
 get_type (3m_anything) - [M_anything] return array of strings containing type names of arguments (LICENSE:MIT)
 M_anything (3m_anything) - [M_anything::INTRO] procedures that use polymorphism to allow arguments of different types generically (LICENSE:MIT)
-unique (1)	     - [FUNIX] generate a UUID (Universally Unique ID) string per RFC 4122 (LICENSE:PD)
-unique.1.man(1m_anything)			     unique.1.man(1m_anything)
-
 
 
 NAME

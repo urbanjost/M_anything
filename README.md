@@ -1,6 +1,6 @@
 ## Name
    M_anything(3fm) - [M_anything] procedures that use polymorphism to allow arguments of different types generically
-   (LICENSE:PD)
+   (LICENSE:MIT)
 
 ## Synopsis
     use M_anything,only : anyscalar_to_string  
@@ -13,6 +13,7 @@
     use M_anything,only : bytes_to_anything
     use M_anything,only : empty, assignment(=) 
 
+![toc](docs/workaround.svg)
 ## Description
 
   Generic routines are generally more efficient than casting but can generate a
@@ -134,7 +135,6 @@ program that exercise the routine.
 
    - a simple index to the man-pages in HTML form for the
    [routines](https://urbanjost.github.io/M_anything/man3.html) 
-   and [programs](https://urbanjost.github.io/M_anything/man1.html) 
 
    - A single page that uses javascript to combine all the HTML
      descriptions of the man-pages is at 
