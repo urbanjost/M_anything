@@ -12,8 +12,9 @@
     use M_anything,only : anyinteger_to_string  
     use M_anything,only : bytes_to_anything
     use M_anything,only : empty, assignment(=) 
-
+<!--
 ![toc](docs/workaround.svg)
+-->
 ## Description
 
   Generic routines are generally more efficient than casting but can generate a
