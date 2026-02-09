@@ -1,7 +1,8 @@
 program scalars
 use M_anything,only : anyscalar_to_real
 use,intrinsic :: iso_fortran_env, only : int8, int16, int32, int64 
-use,intrinsic :: iso_fortran_env, only : real32, real64, real128
+use,intrinsic :: iso_fortran_env, only : real32, real64
+!use,intrinsic :: iso_fortran_env, only : real128
 implicit none
 integer               :: ios
 
@@ -11,7 +12,7 @@ integer(kind=int32)   :: medium= huge(0_int32)
 integer(kind=int64)   :: large=  huge(0_int64)
 real(kind=real32)     :: rs= huge(0.0_real32)
 real(kind=real64)     :: rm= huge(0.0_real64)
-real(kind=real128)    :: rl= huge(0.0_real128)
+!real(kind=real128)    :: rl= huge(0.0_real128)
 
 101 format(a10,"|",i39,"|",i11,"|",i39)
 102 format(a10,"|",g0,t55,"|",i11,"|",g0)
@@ -19,7 +20,7 @@ real(kind=real128)    :: rl= huge(0.0_real128)
    write(*,*) '  NAME   |VALUE                                  |KIND(VALUE)|10**RANGE(VALUE)'
    write(*,102) 'rs     ',rs,     kind(rs),     10.0_real32**range(rs)
    write(*,102) 'rm     ',rm,     kind(rm),     10.0_real64**range(rm)
-   write(*,102) 'rl     ',rl,     kind(rl),     10.0_real128**range(rl)
+!   write(*,102) 'rl     ',rl,     kind(rl),     10.0_real128**range(rl)
    write(*,102) 'tiny   ',tiny,   kind(tiny)    
    write(*,102) 'small  ',small,  kind(small)   
    write(*,102) 'medium ',medium, kind(medium)  
@@ -37,7 +38,8 @@ real(kind=real128)    :: rl= huge(0.0_real128)
    write(*,*)'OUTPUT:'
 202 format(a,*(g0:,'; '))
    write(*,202,iostat=ios) 'SQUAREI()  :',squarei(tiny),  squarei(small), squarei(medium), squarei(large) 
-   write(*,202,iostat=ios) 'SQUAREI()  :',                squarei(rs),    squarei(rm),     squarei(rl)    
+   write(*,202,iostat=ios) 'SQUAREI()  :',                squarei(rs),    squarei(rm)
+   !write(*,202,iostat=ios) 'SQUAREI()  :',                squarei(rl)    
 
 contains
 
@@ -48,10 +50,10 @@ implicit none
 class(*),intent(in)  :: invalue
 real                 :: invalue_local
 real                 :: dvalue
-real,parameter       :: biggest=sqrt(real(0.0,kind=real128))
+!real,parameter       :: biggest=sqrt(real(0.0,kind=real128))
    invalue_local=anyscalar_to_real(invalue)
    !if(invalue_local.gt.biggest)then
-   !   write(*,*)'ERROR:*squarei* input value to big=',invalue_local
+   !   write(*,*)'ERROR:*squarei* input value too big=',invalue_local
    !endif
    dvalue=invalue_local*invalue_local
 end function squarei
