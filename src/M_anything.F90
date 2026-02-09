@@ -2,19 +2,36 @@
 ! This module and the example function squarei() that uses it shows how you
 ! can use polymorphism to allow arguments of different types generically by casting
 !===================================================================================================================================
+!-----------------------------------------------------------------------------------------------------------------------------------
+#define  __INTEL_COMP        1
+#define  __GFORTRAN_COMP     2
+#define  __NVIDIA_COMP       3
+#define  __NAG_COMP          4
+#define  __flang__           5
+#define  __UNKNOWN_COMP   9999
 
-#ifdef __NVCOMPILER
-#undef HAS_REAL128
+#define FLOAT128
+
+#ifdef __INTEL_COMPILER
+#   define __COMPILER__ __INTEL_COMP
+#elif __GFORTRAN__ == 1
+#   define __COMPILER__ __GFORTRAN_COMP
+#elif __flang__
+#   undef FLOAT128
+#   define __COMPILER__ __LLVM_FLANG_COMP
+#elif __NVCOMPILER
+#   undef FLOAT128
+#   define __COMPILER__ __NVIDIA_COMP
 #else
-#define HAS_REAL128
+#   define __COMPILER__ __UNKNOWN_COMP
+#   warning  NOTE: UNKNOWN COMPILER
 #endif
-
+!-----------------------------------------------------------------------------------------------------------------------------------
 #ifdef Linux_ifx
 #ifndef __INTEL_LLVM_COMPILER
 #define __INTEL_LLVM_COMPILER  IFX
 #endif
 #endif
-
 !===================================================================================================================================
 !>
 !!##NAME
@@ -22,6 +39,8 @@
 !!    (LICENSE:MIT)
 !!
 !!##SYNOPSIS
+!!
+!!  Syntax:
 !!
 !!      use M_anything,only : anyscalar_to_string
 !!      use M_anything,only : anyscalar_to_int64
@@ -45,7 +64,7 @@
 !!       get_type                return array of strings containing type names of arguments
 !!       empty                   create an empty array
 !!
-!!##EXAMPLE
+!!##EXAMPLES
 !!
 !!
 !! At the cost of casting to a different type these functions can
@@ -68,7 +87,7 @@
 !!        write(*,*)squareall(2_int64)
 !!        write(*,*)squareall(2.0_real32)
 !!        write(*,*)squareall(2.0_real64)
-!!        write(*,*)squareall(2.0_real128)
+!!        !write(*,*)squareall(2.0_real128)
 !!     contains
 !!
 !!     function squareall(invalue) result (dvalue)
@@ -104,11 +123,11 @@ use, intrinsic :: ISO_FORTRAN_ENV, only : CSZ => CHARACTER_STORAGE_SIZE
 use, intrinsic :: iso_fortran_env, only : stderr => error_unit !! ,input_unit,output_unit
 implicit none
 private
-integer,parameter        :: dp=kind(0.0d0)
+integer,parameter :: dp=kind(0.0d0)
 public anyscalar_to_string   ! convert integer parameter of any kind to string
 public anyscalar_to_int64    ! convert integer parameter of any kind to 64-bit integer
 public anyscalar_to_real     ! convert integer or real parameter of any kind to real
-#ifdef HAS_REAL128
+#ifdef FLOAT128
 public anyscalar_to_real128  ! convert integer or real parameter of any kind to real128
 #endif
 public anyscalar_to_double   ! convert integer or real parameter of any kind to doubleprecision
@@ -168,7 +187,7 @@ contains
 !!    use M_anything, only : empty, assignment(=)
 !!##DESCRIPTION
 !!    A convenience routine that sets an array to an empty set.
-!!##EXAMPLE
+!!##EXAMPLES
 !!
 !!
 !!   Sample program:
@@ -177,7 +196,7 @@ contains
 !!    use M_anything, only : empty, assignment(=)
 !!    integer, allocatable      :: ints(:)
 !!    character(:), allocatable :: strs(:)
-!!    real, allocatable      :: reals(:)
+!!    real, allocatable         :: reals(:)
 !!       ints=empty
 !!       write(*,*)size(ints)
 !!
@@ -215,33 +234,33 @@ contains
 !!
 !!##LICENSE
 !!    MIT
-   subroutine ints_empty_( x, emp )
-       integer, allocatable, intent(inout) :: x(:)
-       type(Empty_t), intent(in) :: emp
-       if ( allocated( x ) ) deallocate( x )
-       allocate( x( 0 ) )
-   end subroutine ints_empty_
+subroutine ints_empty_( x, emp )
+integer, allocatable, intent(inout)         :: x(:)
+type(Empty_t), intent(in)                   :: emp
+   if ( allocated( x ) ) deallocate( x )
+   allocate( x( 0 ) )
+end subroutine ints_empty_
 
-   subroutine doubles_empty_( x, emp )
-       doubleprecision, allocatable, intent(inout) :: x(:)
-       type(Empty_t), intent(in) :: emp
-       if ( allocated( x ) ) deallocate( x )
-       allocate( x( 0 ) )
-   end subroutine doubles_empty_
+subroutine doubles_empty_( x, emp )
+doubleprecision, allocatable, intent(inout) :: x(:)
+type(Empty_t), intent(in)                   :: emp
+    if ( allocated( x ) ) deallocate( x )
+    allocate( x( 0 ) )
+end subroutine doubles_empty_
 
-   subroutine reals_empty_( x, emp )
-       real, allocatable, intent(inout) :: x(:)
-       type(Empty_t), intent(in) :: emp
-       if ( allocated( x ) ) deallocate( x )
-       allocate( x( 0 ) )
-   end subroutine reals_empty_
+subroutine reals_empty_( x, emp )
+real, allocatable, intent(inout)            :: x(:)
+type(Empty_t), intent(in)                   :: emp
+    if ( allocated( x ) ) deallocate( x )
+    allocate( x( 0 ) )
+end subroutine reals_empty_
 
-   subroutine strings_empty_( x, emp )
-       character(:), allocatable, intent(inout) :: x(:)
-       type(Empty_t), intent(in) :: emp
-       if ( allocated( x ) ) deallocate( x )
-       allocate( character(0) :: x( 0 ) )
-   end subroutine strings_empty_
+subroutine strings_empty_( x, emp )
+character(:), allocatable, intent(inout)    :: x(:)
+type(Empty_t), intent(in)                   :: emp
+    if ( allocated( x ) ) deallocate( x )
+    allocate( character(0)                  :: x( 0 ) )
+end subroutine strings_empty_
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()!
 !===================================================================================================================================
@@ -274,23 +293,23 @@ contains
 !!              REAL(kind=real32, REAL(kind=real64),
 !!              REAL(kind=real128), complex, or CHARACTER(len=*)
 !!
-!!##EXAMPLE
+!!##EXAMPLES
 !!
 !!
 !!   Sample program
 !!
 !!       program demo_bytes_to_anything
 !!       use, intrinsic :: ISO_FORTRAN_ENV, only: &
-!!            CSZ => CHARACTER_STORAGE_SIZE &
+!!            CSZ => CHARACTER_STORAGE_SIZE, &
 !!            stderr => error_unit
 !!       use :: M_anything, only : bytes_to_anything, anything_to_bytes
 !!       implicit none
 !!       character(len=1), allocatable :: chars(:)
 !!       character(len=:), allocatable :: line
 !!       character(len=:), allocatable :: lines(:)
-!!       integer :: ints(10)
-!!       integer :: i, int
-!!       integer,allocatable :: somesize(:)
+!!       integer                       :: ints(10)
+!!       integer                       :: i, int
+!!       integer,allocatable           :: somesize(:)
 !!
 !!       call header('integer array to bytes')
 !!       chars = anything_to_bytes([(i*i, i=1, size(ints))])
@@ -404,8 +423,8 @@ contains
 !!##LICENSE
 !!    MIT
 subroutine bytes_to_anything_arr(chars,anything)
-   character(len=1),intent(in) :: chars(:)
-   class(*),intent(out) :: anything(:)
+character(len=1),intent(in) :: chars(:)
+class(*),intent(out)        :: anything(:)
    select type(anything)
     type is (character(len=*));
             anything=transfer(chars,anything)
@@ -417,7 +436,9 @@ subroutine bytes_to_anything_arr(chars,anything)
     type is (integer(kind=int64));  anything=transfer(chars,anything)
     type is (real(kind=real32));    anything=transfer(chars,anything)
     type is (real(kind=real64));    anything=transfer(chars,anything)
+#ifdef FLOAT128
     type is (real(kind=real128));   anything=transfer(chars,anything)
+#endif
     type is (logical);              anything=transfer(chars,anything)
     class default
       !anything=transfer(chars,anything)
@@ -426,8 +447,8 @@ subroutine bytes_to_anything_arr(chars,anything)
 end subroutine bytes_to_anything_arr
 
 subroutine bytes_to_anything_scalar(chars,anything)
-   character(len=1),intent(in):: chars(:)
-   class(*),intent(out) :: anything
+character(len=1),intent(in) :: chars(:)
+class(*),intent(out)        :: anything
    select type(anything)
     ! caller must ensure string passed in is long enough for results
     type is (character(len=*));     anything=transfer(chars,repeat('x',size(chars)))
@@ -444,7 +465,9 @@ subroutine bytes_to_anything_scalar(chars,anything)
     type is (integer(kind=int64));  anything=transfer(chars,anything)
     type is (real(kind=real32));    anything=transfer(chars,anything)
     type is (real(kind=real64));    anything=transfer(chars,anything)
+#ifdef FLOAT128
     type is (real(kind=real128));   anything=transfer(chars,anything)
+#endif
     type is (logical);              anything=transfer(chars,anything)
     class default
       !anything=transfer(chars,anything)
@@ -477,6 +500,9 @@ end subroutine bytes_to_anything_scalar
 !!    to simplify storing arbitrary data, to simplify generating data
 !!    hashes, ...
 !!
+!!    The **transfer(3f)** function is now a standard, even more general
+!!    equivalent.
+!!
 !!##OPTIONS
 !!
 !!    VALUEIN  input array or scalar to convert to type CHARACTER(LEN=1).
@@ -488,41 +514,47 @@ end subroutine bytes_to_anything_scalar
 !!
 !!    CHARS    The returned value is an array of bytes (character(len=1)).
 !!
-!!##EXAMPLE
+!!##EXAMPLES
 !!
 !!
 !!   Sample program
 !!
-!!    program demo_anything_to_bytes
-!!    use M_anything,      only : anything_to_bytes
-!!    implicit none
-!!    integer :: i
-!!       write(*,'(/,4(1x,z2.2))')anything_to_bytes([(i*i,i=1,10)])
-!!       write(*,'(/,4(1x,z2.2))')anything_to_bytes([11.11,22.22,33.33])
-!!       write(*,'(/,4(1x,z2.2))')anything_to_bytes('This is a string')
-!!    end program demo_anything_to_bytes
+!!      program demo_anything_to_bytes
+!!      use M_anything,      only : anything_to_bytes
+!!      implicit none
+!!      integer :: i
+!!         write(*,"('select various types')")
+!!         write(*,'(/,16(1x,z2.2))')anything_to_bytes([(i*i,i=1,10)])
+!!         write(*,'(/,16(1x,z2.2))')anything_to_bytes([11.11,22.22,33.33])
+!!         write(*,'(/,16(1x,z2.2))')anything_to_bytes('This is a string')
 !!
-!!   Expected output
+!!         write(*,"(/,'compare to TRANSFER(3f)')")
+!!         write(*,'(/,16(1x,z2.2))') transfer([(i*i,i=1,10)],[' '])
+!!         write(*,'(/,16(1x,z2.2))') transfer([11.11,22.22,33.33],[' '])
+!!         write(*,'(/,16(1x,z2.2))') transfer('This is a string',[' '])
+!!      end program demo_anything_to_bytes
+!! ```
+!!   Results:
 !!
-!!        01 00 00 00
-!!        04 00 00 00
-!!        09 00 00 00
-!!        10 00 00 00
-!!        19 00 00 00
-!!        24 00 00 00
-!!        31 00 00 00
-!!        40 00 00 00
-!!        51 00 00 00
-!!        64 00 00 00
-!!
-!!        8F C2 31 41
-!!        8F C2 B1 41
-!!        EC 51 05 42
-!!
-!!        54 68 69 73
-!!        20 69 73 20
-!!        61 20 73 74
-!!        72 69 6E 67
+!!     > select various types
+!!     >
+!!     >  01 00 00 00 04 00 00 00 09 00 00 00 10 00 00 00
+!!     >  19 00 00 00 24 00 00 00 31 00 00 00 40 00 00 00
+!!     >  51 00 00 00 64 00 00 00
+!!     >
+!!     >  8F C2 31 41 8F C2 B1 41 EC 51 05 42
+!!     >
+!!     >  54 68 69 73 20 69 73 20 61 20 73 74 72 69 6E 67
+!!     >
+!!     > compare to TRANSFER(3f)
+!!     >
+!!     >  01 00 00 00 04 00 00 00 09 00 00 00 10 00 00 00
+!!     >  19 00 00 00 24 00 00 00 31 00 00 00 40 00 00 00
+!!     >  51 00 00 00 64 00 00 00
+!!     >
+!!     >  8F C2 31 41 8F C2 B1 41 EC 51 05 42
+!!     >
+!!     >  54 68 69 73 20 69 73 20 61 20 73 74 72 69 6E 67
 !!
 !!##AUTHOR
 !!    John S. Urban
@@ -549,7 +581,7 @@ character(len=1),allocatable :: chars(:)
     type is (integer(kind=int64));  chars=transfer(anything,chars)
     type is (real(kind=real32));    chars=transfer(anything,chars)
     type is (real(kind=real64));    chars=transfer(anything,chars)
-#ifdef HAS_REAL128
+#ifdef FLOAT128
     type is (real(kind=real128));   chars=transfer(anything,chars)
 #endif
     type is (logical);              chars=transfer(anything,chars)
@@ -579,7 +611,7 @@ character(len=1),allocatable :: chars(:)
     type is (integer(kind=int64));  chars=transfer(anything,chars)
     type is (real(kind=real32));    chars=transfer(anything,chars)
     type is (real(kind=real64));    chars=transfer(anything,chars)
-#ifdef HAS_REAL128
+#ifdef FLOAT128
     type is (real(kind=real128));   chars=transfer(anything,chars)
 #endif
     type is (logical);              chars=transfer(anything,chars)
@@ -640,42 +672,44 @@ end function  anything_to_bytes_scalar
 !!    D_OUT    The value of VALUIN converted to REAL128 (assuming
 !!             it is actually in the range of type REAL128).
 !!
-!!##EXAMPLE
+!!##EXAMPLES
 !!
 !!
 !!   Sample program
 !!
 !!     program demo_anyscalar_to_real128
-!!     use, intrinsic :: iso_fortran_env, only : int8, int16, int32, int64
-!!     use, intrinsic :: iso_fortran_env, only : real32, real64, real128
+!!     use, intrinsic :: iso_fortran_env, only : &
+!!        & i8=>int8, i16=>int16, i32=>int32, i64=>int64
+!!     use, intrinsic :: iso_fortran_env, only : &
+!!        & sp=>real32, dp=>real64, qp=>real128
 !!     implicit none
 !!        ! call same function with many scalar input types
-!!        write(*,*)squarei(2_int8)
-!!        write(*,*)squarei(2_int16)
-!!        write(*,*)squarei(2_int32)
-!!        write(*,*)squarei(2_int64)
-!!        write(*,*)squarei(2.0_real32)
-!!        write(*,*)squarei(2.0_real64)
-!!        write(*,*)squarei(2.0_real128)
+!!        write(*,*)minall(&
+!!        & 2_i8, 7_i16, 8_i32, 9_i64, 2.0123123_sp, 3.0123_dp, 5.0_qp)
+!!        write(*,*)minall(&
+!!        & 5.0_qp, 3.0123_dp, 2.0123123_sp, 9_i64, 8_i32, 7_i16, 2_i8)
 !!     contains
 !!
-!!     function squarei(invalue) result (dvalue)
-!!     use M_anything, only : anyscalar_to_real128
-!!     class(*),intent(in)  :: invalue
-!!     real(kind=real128)   :: invalue_local
-!!     real(kind=real128)   :: dvalue
-!!        invalue_local=anyscalar_to_real128(invalue)
-!!        dvalue=invalue_local*invalue_local
-!!     end function squarei
+!!     function minall(a,b,c,d,e,f,g) result (value)
+!!     use M_anything, only : x=>anyscalar_to_real128
+!!     class(*),intent(in) :: a,b,c,d,e,f,g
+!!     real(kind=qp)       :: value
+!!        value=min( x(a),x(b),x(c),x(d),x(e),x(f),x(g) )
+!!     end function minall
 !!
 !!     end program demo_anyscalar_to_real128
+!!
+!!   Results:
+!!
+!!    > 2.00000000000000000000000000000000000
+!!    > 2.00000000000000000000000000000000000
 !!
 !!##AUTHOR
 !!    John S. Urban
 !!
 !!##LICENSE
 !!    MIT
-#ifdef HAS_REAL128
+#ifdef FLOAT128
 pure elemental function anyscalar_to_real128(valuein) result(d_out)
 
 ! ident_3="@(#) M_anything anyscalar_to_real128(3f) convert integer or real parameter of any kind to real128"
@@ -732,7 +766,7 @@ end function anyscalar_to_real128
 !!    D_OUT    The value of VALUIN converted to doubleprecision (assuming
 !!             it is actually in the range of type DOUBLEPRECISION).
 !!
-!!##EXAMPLE
+!!##EXAMPLES
 !!
 !!
 !!   Sample program
@@ -742,25 +776,33 @@ end function anyscalar_to_real128
 !!     use, intrinsic :: iso_fortran_env, only : real32, real64, real128
 !!     implicit none
 !!        ! call same function with many scalar input types
-!!        write(*,*)squarei(2_int8)
-!!        write(*,*)squarei(2_int16)
-!!        write(*,*)squarei(2_int32)
-!!        write(*,*)squarei(2_int64)
-!!        write(*,*)squarei(2.0_real32)
-!!        write(*,*)squarei(2.0_real64)
-!!        write(*,*)squarei(2.0_real128)
+!!        write(*,*)sqrtany(2_int8)
+!!        write(*,*)sqrtany(2_int16)
+!!        write(*,*)sqrtany(2_int32)
+!!        write(*,*)sqrtany(2_int64)
+!!        write(*,*)sqrtany(2.0_real32)
+!!        write(*,*)sqrtany(2.0_real64)
+!!        write(*,*)sqrtany(2.0_real128)
 !!     contains
 !!
-!!     function squarei(invalue) result (dvalue)
+!!     function sqrtany(invalue) result (value)
 !!     use M_anything, only : anyscalar_to_double
 !!     class(*),intent(in)  :: invalue
-!!     doubleprecision      :: invalue_local
-!!     doubleprecision      :: dvalue
-!!        invalue_local=anyscalar_to_double(invalue)
-!!        dvalue=invalue_local*invalue_local
-!!     end function squarei
+!!     doubleprecision      :: value
+!!        value=sqrt(anyscalar_to_double(invalue))
+!!     end function sqrtany
 !!
 !!     end program demo_anyscalar_to_double
+!!
+!!    Results:
+!!
+!!     >    1.4142135623730951
+!!     >    1.4142135623730951
+!!     >    1.4142135623730951
+!!     >    1.4142135623730951
+!!     >    1.4142135623730951
+!!     >    1.4142135623730951
+!!     >    1.4142135623730951
 !!
 !!##AUTHOR
 !!    John S. Urban
@@ -773,7 +815,7 @@ pure elemental function anyscalar_to_double(valuein) result(d_out)
 
 class(*),intent(in)       :: valuein
 doubleprecision           :: d_out
-#ifdef HAS_REAL128
+#ifdef FLOAT128
 doubleprecision,parameter :: big=huge(0.0d0)
 #endif
    select type(valuein)
@@ -783,7 +825,7 @@ doubleprecision,parameter :: big=huge(0.0d0)
    type is (integer(kind=int64));  d_out=dble(valuein)
    type is (real(kind=real32));    d_out=dble(valuein)
    type is (real(kind=real64));    d_out=dble(valuein)
-#ifdef HAS_REAL128
+#ifdef FLOAT128
    Type is (real(kind=real128))
       !IMPURE! if(valuein > big)then
       !IMPURE!    write(stderr,'(*(g0,1x))')'*anyscalar_to_double* value too large ',valuein
@@ -828,7 +870,7 @@ end function anyscalar_to_double
 !!    R_OUT    The value of VALUIN converted to real (assuming it is actually
 !!             in the range of type REAL).
 !!
-!!##EXAMPLE
+!!##EXAMPLES
 !!
 !!   Sample program
 !!
@@ -870,17 +912,17 @@ class(*),intent(in) :: valuein
 real                :: r_out
 real,parameter      :: big=huge(0.0)
    select type(valuein)
-   type is (integer(kind=int8));   r_out=real(valuein)
-   type is (integer(kind=int16));  r_out=real(valuein)
-   type is (integer(kind=int32));  r_out=real(valuein)
-   type is (integer(kind=int64));  r_out=real(valuein)
-   type is (real(kind=real32));    r_out=real(valuein)
+   type is (integer(kind=int8))  ; r_out=real(valuein)
+   type is (integer(kind=int16)) ; r_out=real(valuein)
+   type is (integer(kind=int32)) ; r_out=real(valuein)
+   type is (integer(kind=int64)) ; r_out=real(valuein)
+   type is (real(kind=real32))   ; r_out=real(valuein)
    type is (real(kind=real64))
       !!if(valuein > big)then
       !!   write(stderr,*)'*anyscalar_to_real* value too large ',valuein
       !!endif
       r_out=real(valuein)
-#ifdef HAS_REAL128
+#ifdef FLOAT128
    type is (real(kind=real128))
       !!if(valuein > big)then
       !!   write(stderr,*)'*anyscalar_to_real* value too large ',valuein
@@ -925,7 +967,7 @@ end function anyscalar_to_real
 !!
 !!##RESULTS
 !!             The value of VALUIN converted to INTEGER(KIND=INT64).
-!!##EXAMPLE
+!!##EXAMPLES
 !!
 !!    Sample program
 !!
@@ -987,7 +1029,7 @@ class(*),intent(in)    :: valuein
    type is (integer(kind=int64));  ii38=valuein
    type is (real(kind=real32));    ii38=nint(valuein,kind=int64)
    type is (real(kind=real64));    ii38=nint(valuein,kind=int64)
-#ifdef HAS_REAL128
+#ifdef FLOAT128
    Type is (real(kind=real128));   ii38=nint(valuein,kind=int64)
 #endif
    type is (logical);              ii38=merge(0_int64,1_int64,valuein)
@@ -1016,10 +1058,10 @@ end function anyscalar_to_int64
 !!
 !!      pure function anyscalar_to_string(g0,g1,g2,g3,g4,g5,g6,g7,g8,g9,&
 !!      & ga,gb,gc,gd,ge,gf,gg,gh,gi,gj,sep)
-!!      class(*),intent(in),optional  :: g0,g1,g2,g3,g4,g5,g6,g7,g8,g9
-!!      class(*),intent(in),optional  :: ga,gb,gc,gd,ge,gf,gg,gh,gi,gj
+!!      class(*),intent(in),optional         :: g0,g1,g2,g3,g4,g5,g6,g7,g8,g9
+!!      class(*),intent(in),optional         :: ga,gb,gc,gd,ge,gf,gg,gh,gi,gj
 !!      character(len=*),intent(in),optional :: sep
-!!      character,len=(:),allocatable :: anyscalar_to_string
+!!      character,len=(:),allocatable        :: anyscalar_to_string
 !!
 !!##DESCRIPTION
 !!    anyscalar_to_string(3f) builds a space-separated string from up to twenty scalar values.
@@ -1095,16 +1137,16 @@ pure function anyscalar_to_string(gen0, gen1, gen2, gen3, gen4, gen5, gen6, gen7
 
 ! ident_7="@(#) M_anything anyscalar_to_string(3fp) writes a message to a string composed of any standard scalar types"
 
-class(*),intent(in),optional  :: gen0, gen1, gen2, gen3, gen4
-class(*),intent(in),optional  :: gen5, gen6, gen7, gen8, gen9
-class(*),intent(in),optional  :: gena, genb, genc, gend, gene
-class(*),intent(in),optional  :: genf, geng, genh, geni, genj
-character(len=:),allocatable  :: anyscalar_to_string
-character(len=4096)           :: line
-integer                       :: istart
-integer                       :: increment
+class(*),intent(in),optional         :: gen0, gen1, gen2, gen3, gen4
+class(*),intent(in),optional         :: gen5, gen6, gen7, gen8, gen9
+class(*),intent(in),optional         :: gena, genb, genc, gend, gene
+class(*),intent(in),optional         :: genf, geng, genh, geni, genj
+character(len=:),allocatable         :: anyscalar_to_string
+character(len=4096)                  :: line
+integer                              :: istart
+integer                              :: increment
 character(len=*),intent(in),optional :: sep
-character(len=:),allocatable  :: sep_local
+character(len=:),allocatable         :: sep_local
    if(present(sep))then
       increment=len(sep)+1
       sep_local=sep
@@ -1139,11 +1181,11 @@ character(len=:),allocatable  :: sep_local
 contains
 !===================================================================================================================================
 pure subroutine print_generic(generic,line,istart,increment,sep)
-class(*),intent(in) :: generic
+class(*),intent(in)               :: generic
 character(len=4096),intent(inout) :: line
-integer,intent(inout) :: istart
-integer,intent(in) :: increment
-character(len=*),intent(in) :: sep
+integer,intent(inout)             :: istart
+integer,intent(in)                :: increment
+character(len=*),intent(in)       :: sep
    select type(generic)
       type is (integer(kind=int8));     write(line(istart:),'(i0)') generic
       type is (integer(kind=int16));    write(line(istart:),'(i0)') generic
@@ -1151,7 +1193,7 @@ character(len=*),intent(in) :: sep
       type is (integer(kind=int64));    write(line(istart:),'(i0)') generic
       type is (real(kind=real32));      write(line(istart:),'(1pg0)') generic
       type is (real(kind=real64));      write(line(istart:),'(1pg0)') generic
-#ifdef HAS_REAL128
+#ifdef FLOAT128
       type is (real(kind=real128));     write(line(istart:),'(1pg0)') generic
 #endif
       type is (logical);                write(line(istart:),'(l1)') generic
@@ -1192,7 +1234,7 @@ end function anyscalar_to_string
 !!##RESULTS
 !!             The value of VALUIN converted to a CHARACTER string.
 !!
-!!##EXAMPLE
+!!##EXAMPLES
 !!
 !!
 !!   Sample program
@@ -1277,18 +1319,15 @@ end function anyinteger_to_string
 !!    argument types as input options.
 !!
 !!##OPTIONS
-!!
 !!    VALUEIN  input array or scalar to return type of
 !!             May be of KIND INTEGER(kind=int8), INTEGER(kind=int16),
 !!             INTEGER(kind=int32), INTEGER(kind=int64),
 !!             REAL(kind=real32, REAL(kind=real64),
 !!             REAL(kind=real128), complex, or CHARACTER(len=*)
 !!##RETURN
-!!
 !!    CHARS    The returned value is an array of names
 !!
-!!##EXAMPLE
-!!
+!!##EXAMPLES
 !!
 !!   Sample program
 !!
@@ -1330,7 +1369,7 @@ character(len=20)   :: chars
     type is (integer(kind=int64));  chars='int64'
     type is (real(kind=real32));    chars='real32'
     type is (real(kind=real64));    chars='real64'
-#ifdef HAS_REAL128
+#ifdef FLOAT128
     type is (real(kind=real128));   chars='real128'
 #endif
     type is (logical);              chars='logical'
@@ -1356,7 +1395,7 @@ character(len=20)   :: chars
     type is (integer(kind=int64));  chars='int64'
     type is (real(kind=real32));    chars='real32'
     type is (real(kind=real64));    chars='real64'
-#ifdef HAS_REAL128
+#ifdef FLOAT128
     type is (real(kind=real128));   chars='real128'
 #endif
     type is (logical);              chars='logical'
